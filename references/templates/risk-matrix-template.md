@@ -6,9 +6,32 @@
 
 # Gatekeeper 风险矩阵
 
-**项目**：{project_name}
-**计划**：{plan_id}
-**节点**：{node_name} | **深度**：{depth} | **生成时间**：{generated_at}
+**项目**：{project_name}　**计划**：{plan_id}　**节点**：{node_name}　**深度**：{depth}　**生成时间**：{generated_at}
+
+---
+
+## 执行摘要
+
+> {exec_verdict}
+
+| 节点 | 评级 | 风险数 |
+|------|------|--------|
+| 行业/业务定位 | {industry_rating} | {industry_risk_count} |
+| 技术/知识产权 | {tech_rating} | {tech_risk_count} |
+| 财务合规 | {finance_rating} | {finance_risk_count} |
+| 定价/发行 | {pricing_rating} | {pricing_risk_count} |
+
+**风险分布**：🔴Critical {critical_count}　🟠High {high_count}　🟡Medium {medium_count}　🟢Low {low_count}
+
+**TOP 3 风险**：
+1. {exec_top1}
+2. {exec_top2}
+3. {exec_top3}
+
+**关键数据**：
+- {exec_data1}
+- {exec_data2}
+- {exec_data3}
 
 ---
 
