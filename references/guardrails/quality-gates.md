@@ -4,8 +4,9 @@
 
 ## G1: 角色完备（Role Completeness）
 
-**规则**：每个角色产出 ≥ 5 条风险条目（full-chain 深度），≥ 3 条（targeted-update 深度）。
-       quick-scan 深度：每个角色 ≥ 1 条。
+**规则**：depth=deep（full-chain / pricing-focused）：每个角色 ≥ 5 条风险条目。
+       depth=standard（targeted-update）：每个角色 ≥ 3 条。
+       depth=quick（quick-scan）：每个角色 ≥ 1 条。
 **不通过处理**：标注数据不足的角色，降低该节点整体置信度为 `confidence: low`。
 
 ## G2: 来源多样（Source Diversity）

@@ -43,7 +43,7 @@ AGENTS.md                              ← 全局编排 + 非协商条款 + 输�
 │   ├── roles/
 │   │   ├── pre-ipo-investor.md
 │   │   ├── buy-side.md
-│   │   └── media-watchdog.md
+│   │   └── media.md
 │   ├── templates/
 │   │   └── risk-matrix-template.md
 │   └── guardrails/

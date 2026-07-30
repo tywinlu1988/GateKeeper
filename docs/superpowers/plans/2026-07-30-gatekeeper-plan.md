@@ -47,7 +47,7 @@ D:\sandbox\
 │   ├── roles/
 │   │   ├── pre-ipo-investor.md           ← Task 5
 │   │   ├── buy-side.md                   ← Task 5
-│   │   └── media-watchdog.md             ← Task 5
+│   │   └── media.md                      ← Task 5
 │   └── templates/
 │       └── risk-matrix-template.md        ← Task 6
 └── knowledge/
@@ -611,7 +611,7 @@ git commit -m "feat: add analysis registry and artifact schemas"
 **Files:**
 - Create: `references/roles/pre-ipo-investor.md`
 - Create: `references/roles/buy-side.md`
-- Create: `references/roles/media-watchdog.md`
+- Create: `references/roles/media.md`
 
 **Interfaces:**
 - Consumes: quality-gates.md (G5 role anchoring check), degradation-paths.md (search failure behavior)
@@ -717,7 +717,7 @@ git commit -m "feat: add analysis registry and artifact schemas"
 - 对监管审核流程的评论
 ```
 
-- [ ] **Step 3: Write media-watchdog.md**
+- [ ] **Step 3: Write media.md**
 
 ```markdown
 # 舆论/媒体视角
@@ -1099,7 +1099,7 @@ description: >
 
 1. 读取 `references/roles/pre-ipo-investor.md`
 2. 读取 `references/roles/buy-side.md`
-3. 读取 `references/roles/media-watchdog.md`
+3. 读取 `references/roles/media.md`
 4. 按每个角色的搜索策略，并行搜索行业相关数据
 
 ### Step 2: 三角色并行分析
@@ -1253,7 +1253,7 @@ description: >
 
 1. 读取 `references/roles/pre-ipo-investor.md`
 2. 读取 `references/roles/buy-side.md`
-3. 读取 `references/roles/media-watchdog.md`
+3. 读取 `references/roles/media.md`
 4. 读取上游 industry-scanner 的 node_artifact（引用 `summary.key_finding` 和 `data_freshness`）
 5. 不重复搜索行业数据——仅搜索技术相关数据
 

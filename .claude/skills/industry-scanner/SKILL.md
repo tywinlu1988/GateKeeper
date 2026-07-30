@@ -36,7 +36,7 @@ description: >
 
 1. 读取 `references/roles/pre-ipo-investor.md`
 2. 读取 `references/roles/buy-side.md`
-3. 读取 `references/roles/media-watchdog.md`
+3. 读取 `references/roles/media.md`
 4. 按每个角色的搜索策略，并行搜索行业相关数据
 
 ### Step 2: 三角色并行分析

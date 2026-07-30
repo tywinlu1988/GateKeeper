@@ -40,7 +40,7 @@ description: >
 
 1. 读取 `references/roles/pre-ipo-investor.md`
 2. 读取 `references/roles/buy-side.md`
-3. 读取 `references/roles/media-watchdog.md`
+3. 读取 `references/roles/media.md`
 4. 读取上游 node_artifact（行业 + 技术 + 财务 或仅行业，取决于路径模式）
 5. 不重复搜索行业/技术/财务数据——仅搜索估值相关数据
 

@@ -29,7 +29,8 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 
 1. ipo-router 产出分析计划单后，按 plan.mode 决定执行链路
 2. full-chain / pricing-focused：按节点顺序自动衔接，不等待用户确认
-3. targeted-update / quick-scan：Router 路由到指定节点后执行
+3. quick-scan：industry 和 tech 节点并行执行，参见 references/analysis-registry.md 并行协调规则
+4. targeted-update：Router 路由到指定节点后执行
 4. 每个节点产出后立即移交下游（如链路中有下一节点）
 
 ## 非协商条款（所有 agent、所有 CLI、所有请求强制生效）

@@ -39,7 +39,7 @@ description: >
 
 1. 读取 `references/roles/pre-ipo-investor.md`
 2. 读取 `references/roles/buy-side.md`
-3. 读取 `references/roles/media-watchdog.md`
+3. 读取 `references/roles/media.md`
 4. 读取上游 industry-scanner 和 tech-scanner 的 node_artifact
 5. 不重复搜索行业和技术数据——仅搜索财务相关数据
 
