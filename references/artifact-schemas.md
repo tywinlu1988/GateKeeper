@@ -12,7 +12,7 @@ analysis_plan:
   plan_id: "PLAN-{YYYYMMDD}-{3位序号}"    # 必填，格式强制
   project_name: ""                          # 必填
   mode: "full-chain|targeted-update|pricing-focused|quick-scan"  # 必填，枚举
-  path_id: ""                               # 必填，对应 analysis-registry 中的 path_id
+  path_id: "FULL-CHAIN|TARGETED-UPDATE|PRICING-FOCUSED|QUICK-SCAN"  # 必填，枚举，对应 analysis-registry
   nodes: []                                 # 必填，枚举值：industry|tech|finance|pricing
   depth: "deep|standard|quick"              # 必填，枚举
   previous_run_id: null                     # 可选，关联上次推演
