@@ -27,10 +27,15 @@ GateKeeper 围绕科创板 IPO 保荐承销场景，覆盖从行业定位到发�
 
 ## 使用方式
 
+### 通过 npx（推荐）
+
+```bash
+npx github:tywinlu1988/GateKeeper
+```
+
 ### 源码安装
 
 ```bash
-# 克隆仓库
 git clone https://github.com/tywinlu1988/GateKeeper.git
 cd GateKeeper
 ```
