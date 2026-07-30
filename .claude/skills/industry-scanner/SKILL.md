@@ -46,17 +46,26 @@ description: >
 每个角色产出风险条目列表（deep: ≥5条/角色, standard: ≥3条, quick: ≥1条）。
 条目格式严格遵循 `references/artifact-schemas.md §S3 risk_entry`。
 
+### Step 2.5: 前瞻信号生成
+
+对每条 Critical/High 风险条目，按 `references/signal-watchlist.md` 生成信号清单。
+
 ### Step 3: 汇聚与冲突标注
 
 1. 合并三个角色的风险条目
-2. 识别共识风险（≥2 个角色关注的同一话题）
-3. 识别角色冲突（同一话题的不同解读）
-4. 标注冲突类型：assumption / weighting / interpretation
+2. 识别共识风险
+3. 识别角色冲突，标注冲突类型
+
+### Step 3.5: 传染检测
+
+对照 `references/contagion-matrix.md` 检查跨维度传染信号。
+若触发 → node_artifact 中添加 `contagion_alert` 字段。
 
 ### Step 4: 质量门禁
 
 按 `references/guardrails/quality-gates.md` 逐项检查：
   - G1: 角色完备（每角色条目 ≥ depth 要求）
+  - G1.5: 信号完备（Critical/High 风险必须有 signal_watchlist）
   - G2: 来源多样（不同条目不同 URL）
   - G3: 证据内联（每条有 inline_summary）
   - G4: 枚举合规（node/role/risk_level/id 格式）

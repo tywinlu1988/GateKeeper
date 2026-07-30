@@ -51,9 +51,17 @@ description: >
 条目格式严格遵循 `references/artifact-schemas.md §S3 risk_entry`。
 node 字段固定为 `"finance"`。
 
+### Step 2.5: 前瞻信号生成
+
+同 industry-scanner（Step 2.5），按 `references/signal-watchlist.md` 生成。
+
 ### Step 3: 汇聚与冲突标注
 
 同 industry-scanner（Step 3）。
+
+### Step 3.5: 传染检测
+
+同 industry-scanner（Step 3.5），对照 `references/contagion-matrix.md`。财务节点特别关注 C1（行业→财务）和 C5（财务→定价）通道。
 
 ### Step 4: 质量门禁
 

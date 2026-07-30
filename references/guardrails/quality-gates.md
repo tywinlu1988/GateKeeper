@@ -9,6 +9,11 @@
        depth=quick（quick-scan）：每个角色 ≥ 1 条。
 **不通过处理**：标注数据不足的角色，降低该节点整体置信度为 `confidence: low`。
 
+## G1.5: 信号完备（Signal Completeness）
+
+**规则**：每条 risk_level = critical 或 high 的风险条目，必须附带 signal_watchlist（≥2 条正向信号 + ≥2 条负向信号 + ≥1 条 what_must_go_right）。信号设计须遵循可观测、有阈值、有时效、有含义、双面对称五原则。
+**不通过处理**：标注 `signal_incomplete`，要求补充信号清单。最多重试一次。
+
 ## G2: 来源多样（Source Diversity）
 
 **规则**：同一角色内不同风险条目使用不同 primary_source URL。

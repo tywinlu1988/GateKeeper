@@ -58,6 +58,10 @@ description: >
 条目格式严格遵循 `references/artifact-schemas.md §S3 risk_entry`。
 node 字段固定为 `"pricing"`。
 
+### Step 2.5: 前瞻信号生成
+
+同 industry-scanner（Step 2.5），按 `references/signal-watchlist.md` 生成。
+
 ### Step 3: 汇聚与冲突标注
 
 1. 合并三个角色的风险条目
@@ -65,6 +69,10 @@ node 字段固定为 `"pricing"`。
 3. 识别角色冲突（同一话题的不同解读）
 4. 特别关注定价节点特有的三角色对立——不要强行调和
 5. 标注冲突类型：assumption / weighting / interpretation
+
+### Step 3.5: 传染检测
+
+同 industry-scanner（Step 3.5），对照 `references/contagion-matrix.md`。定价节点特别关注 C2（行业→定价）和 C5（财务→定价）通道。
 
 ### Step 4: 质量门禁
 

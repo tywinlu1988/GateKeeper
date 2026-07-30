@@ -50,13 +50,21 @@ description: >
 条目格式严格遵循 `references/artifact-schemas.md §S3 risk_entry`。
 node 字段固定为 `"tech"`。
 
+### Step 2.5: 前瞻信号生成
+
+同 industry-scanner（Step 2.5），按 `references/signal-watchlist.md` 生成。
+
 ### Step 3: 汇聚与冲突标注
 
 同 industry-scanner（Step 3）。
 
+### Step 3.5: 传染检测
+
+同 industry-scanner（Step 3.5），对照 `references/contagion-matrix.md`。
+
 ### Step 4: 质量门禁
 
-同 industry-scanner（Step 4），按 `references/guardrails/quality-gates.md` 逐项检查。
+同 industry-scanner（Step 4），含 G1.5 信号完备检查。
 
 ### Step 5: 降级处理
 

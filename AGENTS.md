@@ -1,7 +1,7 @@
 # AGENTS.md — Gatekeeper 跨 CLI 通用入口
 
 **项目**：Gatekeeper（科创板 Pre-IPO 外部视角推演引擎）
-**版本**：v0.1.1
+**版本**：v0.2.0
 **一句话**：为科创板 IPO 保荐承销机构提供 Pre-IPO 投资人、上市后买方、舆论三个外部视角的结构化风险推演。
 
 > 任何 agent CLI 都从这里开始：先读你的 instructions file，再读当前任务对应的 SKILL.md。
@@ -53,6 +53,8 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 - 角色定义：`references/roles/*.md`
 - 质量门禁定义：`references/guardrails/quality-gates.md`
 - 降级策略定义：`references/guardrails/degradation-paths.md`
+- 跨维度传染矩阵：`references/contagion-matrix.md`
+- 前瞻信号监测框架：`references/signal-watchlist.md`
 - 输出模板（Markdown）：`references/templates/risk-matrix-template.md`
 - 输出模板（HTML）：`references/templates/risk-matrix-template.html`（自包含，内联 CSS）
 
