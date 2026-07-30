@@ -84,7 +84,8 @@ node_artifact:
 
 ### 2. 风险矩阵报告
 
-按 `references/templates/risk-matrix-template.md` 格式输出。
+默认按 `references/templates/risk-matrix-template.md` 格式输出 Markdown。
+如需自包含 HTML 报告，按 `references/templates/risk-matrix-template.html` 格式输出。
 
 ### 3. 制品新鲜度
 

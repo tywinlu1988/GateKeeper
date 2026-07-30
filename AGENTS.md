@@ -53,7 +53,8 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 - 角色定义：`references/roles/*.md`
 - 质量门禁定义：`references/guardrails/quality-gates.md`
 - 降级策略定义：`references/guardrails/degradation-paths.md`
-- 输出模板：`references/templates/risk-matrix-template.md`
+- 输出模板（Markdown）：`references/templates/risk-matrix-template.md`
+- 输出模板（HTML）：`references/templates/risk-matrix-template.html`（自包含，内联 CSS）
 
 所有 skill 文件引用以上文档，不自行定义路径、schema、角色、门禁。
 

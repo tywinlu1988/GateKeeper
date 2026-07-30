@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GateKeeper 风险矩阵 — {project_name}</title>
+<!-- @dsCard group="Reports" -->
+<style>
+  /* ===== Reset & Base ===== */
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:#1a1a2e;background:#f5f5f7;line-height:1.6}
+
+  /* ===== Page ===== */
+  .report{max-width:1100px;margin:0 auto;padding:40px 24px}
+
+  /* ===== Header ===== */
+  .header{background:#fff;border-radius:12px;padding:36px 40px;margin-bottom:24px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .header h1{font-size:28px;font-weight:700;color:#0f0f23}
+  .header .meta{display:flex;flex-wrap:wrap;gap:16px;margin-top:12px;font-size:14px;color:#6b7280}
+  .header .meta span{background:#f3f4f6;padding:4px 12px;border-radius:6px}
+
+  /* ===== Section ===== */
+  .section{background:#fff;border-radius:12px;padding:28px 40px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .section h2{font-size:20px;font-weight:700;margin-bottom:16px;padding-bottom:10px;border-bottom:2px solid #e5e7eb;color:#0f0f23}
+  .section h3{font-size:16px;font-weight:600;margin:20px 0 12px;color:#374151}
+
+  /* ===== Rating Badges ===== */
+  .rating{display:inline-block;padding:4px 14px;border-radius:20px;font-size:13px;font-weight:600}
+  .rating-favorable{background:#d1fae5;color:#065f46}
+  .rating-neutral{background:#fef3c7;color:#92400e}
+  .rating-cautious{background:#fee2e2;color:#991b1b}
+  .rating-red-flag{background:#fecaca;color:#7f1d1d}
+
+  /* ===== Risk Level Badges ===== */
+  .risk-critical{background:#dc2626;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px;font-weight:700;white-space:nowrap}
+  .risk-high{background:#f97316;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px;font-weight:700;white-space:nowrap}
+  .risk-medium{background:#eab308;color:#1a1a2e;padding:2px 10px;border-radius:10px;font-size:12px;font-weight:700;white-space:nowrap}
+  .risk-low{background:#22c55e;color:#fff;padding:2px 10px;border-radius:10px;font-size:12px;font-weight:700;white-space:nowrap}
+
+  /* ===== Summary Box ===== */
+  .summary-box{background:#f9fafb;border-radius:8px;padding:20px 24px;margin-bottom:16px}
+  .summary-box .kv{display:flex;gap:8px;align-items:center;margin-bottom:8px}
+  .summary-box .kv-label{font-weight:600;color:#6b7280;min-width:80px}
+  .summary-box .finding{font-size:15px;color:#1a1a2e;margin-top:8px;padding:12px;background:#fff;border-left:4px solid #6366f1;border-radius:4px}
+
+  /* ===== Tables ===== */
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+  thead th{background:#f9fafb;padding:10px 12px;text-align:left;font-weight:600;color:#374151;border-bottom:2px solid #e5e7eb;white-space:nowrap;position:sticky;top:0}
+  tbody td{padding:10px 12px;border-bottom:1px solid #f3f4f6;vertical-align:top}
+  tbody tr:hover{background:#f9fafb}
+  .col-id{width:180px;font-family:monospace;font-size:11px}
+  .col-claim{min-width:200px}
+  .col-level{width:80px;text-align:center}
+  .col-data{min-width:140px;font-size:12px}
+  .col-impact{min-width:160px;font-size:12px}
+  .col-response{min-width:160px;font-size:12px}
+
+  /* ===== Conflict Section ===== */
+  .conflict-card{border:1px solid #e5e7eb;border-radius:8px;padding:20px;margin-bottom:16px}
+  .conflict-card .topic{font-weight:700;font-size:15px;margin-bottom:12px}
+  .conflict-card .tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:11px;font-weight:600;margin-left:8px}
+  .tag-assumption{background:#dbeafe;color:#1e40af}
+  .tag-weighting{background:#fef3c7;color:#92400e}
+  .tag-interpretation{background:#ede9fe;color:#5b21b6}
+
+  /* ===== Consensus Section ===== */
+  .consensus-box{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;padding:16px 20px;margin-bottom:16px}
+  .consensus-box h4{color:#065f46;margin-bottom:8px}
+
+  /* ===== Freshness Footer ===== */
+  .freshness{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .fresh-card{text-align:center;padding:12px;border-radius:8px}
+  .fresh{background:#d1fae5;color:#065f46}
+  .stale{background:#fef3c7;color:#92400e}
+  .not-run{background:#f3f4f6;color:#9ca3af}
+  .fresh-card .status{font-size:12px;font-weight:600}
+
+  /* ===== Footer ===== */
+  .footer{text-align:center;font-size:12px;color:#9ca3af;margin-top:32px;padding:16px}
+
+  /* ===== Print ===== */
+  @media print{
+    body{background:#fff}
+    .report{padding:0}
+    .section,.header{box-shadow:none;border:1px solid #e5e7eb;break-inside:avoid}
+  }
+
+  /* ===== Role Section Headers ===== */
+  .role-preipo{border-left:4px solid #6366f1}
+  .role-buyside{border-left:4px solid #f59e0b}
+  .role-media{border-left:4px solid #ef4444}
+  .role-desc{font-size:13px;color:#6b7280;margin:4px 0 16px}
+
+  /* ===== Legend ===== */
+  .legend{display:flex;gap:16px;flex-wrap:wrap;margin:10px 0 16px}
+  .legend span{display:flex;align-items:center;gap:4px;font-size:12px}
+</style>
+</head>
+<body>
+<div class="report">
+
+  <!-- ===== HEADER ===== -->
+  <div class="header">
+    <h1>GateKeeper 风险矩阵</h1>
+    <div class="meta">
+      <span>📋 项目：{project_name}</span>
+      <span>📌 计划：{plan_id}</span>
+      <span>🔍 节点：{node_name}</span>
+      <span>📏 深度：{depth}</span>
+      <span>🕐 生成：{generated_at}</span>
+    </div>
+  </div>
+
+  <!-- ===== NODE SUMMARY ===== -->
+  <div class="section">
+    <h2>节点总结</h2>
+    <div class="summary-box">
+      <div class="kv"><span class="kv-label">综合评级</span> <span class="rating rating-{overall_rating_class}">{overall_rating}</span></div>
+      <div class="kv"><span class="kv-label">数据质量</span> {search_quality} | <span class="kv-label">缺失数据</span> {data_gaps}</div>
+      <div class="finding"><strong>核心发现：</strong>{key_finding}</div>
+    </div>
+    <div class="legend">
+      <span><span class="risk-critical">Critical</span> 重大风险</span>
+      <span><span class="risk-high">High</span> 高风险</span>
+      <span><span class="risk-medium">Medium</span> 中等风险</span>
+      <span><span class="risk-low">Low</span> 低风险</span>
+    </div>
+  </div>
+
+  <!-- ===== CONSENSUS RISKS ===== -->
+  <div class="section" id="consensus">
+    <h2>角色共识风险</h2>
+    <p class="role-desc">以下风险被多个角色共同关注，推演可信度最高。</p>
+    {agreed_risks_section}
+  </div>
+
+  <!-- ===== CONFLICTS ===== -->
+  <div class="section" id="conflicts">
+    <h2>角色冲突标注</h2>
+    <p class="role-desc">以下话题存在角色间分歧。分歧类型：<span class="tag tag-assumption">假设冲突(assumption)</span> <span class="tag tag-weighting">权重冲突(weighting)</span> <span class="tag tag-interpretation">解读冲突(interpretation)</span></p>
+    {conflicts_section}
+  </div>
+
+  <!-- ===== PRE-IPO INVESTOR ===== -->
+  <div class="section role-preipo" id="pre-ipo">
+    <h2>Pre-IPO 投资人视角</h2>
+    <p class="role-desc">此角色关注：退出路径清晰度、估值安全垫、上市确定性对投资回报的影响</p>
+    {pre_ipo_entries}
+  </div>
+
+  <!-- ===== BUY-SIDE ===== -->
+  <div class="section role-buyside" id="buy-side">
+    <h2>上市后买方视角</h2>
+    <p class="role-desc">此角色关注：上市后增长可持续性、财务质量、估值合理性</p>
+    {buy_side_entries}
+  </div>
+
+  <!-- ===== MEDIA ===== -->
+  <div class="section role-media" id="media">
+    <h2>舆论/媒体视角</h2>
+    <p class="role-desc">此角色关注：可能引发负面报道的争议话题、隐藏风险、信息披露薄弱点</p>
+    {media_entries}
+  </div>
+
+  <!-- ===== FRESHNESS ===== -->
+  <div class="section">
+    <h2>制品新鲜度</h2>
+    <div class="freshness">
+      <div class="fresh-card {industry_status}"><strong>行业定位</strong><br>{industry_generated_at}<br><span class="status">{industry_status} · {industry_age}</span></div>
+      <div class="fresh-card {tech_status}"><strong>技术/IP</strong><br>{tech_generated_at}<br><span class="status">{tech_status} · {tech_age}</span></div>
+      <div class="fresh-card {finance_status}"><strong>财务合规</strong><br>{finance_generated_at}<br><span class="status">{finance_status} · {finance_age}</span></div>
+      <div class="fresh-card {pricing_status}"><strong>定价/发行</strong><br>{pricing_generated_at}<br><span class="status">{pricing_status} · {pricing_age}</span></div>
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <div class="footer">
+    <p>报告由 GateKeeper v0.1.0 生成 · 所有数据均内联摘要，可独立分发</p>
+    <p>知识来源：实时搜索 · 搜索质量：{search_quality}</p>
+  </div>
+
+</div>
+</body>
+</html>

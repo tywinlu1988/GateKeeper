@@ -108,7 +108,8 @@ node_artifact:
 
 ### 2. 风险矩阵报告（全链路最终输出）
 
-按 `references/templates/risk-matrix-template.md` 格式输出。
+默认按 `references/templates/risk-matrix-template.md` 格式输出 Markdown。
+如需自包含 HTML 报告，按 `references/templates/risk-matrix-template.html` 格式输出（内联 CSS）。
 如果为全链路模式，报告包含所有四个节点的 artifact_freshness 汇总。
 
 ## 链式调用
