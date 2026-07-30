@@ -45,8 +45,11 @@ node_artifact:
     conflicts:                               # 角色间冲突
       - topic: ""
         pre_ipo_view: ""
+        pre_ipo_basis: ""                    # 该角色观点的数据/逻辑依据
         buy_side_view: ""
+        buy_side_basis: ""
         media_view: ""
+        media_basis: ""
         conflict_type: "assumption|weighting|interpretation"  # 枚举
   data_freshness:
     search_quality: "rich|adequate|sparse"   # 必填，枚举

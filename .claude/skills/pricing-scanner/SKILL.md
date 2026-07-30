@@ -54,7 +54,7 @@ description: >
 - **买方**：分析发行价相对于可比公司的合理性。搜索可比公司 PS/PE/PEG，反推发行价隐含增速
 - **舆论**：搜索高市盈率发行争议案例、实控人套现记录、定价争议的常见质疑模式
 
-每个角色产出风险条目列表（deep: ≥5条/角色, standard: ≥3条, quick: ≥1条）。
+每个角色产出风险条目列表（deep: ≥5条/角色。pricing-scanner 仅运行在 deep 深度下）。
 条目格式严格遵循 `references/artifact-schemas.md §S3 risk_entry`。
 node 字段固定为 `"pricing"`。
 

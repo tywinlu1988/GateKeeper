@@ -13,7 +13,8 @@ description: >
 ## 前置条件
 
 - 分析计划单（analysis_plan YAML）
-- 上游 node_artifact（来自 industry-scanner）——引用其行业判断，不做重复分析
+- quick-scan 模式：无上游依赖（与 industry-scanner 并行执行）
+- full-chain / targeted-update / pricing-focused 模式：上游 node_artifact（来自 industry-scanner）——引用其行业判断，不做重复分析
 - 无分析计划单 → 拒绝启动（非协商条款 N2）
 
 ## 分析边界
@@ -38,7 +39,7 @@ description: >
 1. 读取 `references/roles/pre-ipo-investor.md`
 2. 读取 `references/roles/buy-side.md`
 3. 读取 `references/roles/media.md`
-4. 读取上游 industry-scanner 的 node_artifact（引用 `summary.key_finding` 和 `data_freshness`）
+4. 如非 quick-scan 模式：读取上游 industry-scanner 的 node_artifact（引用 `summary.key_finding` 和 `data_freshness`）
 5. 不重复搜索行业数据——仅搜索技术相关数据
 
 ### Step 2: 三角色并行分析
