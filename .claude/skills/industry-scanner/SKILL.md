@@ -48,24 +48,32 @@ description: >
 
 ### Step 2.5: 前瞻信号生成
 
-对每条 Critical/High 风险条目，按 `references/signal-watchlist.md` 生成信号清单。
+对每条 Critical/High 风险条目，按 `references/signal-watchlist.md` 生成信号清单。新增字段：
+- `time_window`：按风险类别选择窗口（customer 2-4Q / tech 4-8Q / profit 4-8Q）
+- `priority_tier`：标注 T1（结构级）/ T2（趋势级）/ T3（事件级）
+- `execution_proxy`：可选，管理层执行力代理（不计分）
+- `reversal_signal`：仅在 C9 范式冲击时使用
 
 ### Step 3: 汇聚与冲突标注
 
 1. 合并三个角色的风险条目
 2. 识别共识风险
 3. 识别角色冲突，标注冲突类型
+4. 角色间风险等级对比 → 若某角色 ≥ 其他角色 +2 档 → 按 G1.7 异议加权
 
 ### Step 3.5: 传染检测
 
 对照 `references/contagion-matrix.md` 检查跨维度传染信号。
 若触发 → node_artifact 中添加 `contagion_alert` 字段。
+叠加检查 → 若 ≥2 条通道同时负向 → 按 §6 叠加规则计算放大因子。
 
 ### Step 4: 质量门禁
 
 按 `references/guardrails/quality-gates.md` 逐项检查：
   - G1: 角色完备（每角色条目 ≥ depth 要求）
   - G1.5: 信号完备（Critical/High 风险必须有 signal_watchlist）
+  - G1.6: 交叉信号一致性（跨层级冲突按 T1>T2>T3 处理）
+  - G1.7: 异议角色加权（角色间风险 ≥2 档偏差时触发）
   - G2: 来源多样（不同条目不同 URL）
   - G3: 证据内联（每条有 inline_summary）
   - G4: 枚举合规（node/role/risk_level/id 格式）

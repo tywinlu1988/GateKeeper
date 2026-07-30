@@ -60,7 +60,7 @@ node 字段固定为 `"pricing"`。
 
 ### Step 2.5: 前瞻信号生成
 
-同 industry-scanner（Step 2.5），按 `references/signal-watchlist.md` 生成。
+同 industry-scanner（Step 2.5），按 `references/signal-watchlist.md` 生成（含 time_window / priority_tier / execution_proxy 新字段）。
 
 ### Step 3: 汇聚与冲突标注
 

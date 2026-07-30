@@ -14,6 +14,17 @@
 **规则**：每条 risk_level = critical 或 high 的风险条目，必须附带 signal_watchlist（≥2 条正向信号 + ≥2 条负向信号 + ≥1 条 what_must_go_right）。信号设计须遵循可观测、有阈值、有时效、有含义、双面对称五原则。
 **不通过处理**：标注 `signal_incomplete`，要求补充信号清单。最多重试一次。
 
+## G1.6: 交叉信号一致性（Cross-Signal Consistency）
+
+**规则**：当同一风险条目的 signal_watchlist 中包含跨优先级层级（T1 vs T2/T3）且方向相反的信号时，按 `references/signal-watchlist.md §3.6` 的优先级冲突处理规则执行。T1 信号优先于 T3，被覆盖信号标注 `overridden_by_T1`。冲突处理结果须在 risk_entry 中记录。
+**不通过处理**：不做拒绝——仅标注 `cross_signal_conflict: true` 并列出覆盖理由。覆盖后的风险等级以主导信号为准。
+
+## G1.7: 异议角色加权（Dissenting-Role Escalation）
+
+**规则**：汇聚步骤完成后，若角色 A 的 risk_level ≥ 角色 B 和 C 的 risk_level + 2 档（如 A=Critical, B/C=Low），触发异议加权——该角色此条判断权重 ×1.5，在风险矩阵中置顶，在 conflicts 中标注 `dissenting_view: {role}` 和 `amplified: true`。
+**设计依据**：GateKeeper 系统性低估风险幅度（方向正确，量级保守）。当某一角色给出显著高于其他角色的风险等级时，值得额外关注。
+**不通过处理**：不做拒绝——信息增强，仅标注升级。
+
 ## G2: 来源多样（Source Diversity）
 
 **规则**：同一角色内不同风险条目使用不同 primary_source URL。
