@@ -40,7 +40,7 @@
 ## G6: 自包含（Self-Containment）
 
 **规则**：输出报告不得包含：
-       - 本地绝对路径（如 `D:/sandbox/...`、`file:///...`）
+       - 本地绝对路径（如 `/home/user/project/...`、`file:///...`）
        - 外部 CSS/JS 引用（如 `<link rel="stylesheet" href="...">`）
        - 仅裸 URL 作为证据（必须有 inline_summary）
 **不通过处理**：标注违规位置，要求修正。

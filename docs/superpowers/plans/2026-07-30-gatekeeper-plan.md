@@ -75,31 +75,31 @@ D:\sandbox\
 - [ ] **Step 1: Create all directories**
 
 ```bash
-mkdir -p D:/sandbox/.claude/skills/ipo-router
-mkdir -p D:/sandbox/.claude/skills/industry-scanner
-mkdir -p D:/sandbox/.claude/skills/tech-scanner
-mkdir -p D:/sandbox/.claude/skills/finance-scanner
-mkdir -p D:/sandbox/.claude/skills/pricing-scanner
-mkdir -p D:/sandbox/references/guardrails
-mkdir -p D:/sandbox/references/roles
-mkdir -p D:/sandbox/references/templates
-mkdir -p D:/sandbox/knowledge/industry-benchmarks
-mkdir -p D:/sandbox/knowledge/case-library
-mkdir -p D:/sandbox/knowledge/policy-tracker
+mkdir -p D:/sandbox/gatekeeper/.claude/skills/ipo-router
+mkdir -p D:/sandbox/gatekeeper/.claude/skills/industry-scanner
+mkdir -p D:/sandbox/gatekeeper/.claude/skills/tech-scanner
+mkdir -p D:/sandbox/gatekeeper/.claude/skills/finance-scanner
+mkdir -p D:/sandbox/gatekeeper/.claude/skills/pricing-scanner
+mkdir -p D:/sandbox/gatekeeper/references/guardrails
+mkdir -p D:/sandbox/gatekeeper/references/roles
+mkdir -p D:/sandbox/gatekeeper/references/templates
+mkdir -p D:/sandbox/gatekeeper/knowledge/industry-benchmarks
+mkdir -p D:/sandbox/gatekeeper/knowledge/case-library
+mkdir -p D:/sandbox/gatekeeper/knowledge/policy-tracker
 ```
 
 - [ ] **Step 2: Create .gitkeep files for knowledge/ directories**
 
 ```bash
-touch D:/sandbox/knowledge/industry-benchmarks/.gitkeep
-touch D:/sandbox/knowledge/case-library/.gitkeep
-touch D:/sandbox/knowledge/policy-tracker/.gitkeep
+touch D:/sandbox/gatekeeper/knowledge/industry-benchmarks/.gitkeep
+touch D:/sandbox/gatekeeper/knowledge/case-library/.gitkeep
+touch D:/sandbox/gatekeeper/knowledge/policy-tracker/.gitkeep
 ```
 
 - [ ] **Step 3: Verify structure**
 
 ```bash
-find D:/sandbox/.claude D:/sandbox/references D:/sandbox/knowledge -type d | sort
+find D:/sandbox/gatekeeper/.claude D:/sandbox/gatekeeper/references D:/sandbox/gatekeeper/knowledge -type d | sort
 ```
 
 Expected: 15 directories exist.
@@ -325,7 +325,7 @@ git commit -m "feat: add AGENTS.md with global orchestrator and non-negotiables"
 ## G6: 自包含（Self-Containment）
 
 **规则**：输出报告不得包含：
-       - 本地绝对路径（如 `D:/sandbox/...`、`file:///...`）
+       - 本地绝对路径（如 `D:/sandbox/gatekeeper/...`、`file:///...`）
        - 外部 CSS/JS 引用（如 `<link rel="stylesheet" href="...">`）
        - 仅裸 URL 作为证据（必须有 inline_summary）
 **不通过处理**：标注违规位置，要求修正。
