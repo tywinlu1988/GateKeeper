@@ -27,38 +27,25 @@ GateKeeper 围绕科创板 IPO 保荐承销场景，覆盖从行业定位到发�
 
 ## 使用方式
 
-### 通过 npx（推荐）
-
-```bash
-# 安装并运行
-npx @anthropic/agent gatekeeper
-
-# 在 Claude Code 中，将项目目录作为技能包加载：
-# 将本仓库克隆到本地后，在 Claude Code 会话中技能自动发现。
-```
-
 ### 源码安装
 
 ```bash
 # 克隆仓库
 git clone https://github.com/tywinlu1988/GateKeeper.git
-
-# 进入目录
 cd GateKeeper
-
-# 在 Claude Code 中打开此目录即可自动加载所有技能
-claude
 ```
+
+然后在 Claude Code 中打开该目录，`.claude/skills/` 下的所有技能将自动被发现和加载。
 
 ### 快速开始
 
-在 Claude Code 中，描述你的 Pre-IPO 项目情况：
+在 Claude Code 中描述你的 Pre-IPO 项目情况：
 
 ```
 > 帮我评估一下某科技公司，计划明年申报科创板，目前刚完成股改
 ```
 
-系统将自动通过 ipo-router 匹配分析路径，依次执行各节点推演，输出结构化的风险矩阵报告。
+系统将通过 ipo-router 匹配分析路径，依次执行各节点推演，输出结构化风险矩阵报告。
 
 ## 项目结构
 
