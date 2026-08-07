@@ -13,12 +13,13 @@
 ## 标准做法：Write 分块 + cat 拼接
 
 ```
-1. Write  report_head.html   # <!DOCTYPE>、<style>、报告头、执行摘要、评级总览
+0. Read  references/templates/risk-matrix-template.html   # 必须以官方模板为底本（G8），禁止从零自行设计
+1. Write  report_head.html   # 模板的 <!DOCTYPE>、<style>、报告头，填执行摘要、评级总览
 2. Write  report_nodes.html  # 四个节点的风险条目表格（节点 1-2）
 3. Write  report_nodes2.html # 节点 3-4（如需再分）
 4. Write  report_tail.html   # 关键论断时效清单、制品新鲜度、页脚
 5. Bash: cat report_head.html report_nodes.html report_nodes2.html report_tail.html > 最终报告.html
-6. 验证：最终文件非空、以 </html> 结尾、包含 G8 要求的三个固定区块
+6. 验证：最终文件非空、以 </html> 结尾、保留模板标记注释 <!-- GateKeeper-Template: ... -->、包含 G8 要求的三个固定区块
 ```
 
 ## 规则

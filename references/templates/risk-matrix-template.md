@@ -6,6 +6,8 @@
 
 # Gatekeeper 风险矩阵
 
+<!-- GateKeeper-Template: risk-matrix-template.md —— 输出报告必须保留本标记（G8 模板合规验证依据） -->
+
 **项目**：{project_name}　**计划**：{plan_id}　**节点**：{node_name}　**深度**：{depth}　**生成时间**：{generated_at}
 
 ---
@@ -129,5 +131,5 @@
 
 ---
 
-*报告由 Gatekeeper v0.4.3 生成 · 所有数据均内联摘要，可独立分发*
+*报告由 Gatekeeper v0.4.4 生成 · 所有数据均内联摘要，可独立分发*
 *知识来源：实时搜索 + 基准库（knowledge/） · 搜索质量：{search_quality}*
