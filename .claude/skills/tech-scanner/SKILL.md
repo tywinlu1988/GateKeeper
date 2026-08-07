@@ -106,7 +106,7 @@ node_artifact:
 ### 2. 风险矩阵报告
 
 默认按 `references/templates/risk-matrix-template.md` 格式输出 Markdown。
-如需自包含 HTML 报告，按 `references/templates/risk-matrix-template.html` 格式输出。
+如需自包含 HTML 报告，按 `references/templates/risk-matrix-template.html` 格式输出。HTML 生成必须遵循 `references/templates/html-assembly.md` 组装协议（Write 分块 + cat 拼接；禁止 Bash heredoc / 依赖 python 渲染）。
 
 ### 3. 制品新鲜度
 

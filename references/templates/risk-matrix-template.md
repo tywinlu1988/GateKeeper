@@ -23,10 +23,11 @@
 
 **风险分布**：🔴Critical {critical_count}　🟠High {high_count}　🟡Medium {medium_count}　🟢Low {low_count}
 
-**TOP 3 风险**：
+**TOP 3-5 风险**：
 1. {exec_top1}
 2. {exec_top2}
 3. {exec_top3}
+（可选 4-5. {exec_top4_5}）
 
 **关键数据**：
 - {exec_data1}
@@ -128,5 +129,5 @@
 
 ---
 
-*报告由 Gatekeeper v0.4.2 生成 · 所有数据均内联摘要，可独立分发*
+*报告由 Gatekeeper v0.4.3 生成 · 所有数据均内联摘要，可独立分发*
 *知识来源：实时搜索 + 基准库（knowledge/） · 搜索质量：{search_quality}*

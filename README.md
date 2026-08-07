@@ -1,6 +1,6 @@
 # GateKeeper
 
-**当前版本：v0.4.2**（[Release Notes](https://github.com/tywinlu1988/GateKeeper/releases)）
+**当前版本：v0.4.3**（[Release Notes](https://github.com/tywinlu1988/GateKeeper/releases)）
 
 科创板 Pre-IPO 外部视角风险推演引擎。为保荐承销机构提供 Pre-IPO 投资人、上市后买方、舆论三方视角的结构化风险评估。
 
@@ -116,6 +116,12 @@ cd GateKeeper
 - **G1 反凑数**：三角色 search_log 完全雷同视为一次查询；每角色 ≥2 条角色独有查询
 - **D4 语义收紧**：仅用于时效不足；数值冲突走 D3，异常值剔除说明理由即可
 - **G8 模板合规**：报告固定区块（执行摘要/时效清单/制品新鲜度）不可缺、不可改名替换
+
+### 门禁回灌与交付协议（v0.4.3，基于弱模型三次实测）
+
+- **D4 回灌检查**：时效判定清单完成后逐字扫描结论位（执行摘要/TOP 风险/关键数据/key_finding），D4 标注数据出现即删除改写——禁止"判而不行"
+- **可比估值双来源**：每家可比 ≥2 独立来源或 1 来源 + 总市值÷TTM 净利交叉计算；聚合数字（均值/区间）必须可从分项复算
+- **HTML 组装协议**：Write 分块 + cat 拼接为标准做法；禁止 Bash heredoc 写 HTML、禁止依赖 python/node 渲染（实测弱模型环境下两者均失败）
 
 ## 质量保障
 
