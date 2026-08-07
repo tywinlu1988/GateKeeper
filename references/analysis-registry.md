@@ -56,11 +56,14 @@ paths:
 
 ## 深度级别定义
 
-| depth | 每角色最少风险条目 | 搜索轮次 | 适用场景 |
-|-------|-----------------|---------|---------|
-| deep | 5 | 3-4 轮 | full-chain, pricing-focused |
-| standard | 3 | 2-3 轮 | targeted-update |
-| quick | 1 | 1-2 轮 | quick-scan |
+| depth | 每角色最少风险条目 | 每节点每角色最少独立查询 | 适用场景 |
+|-------|-----------------|----------------------|---------|
+| deep | 5 | ≥ 3 次（含 ≥1 次一手披露文件查询：招股书申报稿/问询函/发行公告） | full-chain, pricing-focused |
+| standard | 3 | ≥ 2 次 | targeted-update |
+| quick | 1 | ≥ 1 次 | quick-scan |
+
+> 查询留痕于 node_artifact.search_log（artifact-schemas.md §S2），G1 门禁检查完备性。
+> "轮次"指单个角色就本节点主题发出的独立查询，不含对其他节点主题的搜索（跨节点搜索违反各节点护栏）。
 
 ## 路径边界裁定（quick-scan vs targeted-update）
 

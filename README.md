@@ -1,6 +1,6 @@
 # GateKeeper
 
-**当前版本：v0.4.0**（[Release Notes](https://github.com/tywinlu1988/GateKeeper/releases)）
+**当前版本：v0.4.1**（[Release Notes](https://github.com/tywinlu1988/GateKeeper/releases)）
 
 科创板 Pre-IPO 外部视角风险推演引擎。为保荐承销机构提供 Pre-IPO 投资人、上市后买方、舆论三方视角的结构化风险评估。
 
@@ -100,6 +100,14 @@ cd GateKeeper
 - **传染矩阵信号对补全**：C2/C4/C6/C8 通道补齐检测信号（此前仅 C1/C3/C5/C7/C9 有定义），叠加因子计数有了判定依据
 - **状态转移机制**：降级标注 open/narrowed/resolved 三态追踪；contagion_alert 支持解除；制品新鲜度区分 stale(age) 与 stale(superseded)
 - **用户陈述校正通道**：计划单记录 user_stated_status，节点发现实况不符时回写 status_correction
+
+### 可审计性强化（v0.4.1，基于弱模型实测审查）
+
+- **search_log 必填**：node_artifact 强制记录每角色全部查询（查询词/时间/命中数），G1 检查查询次数达标（deep ≥3/角色，含 ≥1 次一手披露查询）
+- **market_snapshot 入 schema**：pricing 快照表从流程要求变为结构要求，缺失则 G1 不过
+- **source_type 证据标记**：search / baseline / material 三分；基准库证据禁止单独进结论位，引用须"先搜后查库"（顺序可审计）
+- **数字追溯链**：key_data_points 可挂载 source_ref 指向具体查询，无法追溯的标 [UNLOGGED]
+- **逐节点 G7 时效判定清单**：门禁判定必须可见，不允许"心里检查"
 
 ## 质量保障
 

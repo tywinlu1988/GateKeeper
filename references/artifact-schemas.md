@@ -57,6 +57,14 @@ node_artifact:
   superposition:                              # 可选，传染叠加（≥2 通道同时负向时填写，见 contagion-matrix.md §6）
     active_channels: []                       # 负向激活通道 ID 列表（如 ["C2","C5"]）
     amplification: "1.0x|1.5x|2.0x"
+  search_log:                                 # 必填，每角色搜索留痕（审计依据，G1 检查）
+    - role: "pre-ipo-investor|buy-side|media"
+      queries:
+        - q: ""                               # 实际发出的查询词
+          searched_at: ""                     # ISO 8601
+          hits: 0                             # 有效数据点数
+  market_snapshot: {}                         # pricing 节点必填（Step 1.5 六项必查表，每项含 as_of 与结果）；
+                                              # 其他节点省略。缺失 → G1 不通过
   data_freshness:
     search_quality: "rich|adequate|sparse"   # 必填，枚举
     key_data_gaps: []                        # 缺失的关键数据点
@@ -84,6 +92,7 @@ risk_entry:
   claim: ""                                   # 必填，一句话风险主张
   evidence:
     primary_source:
+      source_type: "search|baseline|material"   # 必填，枚举：实时搜索 | knowledge/ 基准库 | 用户提供材料
       url: ""                                # 可选（搜索不可用时可为空）
       access_type: "public|internal|paywall"  # 必填，枚举
       captured_at: ""                         # 必填，ISO 8601（抓取时间）
@@ -93,6 +102,8 @@ risk_entry:
       - metric: ""                            # 必填
         value: ""                             # 必填
         comparison: ""                        # 可选
+        source_ref: ""                        # 可选，指向 search_log 中对应查询（如 "buy-side#2"）；
+                                            # 无法追溯到任何已执行查询时填 [UNLOGGED]
   rationale: ""                               # 必填，为什么这个角色关注
   potential_impact: ""                        # 必填，风险发生的影响推演
   suggested_response: ""                      # 必填，建议应对策略
@@ -111,6 +122,9 @@ risk_entry:
 # risk_level: 仅允许 critical, high, medium, low
 # id 格式: RISK-{node}-{role}-NNN（NNN 为 3 位零填充数字）
 # access_type: 仅允许 public, internal, paywall
+# source_type: 仅允许 search, baseline, material。
+#   baseline（knowledge/ 基准库）证据的使用限制见 quality-gates.md G7——
+#   禁止单独进入执行摘要/TOP 风险/评级依据，且引用前必须在 search_log 中有对应的实时搜索尝试。
 # data_as_of: 数据内容所描述的时间点/期间（YYYY-MM 或 YYYY-Qn），
 #   禁止以 captured_at（抓取时间）冒充。2023 年研报今天被抓取，
 #   data_as_of 仍须填 2023 年对应期。历史案例引用须如实标注其发生期。

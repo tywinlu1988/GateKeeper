@@ -45,6 +45,8 @@ description: >
 3. 市场环境类数据（破发率、估值倍数、审核/撤回统计、发行制度、融资热度）：仅接受 `data_as_of` 距 T0 ≤ 6 个月的来源作为"当前"论断依据。
 4. 每条证据必须填写 `data_as_of`（数据所属期）——旧研报今天被抓取，`data_as_of` 仍填其发表期，禁止以抓取时间冒充。
 5. 搜到的数据超出时效阈值 → 触发降级 D4（references/guardrails/degradation-paths.md）。
+6. **先搜后查库**：`knowledge/` 基准库仅在本节点实时搜索完成后才允许查阅引用；基准证据 `source_type=baseline`，禁止单独进入执行摘要/TOP 风险/评级依据（G7）。
+7. 所有查询（含未命中的）逐条写入 `node_artifact.search_log`；每角色查询次数须达 depth 要求（deep ≥3，含 ≥1 次一手披露查询——招股书申报稿/问询函/发行公告）。
 
 ### Step 1: 加载角色与上游制品
 
