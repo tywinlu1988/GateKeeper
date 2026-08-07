@@ -14,6 +14,7 @@ description: >
 
 - 分析计划单（analysis_plan YAML，来自 ipo-router）
 - 无分析计划单 → 拒绝启动（非协商条款 N2）
+- **N2 例外**：用户手动指定 `path_id` 和 `node` 时允许跳过 Router 直接启动（见 references/guardrails/non-negotiables.md N2）
 
 ## 分析边界
 
@@ -31,6 +32,16 @@ description: >
 - 任何形式的最终过会概率判断
 
 ## 执行流程
+
+> 本技能中所有 `references/...` 路径均相对于 Gatekeeper **项目根目录**（非本技能所在目录）。
+
+### Step 0: 时间锚定（强制，先于一切搜索）
+
+1. 确定当前日期 T0（以系统日期为准），写入所有制品的 `generated_at`。
+2. 所有搜索查询必须带时间限定词：`"{主题} {T0年份}"`、`"{主题} 最新/TTM/近12个月"`。禁止发送无时间限定的市场环境类查询。
+3. 市场环境类数据（破发率、估值倍数、审核/撤回统计、发行制度、融资热度）：仅接受 `data_as_of` 距 T0 ≤ 6 个月的来源作为"当前"论断依据。
+4. 每条证据必须填写 `data_as_of`（数据所属期）——旧研报今天被抓取，`data_as_of` 仍填其发表期，禁止以抓取时间冒充。
+5. 搜到的数据超出时效阈值 → 触发降级 D4（references/guardrails/degradation-paths.md）。
 
 ### Step 1: 加载角色与数据
 
@@ -69,16 +80,7 @@ description: >
 
 ### Step 4: 质量门禁
 
-按 `references/guardrails/quality-gates.md` 逐项检查：
-  - G1: 角色完备（每角色条目 ≥ depth 要求）
-  - G1.5: 信号完备（Critical/High 风险必须有 signal_watchlist）
-  - G1.6: 交叉信号一致性（跨层级冲突按 T1>T2>T3 处理）
-  - G1.7: 异议角色加权（角色间风险 ≥2 档偏差时触发）
-  - G2: 来源多样（不同条目不同 URL）
-  - G3: 证据内联（每条有 inline_summary）
-  - G4: 枚举合规（node/role/risk_level/id 格式）
-  - G5: 角色锚定（rationale 与角色立场一致）
-  - G6: 自包含（无本地路径、无裸 URL 依赖）
+按 `references/guardrails/quality-gates.md` **全部**门禁逐项检查（当前为 G1-G7，含 G1.5 信号完备、G1.6 交叉信号一致性、G1.7 异议角色加权、G7 时效合规）。门禁清单的唯一事实源是 quality-gates.md——此处不复制完整清单，避免漂移。
 
 不通过 → 按门禁定义处理 → 重新生成（最多一次）。
 两次仍不通过 → 触发降级策略（references/guardrails/degradation-paths.md）。
@@ -89,6 +91,7 @@ description: >
   - D1: 搜索不可用 → 标注 SEARCH_UNAVAILABLE
   - D2: 数据稀疏 → 降低要求 + confidence: low
   - D3: 数据矛盾 → 保留矛盾双方
+  - D4: 数据时效不足 → 补搜 → 基准库兜底 → [STALE_DATA] 标注且禁入结论位
 
 ## 输出
 

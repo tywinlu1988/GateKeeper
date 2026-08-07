@@ -46,6 +46,8 @@ paths:
       - "初步项目筛选"
       - "快速可行性判断"
       - "立项前快速评估"
+      - "帮我看一下…靠不靠谱 / 怎么样 / 有没有戏"
+      - "先粗看 / 先摸摸底"
     nodes: [industry, tech]
     mode: parallel
     depth: quick
@@ -59,6 +61,15 @@ paths:
 | deep | 5 | 3-4 轮 | full-chain, pricing-focused |
 | standard | 3 | 2-3 轮 | targeted-update |
 | quick | 1 | 1-2 轮 | quick-scan |
+
+## 路径边界裁定（quick-scan vs targeted-update）
+
+两条路径都可能涉及"用户指定部分节点"，按以下优先级裁定：
+
+1. **有 previous_run_id（存在前次推演制品）** → targeted-update（复用制品是其核心价值）
+2. **首次推演 + 快速/粗略意图** → quick-scan（即使只提行业/技术）
+3. **首次推演 + 明确指定单一节点深入** → targeted-update（standard 深度，previous_artifacts 为空）
+4. 仍无法判断 → N3：full-chain
 
 ## 并行执行协调（quick-scan 特有）
 

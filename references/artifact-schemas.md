@@ -18,6 +18,8 @@ analysis_plan:
   previous_run_id: null                     # 可选，关联上次推演
   previous_artifacts: {}                    # 可选，已有节点制品的引用
   existing_materials: []                    # 可选，用户提供的材料路径列表
+  user_stated_status: ""                    # 可选，用户陈述的项目状态要点（原话）。仅作路由输入，不作事实依据；
+                                            # 节点发现实况不符时在 S2 data_freshness.status_correction 标注
   generated_at: ""                          # 必填，ISO 8601
 
 # 枚举约束
@@ -51,15 +53,21 @@ node_artifact:
         media_view: ""
         media_basis: ""
         conflict_type: "assumption|weighting|interpretation"  # 枚举
+  contagion_alert: "none|watch|active|critical"  # 可选，传染检测结果（Step 3.5，见 contagion-matrix.md §4）
+  superposition:                              # 可选，传染叠加（≥2 通道同时负向时填写，见 contagion-matrix.md §6）
+    active_channels: []                       # 负向激活通道 ID 列表（如 ["C2","C5"]）
+    amplification: "1.0x|1.5x|2.0x"
   data_freshness:
     search_quality: "rich|adequate|sparse"   # 必填，枚举
     key_data_gaps: []                        # 缺失的关键数据点
+    status_correction: ""                    # 可选，节点搜索发现的项目实况与用户陈述不符时的校正说明
 
 # 枚举约束
 # node: 仅允许 industry, tech, finance, pricing
 # overall_rating: 仅允许 favorable, neutral, cautious, red-flag
 # conflict_type: 仅允许 assumption, weighting, interpretation
 # search_quality: 仅允许 rich, adequate, sparse
+# contagion_alert: 仅允许 none, watch, active, critical
 ```
 
 ## S3: 风险矩阵条目（Risk Entry）
@@ -78,7 +86,8 @@ risk_entry:
     primary_source:
       url: ""                                # 可选（搜索不可用时可为空）
       access_type: "public|internal|paywall"  # 必填，枚举
-      captured_at: ""                         # 必填，ISO 8601
+      captured_at: ""                         # 必填，ISO 8601（抓取时间）
+      data_as_of: ""                          # 必填，YYYY-MM 或 YYYY-Qn（数据所属期）
     inline_summary: ""                        # 必填，内联证据摘要
     key_data_points:                          # 必填（至少1条）
       - metric: ""                            # 必填
@@ -87,6 +96,14 @@ risk_entry:
   rationale: ""                               # 必填，为什么这个角色关注
   potential_impact: ""                        # 必填，风险发生的影响推演
   suggested_response: ""                      # 必填，建议应对策略
+  signal_watchlist:                           # 可选，risk_level=critical|high 时必填（见 signal-watchlist.md §1 模板）
+    risk_statement: ""
+    time_window: {}
+    priority_tier: "T1|T2|T3"
+    positive_signals: []
+    negative_signals: []
+    what_must_go_right: []
+    execution_proxy: {}                       # 可选，管理层执行力代理（不计分）
 
 # 枚举约束
 # node: 仅允许 industry, tech, finance, pricing
@@ -94,6 +111,11 @@ risk_entry:
 # risk_level: 仅允许 critical, high, medium, low
 # id 格式: RISK-{node}-{role}-NNN（NNN 为 3 位零填充数字）
 # access_type: 仅允许 public, internal, paywall
+# data_as_of: 数据内容所描述的时间点/期间（YYYY-MM 或 YYYY-Qn），
+#   禁止以 captured_at（抓取时间）冒充。2023 年研报今天被抓取，
+#   data_as_of 仍须填 2023 年对应期。历史案例引用须如实标注其发生期。
+#   聚合多篇统计时，data_as_of 填统计期末（非报道日）。
+#   时效阈值由 quality-gates.md G7 定义。
 ```
 
 ## 制品新鲜度追踪（Artifact Freshness）
@@ -120,7 +142,12 @@ artifact_freshness:
     age_days: 0
 
 # 新鲜度规则
-# age_days <= 3 且 status = fresh → fresh
-# age_days > 3 → stale
 # generated_at = null → not_run
+# status 判定（按优先级）：
+#   1. 本次推演中重跑过的节点 → fresh（age_days 从最新 generated_at 计）
+#   2. targeted-update 中未被重跑的节点 → stale（语义为"非本次实测"，不论 age_days）
+#   3. age_days <= 3 → fresh
+#   4. age_days > 3 → stale
+# 注：stale 有两种成因——"时间过期"（age_days 超期）与"被新推演取代"（superseded）。
+#     报告中建议标注成因：stale(age) / stale(superseded)。
 ```

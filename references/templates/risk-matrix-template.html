@@ -240,6 +240,21 @@
     </div>
   </div>
 
+  <!-- CLAIM FRESHNESS (pricing Step 4.5) -->
+  <div class="node-sec">
+    <div class="sec-hdr">
+      <span class="sec-title">关键论断时效清单</span>
+    </div>
+    <div class="sec-body">
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th style="width:34%">论断</th><th style="width:18%">数值</th><th style="width:12%">data_as_of</th><th style="width:22%">来源</th><th style="width:14%">时效状态</th></tr></thead>
+          <tbody>{claim_freshness_rows}</tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
   <!-- FRESHNESS -->
   <div class="rpt-hdr" style="padding:20px 28px">
     <span style="font-weight:700;font-size:14px">制品新鲜度</span>
@@ -252,7 +267,7 @@
   </div>
 
   <div class="rpt-footer">
-    GateKeeper v0.1.0 · 数据内联摘要，可独立分发 · 知识来源：实时搜索
+    GateKeeper v0.4.0 · 数据内联摘要，可独立分发 · 知识来源：实时搜索 + 基准库
   </div>
 
 </div>
