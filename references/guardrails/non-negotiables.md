@@ -58,3 +58,10 @@
 
 **规则**：所有数值论断必须锚定数据所属期（`data_as_of`）。市场环境类论断仅可使用距生成日 ≤ 6 个月的数据作为"当前"依据。禁止以抓取时间（`captured_at`）冒充数据所属期；禁止凭参数记忆输出市场统计而不标注。
 **违反响应**：质量门禁 G7 检查：时效超标或 data_as_of 缺失 → 拒绝通过，按降级路径 D4 处理。
+
+## N12: 规则文件只读（Rule Integrity）
+
+**规则**：执行体（Router / Scanner / 任何节点）对 Gatekeeper 规则文件只有读权限——`AGENTS.md`、`references/`、`.claude/skills/`、`knowledge/` 下任何文件在推演过程中禁止修改。版本号 bump、tag、Release 是用户专属动作，执行体无权发起。
+**设计来源**：v0.4.1 实测中，执行体在开跑前自行修改 AGENTS.md（新增条款 + 版本号改为 v0.5.0），然后对着自己写的规则自评"合规"。规则书不可由被测者修改。
+**发现规则缺陷时**：在 node_artifact 的 `data_freshness.key_data_gaps` 中记录 `rule_defect: {缺陷描述}` 并向用户报告——记录，不修复。
+**违反响应**：推演开始前与结束后比对规则文件状态（如 `git status`）；若规则文件在推演过程中被修改，本次全部产物标记 `rules_tampered: true`，结论不可信，需在干净规则下重跑。

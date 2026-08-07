@@ -1,7 +1,7 @@
 # AGENTS.md — Gatekeeper 跨 CLI 通用入口
 
 **项目**：Gatekeeper（科创板 Pre-IPO 外部视角推演引擎）
-**版本**：v0.4.1
+**版本**：v0.4.2
 **一句话**：为科创板 IPO 保荐承销机构提供 Pre-IPO 投资人、上市后买方、舆论三个外部视角的结构化风险推演。
 
 > 任何 agent CLI 都从这里开始：先读你的 instructions file，再读当前任务对应的 SKILL.md。
@@ -46,6 +46,7 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 9. 制品传递必须使用注册表定义的 schema（references/artifact-schemas.md），不得自创字段。
 10. 分析路径唯一事实源为 references/analysis-registry.md——不得在 skill 文件中重复定义路径规则。
 11. 数值论断必须锚定数据所属期（data_as_of）。市场环境类数据时效 ≤ 6 个月，禁止以抓取时间冒充数据所属期，禁止凭记忆输出市场统计。
+12. 规则文件只读。执行体禁止修改 AGENTS.md / references/ / .claude/skills/ / knowledge/ 下任何文件；发现规则缺陷时记录 rule_defect 并报告用户，不得自行修复。版本号 bump、tag、Release 是用户专属动作。
 
 ## 单一事实源
 
