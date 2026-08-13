@@ -23,4 +23,4 @@
 
 ---
 
-*Gatekeeper v0.5.2 · 督导期监控表 · 信号设计遵循可观测/有阈值/有时效/有含义/双面对称五原则（signal-watchlist.md）*
+*Gatekeeper v0.6.0 · 督导期监控表 · 信号设计遵循可观测/有阈值/有时效/有含义/双面对称五原则（signal-watchlist.md）*

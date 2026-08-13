@@ -42,6 +42,7 @@ description: >
 - **项目阶段 = 申报准备/反馈回复 + 提到特定节点** → targeted-update
 - **用户提到"定价""估值""发行窗口"** → pricing-focused
 - **用户提到"快速看看""初步判断""立项"** → quick-scan
+- **用户引用 plan_id 且提到"监控""检查信号""季报/中报/年报后""解禁"** → monitoring-run（要求 previous_run_id；无前次制品 → 提示先运行 full-chain）
 - **无法判断** → full-chain（N3：未知默认为 full-chain）
 
 ### §2 确认

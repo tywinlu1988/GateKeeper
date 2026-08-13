@@ -1,6 +1,6 @@
 # GateKeeper
 
-**当前版本：v0.5.2**（[Release Notes](https://github.com/tywinlu1988/GateKeeper/releases)）
+**当前版本：v0.6.0**（[Release Notes](https://github.com/tywinlu1988/GateKeeper/releases)）
 
 保荐机构科创板 IPO 全周期决策支持工具。以 Pre-IPO 投资人、上市后买方、舆论三方视角的推演为**分析引擎**，交付**三个工作流产物**：内核风险清单（内核会/问询回复）、发行定价备忘录（投价报告/定价谈判）、督导期监控表（上市后持续督导）。决策标准符合投资人与股票市场第一性——风险按"已定价/未定价"分层，估值用隐含假设反推而非目标价预测，传染输出定性定级而非伪精确因子。
 
@@ -26,6 +26,7 @@ GateKeeper 围绕科创板 IPO 保荐承销场景，覆盖从行业定位到发�
 | **pricing-focused** | 临近发行窗口、估值讨论 | industry → pricing |
 | **targeted-update** | 新数据到达、局部信息更新 | 用户指定节点 |
 | **quick-scan** | 初步项目筛选、快速评估 | industry + tech（并行） |
+| **monitoring-run** | 督导期信号检查（季报/中报/年报/解禁窗口） | monitor-runner 信号比对（非分析节点） |
 
 ## 使用方式
 
@@ -58,9 +59,9 @@ cd GateKeeper
 
 ### 风险推演引擎
 
-- **5 技能管道**：ipo-router → industry → tech → finance → pricing，顺序执行，制品传递
+- **6 技能**：ipo-router → industry → tech → finance → pricing 顺序执行，制品传递；monitor-runner 独立执行督导期信号比对
 - **三角色并行分析**：Pre-IPO 投资人（退出视角）、上市后买方（持有视角）、舆论媒体（负面挖掘视角）
-- **4 条分析路径**：full-chain / pricing-focused / targeted-update / quick-scan
+- **5 条分析路径**：full-chain / pricing-focused / targeted-update / quick-scan / monitoring-run
 
 ### 前瞻信号监测（v0.2.0+）
 
@@ -77,7 +78,7 @@ cd GateKeeper
 ### 质量体系
 
 - 12 条非协商条款（防漂移，含 N11 时效锚定、N12 规则文件只读）
-- 11 道质量门禁（含 G1.5 信号完备、G1.6 交叉信号一致性、G1.7 异议角色加权、G7 时效合规、G8 模板合规）
+- 12 道质量门禁（含 G1.5 信号完备、G1.6 交叉信号一致性、G1.7 异议角色加权、G7 时效合规、G8 模板合规、G9 监控判定合规）
 - 4 条降级策略（搜索不可用 / 数据稀疏 / 结果矛盾 / 数据时效不足）
 - 管理层执行力代理指标（v0.3.0）：辅助判断，不参与评分
 
@@ -88,7 +89,7 @@ cd GateKeeper
 - **Step 0 时间锚定**：所有搜索查询强制带当前年份/最新/TTM 限定词
 - **data_as_of 必填**：每条证据标注数据所属期，禁止以抓取时间冒充
 - **G7 时效门禁 + D4 时效降级**：市场类 ≤6 个月、财务经营类 ≤18 个月；时效不合格数据禁止进入执行摘要/TOP 风险/评级依据
-- **市场环境基准快照**：pricing 节点 6 项必查（破发率、首日均涨、可比 TTM、审核统计、发行制度、发行结果公告）
+- **市场环境基准快照**：pricing 节点 8 项必查（破发率、首日均涨、可比 TTM、审核统计、发行制度、发行结果公告、流通结构与解禁日历、市场情绪位置）
 - **首日破发 vs 估值回归二分框架**：首日风险由当前制度环境决定，禁止历史外推
 - **关键论断时效清单**：终端节点输出前逐条核验数值论断时效（Step 4.5），报告含固定时效清单区块
 - **概率格式护栏**：仅高/中/低三档；百分比需样本量/统计区间/URL/as_of 四要件
@@ -149,6 +150,13 @@ cd GateKeeper
 - **预期差分层**：每条风险标注 priced_in（已定价/部分/未定价）——已定价风险对决策无边际信息，未定价风险才是决策输入
 - **边界修订**：禁止单一目标价预测，允许情景化估值推演（隐含反推/终局情景）；超额认购≠估值认可；三角色降为分析透镜，产物按"问题→应对→责任"组织
 
+### 督导期监控引擎（v0.6.0）
+
+- **monitoring-run 路径 + monitor-runner 技能**：输入 plan_id + 检查时点（季报/中报/年报/解禁窗口）→ 按监控表逐信号检索最新数据 → "阈值 vs 最新值"显式比对 → 告警清单（触发/未触发/数据不足三态）
+- **监控告警清单模板**（monitoring-report.md）：触发告警 + 未触发概览 + 数据不足清单 + 下次检查建议；判定留痕 monitor-run YAML 作审计依据
+- **G9 监控判定合规门禁**：检索留痕 / 数值比较 / 三态完备——禁止凭印象判定、禁止陈旧数据冒充当前状态
+- 无前次推演制品 → 拒绝执行；把静态监控表变成可运行的督导流程（持续督导 2-3 年的法定职责场景）
+
 ### 最终报告合一（v0.5.1/v0.5.2）
 
 - **final-report.html 主交付物**：三产物合一的自包含 HTML（导航 + 三区块 + 内联 CSS），打开即读、可打印、可分发
@@ -170,17 +178,19 @@ cd GateKeeper
 │   ├── industry-scanner/SKILL.md
 │   ├── tech-scanner/SKILL.md
 │   ├── finance-scanner/SKILL.md
-│   └── pricing-scanner/SKILL.md
+│   ├── pricing-scanner/SKILL.md
+│   └── monitor-runner/SKILL.md  # 督导期信号监控执行器（v0.6.0）
 ├── references/                  # 知识/规则层
-│   ├── analysis-registry.md     # 分析路径注册表
+│   ├── analysis-registry.md     # 分析路径注册表（5 路径）
 │   ├── artifact-schemas.md      # 制品 Schema 定义
-│   ├── contagion-matrix.md      # 跨维度传染矩阵（C1-C9 + 叠加规则）
+│   ├── contagion-matrix.md      # 跨维度传染矩阵（C1-C9 + 定性叠加）
 │   ├── signal-watchlist.md      # 前瞻信号监测框架（T1-T3 + 逆转信号）
 │   ├── roles/                   # 三角色定义
-│   ├── guardrails/              # 非协商条款（N1-N11）、质量门禁（G1-G7）、降级策略（D1-D4）
-│   └── templates/               # 风险矩阵输出模板（MD + HTML）
-├── knowledge/                   # 基准库（新股环境/审核统计/估值快照，D1/D4 降级兜底）
-└── docs/                        # 文档（含冒烟测试与回归基准）
+│   ├── guardrails/              # 非协商条款（N1-N12）、质量门禁（G1-G9）、降级策略（D0-D4）
+│   └── templates/               # 三产物/最终报告/监控告警模板
+├── scripts/                     # check-consistency.py 发布前一致性自检
+├── knowledge/                   # 基准库 + 案例库（频准激光/宇树科技）
+└── docs/                        # 冒烟测试、回归基准、弱模型验证任务书
 ```
 
 ## 许可证

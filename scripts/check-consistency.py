@@ -48,6 +48,7 @@ else:
         'references/templates/kernel-risk-checklist.md': r'Gatekeeper v(\d+\.\d+\.\d+) · 内核风险清单',
         'references/templates/pricing-memo.md': r'Gatekeeper v(\d+\.\d+\.\d+) · 发行定价备忘录',
         'references/templates/supervision-monitor.md': r'Gatekeeper v(\d+\.\d+\.\d+) · 督导期监控表',
+        'references/templates/monitoring-report.md': r'Gatekeeper v(\d+\.\d+\.\d+) · 督导期监控告警清单',
     }
     for p, pat in carriers.items():
         if not os.path.exists(p):

@@ -52,6 +52,20 @@ paths:
     mode: parallel
     depth: quick
     description: "快速扫描，行业和技术节点并行执行"
+
+  monitoring-run:
+    path_id: "MONITORING-RUN"
+    trigger:
+      - "督导期信号检查"
+      - "季报/中报/年报后监控"
+      - "解禁窗口检查"
+      - "用户引用 plan_id 并要求监控/检查信号"
+    nodes: []                                # 不触发四节点分析——只执行信号比对
+    mode: single-run
+    depth: n/a
+    reuse_previous_artifacts: true
+    previous_run_id_required: true           # 无前次推演制品 → 拒绝执行
+    description: "对前次推演的督导期监控表（supervision-monitor）执行一次检查时点的信号比对，产出告警清单。执行体：monitor-runner 技能（非四节点之一，N5 节点枚举不受影响）"
 ```
 
 ## 深度级别定义

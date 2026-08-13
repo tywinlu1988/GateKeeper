@@ -118,7 +118,7 @@ node 字段固定为 `"pricing"`。
 
 ### Step 4: 质量门禁
 
-同 industry-scanner（Step 4）：按 `references/guardrails/quality-gates.md` **全部**门禁逐项检查（当前为 G1-G8，含 G1.5 信号完备、G1.6 交叉信号一致性、G1.7 异议角色加权、G7 时效合规、G8 模板合规）。
+同 industry-scanner（Step 4）：按 `references/guardrails/quality-gates.md` **全部**门禁逐项检查（当前为 G1-G9，含 G1.5 信号完备、G1.6 交叉信号一致性、G1.7 异议角色加权、G7 时效合规、G8 模板合规、G9 监控判定合规）。
 
 不通过 → 按门禁定义处理 → 重新生成（最多一次）。
 两次仍不通过 → 触发降级策略（references/guardrails/degradation-paths.md）。

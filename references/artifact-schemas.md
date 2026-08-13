@@ -11,10 +11,11 @@
 analysis_plan:
   plan_id: "PLAN-{YYYYMMDD}-{3位序号}"    # 必填，格式强制
   project_name: ""                          # 必填
-  mode: "full-chain|targeted-update|pricing-focused|quick-scan"  # 必填，枚举
-  path_id: "FULL-CHAIN|TARGETED-UPDATE|PRICING-FOCUSED|QUICK-SCAN"  # 必填，枚举，对应 analysis-registry
+  mode: "full-chain|targeted-update|pricing-focused|quick-scan|monitoring-run"  # 必填，枚举
+  path_id: "FULL-CHAIN|TARGETED-UPDATE|PRICING-FOCUSED|QUICK-SCAN|MONITORING-RUN"  # 必填，枚举，对应 analysis-registry
   nodes: []                                 # 必填，枚举值：industry|tech|finance|pricing
-  depth: "deep|standard|quick"              # 必填，枚举
+                                            # monitoring-run 模式允许空数组（不触发分析节点）
+  depth: "deep|standard|quick"              # 必填，枚举；monitoring-run 填 "quick" 占位
   previous_run_id: null                     # 可选，关联上次推演
   previous_artifacts: {}                    # 可选，已有节点制品的引用
   existing_materials: []                    # 可选，用户提供的材料路径列表

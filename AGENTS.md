@@ -1,7 +1,7 @@
 # AGENTS.md — Gatekeeper 跨 CLI 通用入口
 
 **项目**：Gatekeeper（保荐机构科创板 IPO 全周期决策支持工具）
-**版本**：v0.5.2
+**版本**：v0.6.0
 **一句话**：以三角色外部视角推演为分析引擎，为保荐机构产出三个工作流产物——内核风险清单、发行定价备忘录、督导期监控表。分析透镜是三角色；交付形态是工作流产物；决策标准符合投资人与股票市场第一性。
 
 > 任何 agent CLI 都从这里开始：先读你的 instructions file，再读当前任务对应的 SKILL.md。
@@ -15,6 +15,7 @@
 | tech-scanner | 节点2：技术/知识产权三角色推演 | .claude/skills/tech-scanner/SKILL.md |
 | finance-scanner | 节点3：财务合规三角色推演 | .claude/skills/finance-scanner/SKILL.md |
 | pricing-scanner | 节点4：定价/发行三角色推演 | .claude/skills/pricing-scanner/SKILL.md |
+| monitor-runner | 督导期信号监控执行器（monitoring-run 路径，非分析节点）。不做四节点分析，只做信号比对与告警 | .claude/skills/monitor-runner/SKILL.md |
 
 ## 四节点管道
 
@@ -31,7 +32,8 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 2. full-chain / pricing-focused：按节点顺序自动衔接，不等待用户确认
 3. quick-scan：industry 和 tech 节点并行执行，参见 references/analysis-registry.md 并行协调规则
 4. targeted-update：Router 路由到指定节点后执行
-5. 每个节点产出后立即移交下游（如链路中有下一节点）
+5. monitoring-run：引用前次推演的督导期监控表执行信号比对（monitor-runner），要求 previous_run_id，无制品拒绝执行
+6. 每个节点产出后立即移交下游（如链路中有下一节点）
 
 ## 非协商条款（所有 agent、所有 CLI、所有请求强制生效）
 
@@ -63,6 +65,7 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 - HTML 组装协议：`references/templates/html-assembly.md`（Write 分块 + cat 拼接；禁止 heredoc/python 渲染）
 - 工作流产物模板（v0.5.0 主交付物）：`references/templates/kernel-risk-checklist.md`、`references/templates/pricing-memo.md`、`references/templates/supervision-monitor.md`
 - 最终报告模板（v0.5.1 起主交付物）：`references/templates/final-report.html`（三产物合一自包含 HTML；分拆件为上面三个 MD）
+- 监控告警清单模板（v0.6.0）：`references/templates/monitoring-report.md`（monitoring-run 路径产物）
 
 所有 skill 文件引用以上文档，不自行定义路径、schema、角色、门禁。
 
