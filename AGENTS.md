@@ -61,7 +61,7 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 - 输出模板（Markdown）：`references/templates/risk-matrix-template.md`
 - 输出模板（HTML）：`references/templates/risk-matrix-template.html`（自包含，内联 CSS；v0.5.0 起为可选底稿附录）
 - HTML 组装协议：`references/templates/html-assembly.md`（Write 分块 + cat 拼接；禁止 heredoc/python 渲染）
-- 工作流产物模板（v0.5.0 主交付物）：`references/templates/kernel-risk-checklist.md`、`pricing-memo.md`、`supervision-monitor.md`
+- 工作流产物模板（v0.5.0 主交付物）：`references/templates/kernel-risk-checklist.md`、`references/templates/pricing-memo.md`、`references/templates/supervision-monitor.md`
 - 最终报告模板（v0.5.1 起主交付物）：`references/templates/final-report.html`（三产物合一自包含 HTML；分拆件为上面三个 MD）
 
 所有 skill 文件引用以上文档，不自行定义路径、schema、角色、门禁。
