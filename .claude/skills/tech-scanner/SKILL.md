@@ -103,10 +103,9 @@ node_artifact:
     key_data_gaps: []
 ```
 
-### 2. 风险矩阵报告
+### 2. 风险矩阵条目（给终端节点）
 
-默认按 `references/templates/risk-matrix-template.md` 格式输出 Markdown。
-如需自包含 HTML 报告，**以 `references/templates/risk-matrix-template.html` 为底本填充**——禁止从零自行设计 HTML/CSS；输出必须保留模板标记注释（G8 验证）。HTML 生成必须遵循 `references/templates/html-assembly.md` 组装协议（Write 分块 + cat 拼接；禁止 Bash heredoc / 依赖 python 渲染）。
+本节点产出 node_artifact + risk_entries 即止。面向用户的三个工作流产物（内核风险清单 / 发行定价备忘录 / 督导期监控表）由 pricing 终端节点整合四节点制品产出（v0.5.0，模板见 references/templates/）。
 
 ### 3. 制品新鲜度
 

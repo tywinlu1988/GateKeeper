@@ -1,8 +1,8 @@
 # AGENTS.md — Gatekeeper 跨 CLI 通用入口
 
-**项目**：Gatekeeper（科创板 Pre-IPO 外部视角推演引擎）
-**版本**：v0.4.5
-**一句话**：为科创板 IPO 保荐承销机构提供 Pre-IPO 投资人、上市后买方、舆论三个外部视角的结构化风险推演。
+**项目**：Gatekeeper（保荐机构科创板 IPO 全周期决策支持工具）
+**版本**：v0.5.0
+**一句话**：以三角色外部视角推演为分析引擎，为保荐机构产出三个工作流产物——内核风险清单、发行定价备忘录、督导期监控表。分析透镜是三角色；交付形态是工作流产物；决策标准符合投资人与股票市场第一性。
 
 > 任何 agent CLI 都从这里开始：先读你的 instructions file，再读当前任务对应的 SKILL.md。
 
@@ -59,8 +59,9 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 - 跨维度传染矩阵：`references/contagion-matrix.md`（C1-C9，含叠加规则§6）
 - 前瞻信号监测框架：`references/signal-watchlist.md`（含优先级矩阵§3.6、逆转信号§3.7、执行力代理§3.8）
 - 输出模板（Markdown）：`references/templates/risk-matrix-template.md`
-- 输出模板（HTML）：`references/templates/risk-matrix-template.html`（自包含，内联 CSS）
+- 输出模板（HTML）：`references/templates/risk-matrix-template.html`（自包含，内联 CSS；v0.5.0 起为可选底稿附录）
 - HTML 组装协议：`references/templates/html-assembly.md`（Write 分块 + cat 拼接；禁止 heredoc/python 渲染）
+- 工作流产物模板（v0.5.0 主交付物）：`references/templates/kernel-risk-checklist.md`、`pricing-memo.md`、`supervision-monitor.md`
 
 所有 skill 文件引用以上文档，不自行定义路径、schema、角色、门禁。
 
@@ -69,4 +70,4 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 `knowledge/` 为内建基准库——搜索失败或数据时效不足（D1/D4 降级）时的兜底依据。使用规则见 `knowledge/README.md`。子目录：
 - `industry-benchmarks/` — 新股发行环境基准、可比估值快照方法与实例（基准日期 2026-08）
 - `policy-tracker/` — IPO 审核/现场检查统计基准（基准日期 2026-08）
-- `case-library/` — 历史 IPO 案例库：频准激光（688826）发行推演首案（2026-08，含失败模式清单，弱模型执行前参照）
+- `case-library/` — 历史 IPO 案例库：频准激光（688826，2026-08，含失败模式清单）、宇树科技（688836，2026-08，含市场第一性要素与实测质量记录）

@@ -56,7 +56,8 @@ node_artifact:
   contagion_alert: "none|watch|active|critical"  # 可选，传染检测结果（Step 3.5，见 contagion-matrix.md §4）
   superposition:                              # 可选，传染叠加（≥2 通道同时负向时填写，见 contagion-matrix.md §6）
     active_channels: []                       # 负向激活通道 ID 列表（如 ["C2","C5"]）
-    amplification: "1.0x|1.5x|2.0x"
+    alert_level: "watch|active|critical"      # v0.5.0 起定性化：通道数 1→watch、2-3→active、≥4→critical；
+                                              # 数值放大因子（1.5×/2.0×）无实证校准，已弃用
   search_log:                                 # 必填，每角色搜索留痕（审计依据，G1 检查）
     - role: "pre-ipo-investor|buy-side|media"
       queries:
@@ -106,7 +107,11 @@ risk_entry:
                                             # 无法追溯到任何已执行查询时填 [UNLOGGED]
   rationale: ""                               # 必填，为什么这个角色关注
   potential_impact: ""                        # 必填，风险发生的影响推演
-  suggested_response: ""                      # 必填，建议应对策略
+  suggested_response: ""                      # 必填，保荐机构可执行动作（含动词与对象；禁止"关注XX""加强管理"等空泛表述）
+  priced_in: "priced-in|partially|unpriced|unknown"  # 必填（v0.5.0），市场定价状态：219x 已隐含的预期属于 priced-in；
+                                              # 判定必须附推导依据（如"发行 PE 隐含 35%+ 增速，增速放缓已被定价"）
+  response_owner: "保荐代表人|内核|发行人|资本市场部|督导团队|联合体"  # 必填（v0.5.0），应对动作责任归属
+  response_deadline: ""                       # 必填（v0.5.0），如"问询回复前|发行前|上市后6个月"
   signal_watchlist:                           # 可选，risk_level=critical|high 时必填（见 signal-watchlist.md §1 模板）
     risk_statement: ""
     time_window: {}
@@ -124,6 +129,8 @@ risk_entry:
 #   {role} 段必须等于 role 字段的完整枚举值：pre-ipo-investor | buy-side | media。
 #   禁止缩写（RISK-pricing-pre-ipo-001 违规；合法为 RISK-pricing-pre-ipo-investor-001）。
 # access_type: 仅允许 public, internal, paywall
+# priced_in: 仅允许 priced-in, partially, unpriced, unknown。
+#   全部 unknown 视为 G1 不通过；priced-in 判定必须附推导依据（G5）。
 # source_type: 仅允许 search, baseline, material。
 #   baseline（knowledge/ 基准库）证据的使用限制见 quality-gates.md G7——
 #   禁止单独进入执行摘要/TOP 风险/评级依据，且引用前必须在 search_log 中有对应的实时搜索尝试。
