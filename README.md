@@ -190,7 +190,7 @@ cd GateKeeper
 │   └── templates/               # 三产物/最终报告/监控告警模板
 ├── scripts/                     # check-consistency.py 发布前一致性自检
 ├── knowledge/                   # 基准库 + 案例库（频准激光/宇树科技）
-└── docs/                        # 冒烟测试、回归基准、弱模型验证任务书
+└── docs/                        # 冒烟测试与回归基准
 ```
 
 ## 许可证
