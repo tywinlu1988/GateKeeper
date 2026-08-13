@@ -7,8 +7,9 @@
 **规则**：depth=deep（full-chain / pricing-focused）：每个角色 ≥ 5 条风险条目。
        depth=standard（targeted-update）：每个角色 ≥ 3 条。
        depth=quick（quick-scan）：每个角色 ≥ 1 条。
-**搜索留痕完备（v0.4.1 新增）**：`search_log` 必填，每角色独立查询次数 ≥ depth 要求（deep ≥3 / standard ≥2 / quick ≥1），
-       且查询词须带时间限定词（Step 0）。pricing 节点另须 `market_snapshot` 六项齐全（每项含 as_of 与结果）。
+**搜索留痕完备（v0.4.1 新增，v0.4.5 补一手披露验收与单一事实源）**：`search_log` 必填，每角色独立查询次数与深度对应（**次数标准见 analysis-registry 深度级别定义——唯一事实源，此处不复制**），
+       且查询词须带时间限定词（Step 0）。**deep 深度下每角色 ≥1 条查询命中一手披露模板**（招股书申报稿 / 问询函回复 / 发行公告，见 roles 查询模板）。
+       pricing 节点另须 `market_snapshot` 六项齐全（每项含 as_of 与结果）。
 **反凑数规则（v0.4.2 新增）**：
        - 三角色的 search_log 完全雷同（同查询词 + 同时间戳）视为一次查询，不重复计数——共享查询只允许存在，不允许充数
        - 每角色至少 2 条**角色独有查询**，且与该角色搜索策略匹配（如舆论角色必须有负面/诉讼/质疑类查询）
@@ -43,6 +44,9 @@
 
 **规则**：每条风险条目必须有 `evidence.inline_summary` 字段，且非空。
        裸 URL（有 primary_source.url 但无 inline_summary）视为不通过。
+       深度 deep 下另须 `key_data_points[].source_ref` 逐条填写（指向 search_log 中对应查询，如 "buy-side#2"；
+       无法追溯时填 [UNLOGGED]）——数字追溯链是审阅者核验出处的前提（实测反例：weak 模型某轮 finance/pricing
+       制品 source_ref 使用 0 处，大量数字无法核实出处）。
 **不通过处理**：拒绝通过，要求补充内联摘要。最多重试一次。
 
 ## G4: 枚举合规（Enum Compliance）
@@ -51,7 +55,7 @@
        - `node`: industry | tech | finance | pricing
        - `role`: pre-ipo-investor | buy-side | media
        - `risk_level`: critical | high | medium | low
-       - `id`: 格式 RISK-{node}-{role}-{seq}（seq 为 3 位数字）
+       - `id`: 格式 RISK-{node}-{role}-{seq}（seq 为 3 位数字），且 **{role} 段必须等于 role 字段的完整枚举值**——禁止缩写（实测反例：`RISK-pricing-pre-ipo-001` 用缩写 pre-ipo 冒充枚举值 pre-ipo-investor，却自评 G4 通过；ID 是跨节点/跨计划单追溯的主键，缩写会使对账与状态转移失效）
 **不通过处理**：拒绝通过，返回修正后的条目。
 
 ## G5: 角色锚定（Role Anchoring）

@@ -102,7 +102,7 @@ risk_entry:
       - metric: ""                            # 必填
         value: ""                             # 必填
         comparison: ""                        # 可选
-        source_ref: ""                        # 可选，指向 search_log 中对应查询（如 "buy-side#2"）；
+        source_ref: ""                        # deep 必填 / standard·quick 可选，指向 search_log 中对应查询（如 "buy-side#2"）；
                                             # 无法追溯到任何已执行查询时填 [UNLOGGED]
   rationale: ""                               # 必填，为什么这个角色关注
   potential_impact: ""                        # 必填，风险发生的影响推演
@@ -121,6 +121,8 @@ risk_entry:
 # role: 仅允许 pre-ipo-investor, buy-side, media
 # risk_level: 仅允许 critical, high, medium, low
 # id 格式: RISK-{node}-{role}-NNN（NNN 为 3 位零填充数字）
+#   {role} 段必须等于 role 字段的完整枚举值：pre-ipo-investor | buy-side | media。
+#   禁止缩写（RISK-pricing-pre-ipo-001 违规；合法为 RISK-pricing-pre-ipo-investor-001）。
 # access_type: 仅允许 public, internal, paywall
 # source_type: 仅允许 search, baseline, material。
 #   baseline（knowledge/ 基准库）证据的使用限制见 quality-gates.md G7——

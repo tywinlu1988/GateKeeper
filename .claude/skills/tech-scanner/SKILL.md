@@ -1,9 +1,9 @@
 ---
 name: tech-scanner
 description: >
-  Gatekeeper 节点2：技术/知识产权三角色推演。接收上游行业制品和分析计划单，
-  从三个外部视角分析核心技术先进性、知识产权完整性、研发投入质量和
-  技术依赖风险。
+  Use when 持有 Gatekeeper 分析计划单（analysis_plan YAML）且链路
+  路由到 tech 节点时需要执行该节点推演时。不独立触发——无分析
+  计划单时拒绝启动。分析范围与流程详见正文，勿凭本描述执行。
 ---
 
 ## 用途
@@ -45,7 +45,7 @@ description: >
 4. 每条证据必须填写 `data_as_of`（数据所属期）——旧研报今天被抓取，`data_as_of` 仍填其发表期，禁止以抓取时间冒充。
 5. 搜到的数据超出时效阈值 → 触发降级 D4（references/guardrails/degradation-paths.md）。
 6. **先搜后查库**：`knowledge/` 基准库仅在本节点实时搜索完成后才允许查阅引用；基准证据 `source_type=baseline`，禁止单独进入执行摘要/TOP 风险/评级依据（G7）。
-7. 所有查询（含未命中的）逐条写入 `node_artifact.search_log`；每角色查询次数须达 depth 要求（deep ≥3，含 ≥1 次一手披露查询——招股书申报稿/问询函/发行公告）。
+7. 所有查询（含未命中的）逐条写入 `node_artifact.search_log`；每角色查询次数须达 depth 要求（次数标准与一手披露要求见 references/analysis-registry.md 深度级别定义）。
 
 ### Step 1: 加载角色与上游制品
 

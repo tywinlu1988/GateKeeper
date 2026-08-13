@@ -1,7 +1,7 @@
 # AGENTS.md — Gatekeeper 跨 CLI 通用入口
 
 **项目**：Gatekeeper（科创板 Pre-IPO 外部视角推演引擎）
-**版本**：v0.4.4
+**版本**：v0.4.5
 **一句话**：为科创板 IPO 保荐承销机构提供 Pre-IPO 投资人、上市后买方、舆论三个外部视角的结构化风险推演。
 
 > 任何 agent CLI 都从这里开始：先读你的 instructions file，再读当前任务对应的 SKILL.md。
@@ -69,4 +69,4 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 `knowledge/` 为内建基准库——搜索失败或数据时效不足（D1/D4 降级）时的兜底依据。使用规则见 `knowledge/README.md`。子目录：
 - `industry-benchmarks/` — 新股发行环境基准、可比估值快照方法与实例（基准日期 2026-08）
 - `policy-tracker/` — IPO 审核/现场检查统计基准（基准日期 2026-08）
-- `case-library/` — 历史 IPO 案例库（待填充）
+- `case-library/` — 历史 IPO 案例库：频准激光（688826）发行推演首案（2026-08，含失败模式清单，弱模型执行前参照）

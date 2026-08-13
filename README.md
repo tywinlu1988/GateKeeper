@@ -1,6 +1,6 @@
 # GateKeeper
 
-**当前版本：v0.4.4**（[Release Notes](https://github.com/tywinlu1988/GateKeeper/releases)）
+**当前版本：v0.4.5**（[Release Notes](https://github.com/tywinlu1988/GateKeeper/releases)）
 
 科创板 Pre-IPO 外部视角风险推演引擎。为保荐承销机构提供 Pre-IPO 投资人、上市后买方、舆论三方视角的结构化风险评估。
 
@@ -130,6 +130,16 @@ cd GateKeeper
 - **G1 不通过强制留痕**：条目/查询不足必须显式标注 confidence: low + 缺口说明，禁止静默放行
 - **快照禁无量词**：market_snapshot 每项强制具体数值 + 来源 URL，"估计/极低"视同未查
 - **回灌按数值扫描**：D4 回灌逐字扫描数值本身（如"16.85%"），同一数值的任何复用都算命中
+
+### 规则缝隙封堵与回归体系（v0.4.5）
+
+- **ID 完整枚举**：风险条目 ID 的 role 段必须使用完整枚举值（pre-ipo-investor/buy-side/media），禁止缩写（G4）
+- **数字追溯链强制**：deep 深度下 key_data_points 逐条附 source_ref 指向 search_log 查询或 [UNLOGGED]（G3）
+- **一手披露入门禁**：deep 每角色 ≥1 次招股书/问询函/发行公告查询计入 G1 验收
+- **description 纯触发化**：5 个 skill 的 frontmatter description 只写触发条件与禁令，不再总结流程——防止"按描述执行、不读正文"
+- **搜索次数规则收敛**：次数标准以 analysis-registry 深度表为唯一事实源，G1/Step 0 只引用不复制
+- **场景 7 机制回归清单**：10 项 v0.4.1+ 机制检查点固化入冒烟测试
+- **case-library 首案**：频准激光发行推演案例（事实卡 + 四轮关键数字对照 + 失败模式清单）
 
 ## 质量保障
 
