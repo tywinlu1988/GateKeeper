@@ -52,6 +52,7 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 
 - 分析路径定义：`references/analysis-registry.md`
 - 制品 schema 定义：`references/artifact-schemas.md`
+- 非协商条款定义：`references/guardrails/non-negotiables.md`
 - 角色定义：`references/roles/*.md`
 - 质量门禁定义：`references/guardrails/quality-gates.md`
 - 降级策略定义：`references/guardrails/degradation-paths.md`
