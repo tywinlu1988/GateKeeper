@@ -169,16 +169,17 @@ node_artifact:
     key_data_gaps: []
 ```
 
-### 2. 三工作流产物（v0.5.0 起为全链路主交付物）
+### 2. 最终报告 + 三工作流产物（v0.5.0 起为全链路主交付物，v0.5.1 补最终报告合一）
 
-作为终端节点，pricing 整合四节点制品产出**三个产物**（模板见 references/templates/，均须以模板为底本、保留 GateKeeper-Template 标记——G8）：
+作为终端节点，pricing 整合四节点制品产出（模板见 references/templates/，均须以模板为底本、保留 GateKeeper-Template 标记——G8）：
 
-1. **内核风险清单**（kernel-risk-checklist.md）：从四节点条目精选 ≤15 条顶格风险（critical/high 优先 → unpriced 优先 → 三角色共识优先），每条含应对动作/责任归属/时限 + 反面论证 + 问询回复策略提示
-2. **发行定价备忘录**（pricing-memo.md）：本节点分析的结构化输出（定价事实/可比估值/隐含假设反推/流通结构/破发风险面/情绪位置/情景赔率/时效清单）
-3. **督导期监控表**（supervision-monitor.md）：四节点 signal_watchlist 汇总为 信号×阈值×责任人×检查周期×触发后动作 的监控表
+1. **final-report.html（主交付物）**：以 `references/templates/final-report.html` 为底本，将三个分拆件内容组装为一份自包含 HTML（导航 + 三区块 + 页脚）。组装按 html-assembly.md 协议（Write 分块 + cat 拼接；禁止 heredoc/python 依赖运行时）——Markdown 内容转 HTML 表格后再组装
+2. **内核风险清单**（kernel-risk-checklist.md）：从四节点条目精选 ≤15 条顶格风险（critical/high 优先 → unpriced 优先 → 三角色共识优先），每条含应对动作/责任归属/时限 + 反面论证 + 问询回复策略提示
+3. **发行定价备忘录**（pricing-memo.md）：本节点分析的结构化输出（定价事实/可比估值/隐含假设反推/流通结构/破发风险面/情绪位置/情景赔率/时效清单）
+4. **督导期监控表**（supervision-monitor.md）：四节点 signal_watchlist 汇总为 信号×阈值×责任人×检查周期×触发后动作 的监控表
 
-三角色视角是分析阶段的内部分析透镜，不作为三产物的组织框架（产物按"问题→应对→责任"组织）。
-完整风险矩阵 HTML（risk-matrix-template.html）降级为**可选底稿附录**——如需生成，按 html-assembly.md 协议执行。
+**交付目录组织（G8）**：最终报告 + 三个分拆件位于输出根目录；全部过程文件（analysis_plan、node-*-artifact/entries、html 分块）收入 `artifacts/` 子目录。
+三角色视角是分析阶段的内部分析透镜，不作为产物的组织框架（产物按"问题→应对→责任"组织）。
 
 ## 链式调用
 

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<!-- GateKeeper-Template: final-report.html —— 最终报告必须保留本标记（G8 验证依据）。三产物合一：内核风险清单 + 发行定价备忘录 + 督导期监控表 -->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GateKeeper · {project_name} · 决策支持报告</title>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;color:#1a1a2e;background:#f5f5f7;line-height:1.55}
+  .report{max-width:1200px;margin:0 auto;padding:36px 20px}
+  .rpt-hdr{background:#0f172a;color:#fff;border-radius:10px;padding:32px 36px;margin-bottom:20px}
+  .rpt-hdr h1{font-size:24px;font-weight:800;margin-bottom:6px}
+  .rpt-hdr .sub{font-size:13px;color:#94a3b8}
+  .rpt-hdr .tags{margin-top:12px}
+  .rpt-hdr .tags span{font-size:12px;padding:3px 12px;border-radius:14px;background:#1e293b;color:#cbd5e1;margin-right:8px}
+  .toc{background:#fff;border-radius:10px;padding:20px 28px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+  .toc a{color:#2563eb;text-decoration:none;font-size:14px;margin-right:24px}
+  .node-sec{background:#fff;border-radius:10px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.05);overflow:hidden;page-break-inside:avoid}
+  .sec-hdr{padding:18px 28px;border-bottom:1px solid #f1f5f9;background:#f8fafc}
+  .sec-title{font-size:17px;font-weight:700;color:#0f172a}
+  .sec-desc{font-size:12px;color:#64748b;margin-top:4px}
+  .sec-body{padding:20px 28px}
+  .sec-body h1,.sec-body h2,.sec-body h3{margin:14px 0 8px;color:#0f172a}
+  .sec-body h2{font-size:16px;border-left:3px solid #6366f1;padding-left:10px}
+  .sec-body h3{font-size:14px;color:#334155}
+  table{width:100%;border-collapse:collapse;font-size:12.5px;margin:10px 0 16px}
+  thead th{background:#f8fafc;padding:8px 10px;text-align:left;font-weight:600;color:#475569;border-bottom:2px solid #e2e8f0;white-space:nowrap}
+  tbody td{padding:8px 10px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+  tbody tr:hover{background:#fafbfc}
+  blockquote{border-left:3px solid #f59e0b;background:#fffbeb;padding:8px 14px;margin:8px 0;color:#92400e;font-size:13px}
+  ul,ol{padding-left:22px;margin:8px 0}
+  li{margin:3px 0}
+  strong{color:#0f172a}
+  .rpt-footer{text-align:center;font-size:11px;color:#94a3b8;margin-top:28px;padding:12px}
+  @media print{body{background:#fff}.node-sec{box-shadow:none;border:1px solid #e2e8f0}}
+</style>
+</head>
+<body>
+<div class="report">
+
+  <div class="rpt-hdr">
+    <h1>🛡️ GateKeeper 决策支持报告 · {project_name}</h1>
+    <div class="sub">保荐机构科创板 IPO 全周期决策支持 ｜ 计划单 {plan_id} ｜ 生成于 {generated_at}</div>
+    <div class="tags">
+      <span>模式：{mode}</span><span>深度：{depth}</span><span>综合评级：{overall_rating}</span><span>三产物合一</span>
+    </div>
+  </div>
+
+  <div class="toc">
+    <a href="#sec-kernel">① 内核风险清单</a>
+    <a href="#sec-pricing">② 发行定价备忘录</a>
+    <a href="#sec-supervision">③ 督导期监控表</a>
+  </div>
+
+  <div class="node-sec" id="sec-kernel">
+    <div class="sec-hdr">
+      <div class="sec-title">① 内核风险清单</div>
+      <div class="sec-desc">服务环节：内核会 · 问询回复策略 ｜ 顶格风险精选（≤15 条）：critical/high 优先 → unpriced 优先 → 三角色共识优先</div>
+    </div>
+    <div class="sec-body">{kernel_content}</div>
+  </div>
+
+  <div class="node-sec" id="sec-pricing">
+    <div class="sec-hdr">
+      <div class="sec-title">② 发行定价备忘录</div>
+      <div class="sec-desc">服务环节：投价报告支撑 · 与发行人的定价谈判 ｜ 情景参数为假设非预测，不构成单一目标价建议</div>
+    </div>
+    <div class="sec-body">{pricing_content}</div>
+  </div>
+
+  <div class="node-sec" id="sec-supervision">
+    <div class="sec-hdr">
+      <div class="sec-title">③ 督导期监控表</div>
+      <div class="sec-desc">服务环节：上市后持续督导（24-36 个月） ｜ 信号×阈值×责任人×检查周期×触发后动作</div>
+    </div>
+    <div class="sec-body">{supervision_content}</div>
+  </div>
+
+  <div class="rpt-footer">
+    GateKeeper v0.5.1 · 三产物合一报告 · 所有数据内联摘要，可独立分发 · 知识来源：实时搜索 + 基准库<br>
+    完整审计底稿（节点制品/风险条目全量/搜索留痕）见 artifacts/ 目录 · 本报告为外部视角推演，不构成投资建议
+  </div>
+
+</div>
+</body>
+</html>

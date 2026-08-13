@@ -98,11 +98,12 @@
 ## G8: 产物合规（Template Compliance，v0.4.2 新增，v0.4.4 强化，v0.5.0 重构为三产物）
 
 **规则**：
-1. 终端节点（pricing）必须产出**三个工作流产物**（模板见 references/templates/）：
+1. 终端节点（pricing）必须产出**一份最终报告 + 三个分拆件**（模板见 references/templates/）：
+   - **`final-report.html`（主交付物，三产物合一的自包含 HTML）**：以 final-report.html 模板为底本组装，含导航 + 三个固定区块
    - `kernel-risk-checklist.md`（内核风险清单：顶格风险精选 + 应对动作 + 责任归属 + 时限）
    - `pricing-memo.md`（发行定价备忘录：可比估值 + 隐含假设反推 + 流通结构 + 破发风险面 + 情绪位置 + 情景赔率 + 时效清单）
    - `supervision-monitor.md`（督导期监控表：信号 × 阈值 × 责任人 × 检查周期 × 触发后动作）
-   完整风险矩阵 HTML 降级为**可选底稿附录**，不是主交付物。
 2. 每个产物以官方模板为底本填充，保留 `GateKeeper-Template` 标记注释
-3. 内核风险清单 ≤15 条（从四节点条目精选：critical/high 优先 + unpriced 优先 + 三角色共识优先），禁止全量罗列 60+ 条
+3. **交付目录组织**：最终报告与三个分拆件在根目录；全部过程文件（analysis_plan、node-*-artifact/entries、html 分块）收入 `artifacts/` 子目录——用户目录只应看到 4 个可读文件
+4. 内核风险清单 ≤15 条（critical/high 优先 + unpriced 优先 + 三角色共识优先），禁止全量罗列 60+ 条
 **不通过处理**：标注缺失产物或缺失标记，要求基于模板重新生成。
