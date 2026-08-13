@@ -1,6 +1,6 @@
 # GateKeeper
 
-**当前版本：v0.6.0**（[Release Notes](https://github.com/tywinlu1988/GateKeeper/releases)）
+**当前版本：v0.6.1**（[Release Notes](https://github.com/tywinlu1988/GateKeeper/releases)）
 
 保荐机构科创板 IPO 全周期决策支持工具。以 Pre-IPO 投资人、上市后买方、舆论三方视角的推演为**分析引擎**，交付**三个工作流产物**：内核风险清单（内核会/问询回复）、发行定价备忘录（投价报告/定价谈判）、督导期监控表（上市后持续督导）。决策标准符合投资人与股票市场第一性——风险按"已定价/未定价"分层，估值用隐含假设反推而非目标价预测，传染输出定性定级而非伪精确因子。
 
