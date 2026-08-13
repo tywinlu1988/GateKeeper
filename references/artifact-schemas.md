@@ -64,7 +64,7 @@ node_artifact:
         - q: ""                               # 实际发出的查询词
           searched_at: ""                     # ISO 8601
           hits: 0                             # 有效数据点数
-  market_snapshot: {}                         # pricing 节点必填（Step 1.5 六项必查表，每项含 as_of 与结果）；
+  market_snapshot: {}                         # pricing 节点必填（Step 1.5 八项必查表，每项含 as_of 与结果）；
                                               # 其他节点省略。缺失 → G1 不通过
   data_freshness:
     search_quality: "rich|adequate|sparse"   # 必填，枚举

@@ -1,7 +1,7 @@
 # AGENTS.md — Gatekeeper 跨 CLI 通用入口
 
 **项目**：Gatekeeper（保荐机构科创板 IPO 全周期决策支持工具）
-**版本**：v0.5.0
+**版本**：v0.5.2
 **一句话**：以三角色外部视角推演为分析引擎，为保荐机构产出三个工作流产物——内核风险清单、发行定价备忘录、督导期监控表。分析透镜是三角色；交付形态是工作流产物；决策标准符合投资人与股票市场第一性。
 
 > 任何 agent CLI 都从这里开始：先读你的 instructions file，再读当前任务对应的 SKILL.md。
@@ -62,6 +62,7 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 - 输出模板（HTML）：`references/templates/risk-matrix-template.html`（自包含，内联 CSS；v0.5.0 起为可选底稿附录）
 - HTML 组装协议：`references/templates/html-assembly.md`（Write 分块 + cat 拼接；禁止 heredoc/python 渲染）
 - 工作流产物模板（v0.5.0 主交付物）：`references/templates/kernel-risk-checklist.md`、`pricing-memo.md`、`supervision-monitor.md`
+- 最终报告模板（v0.5.1 起主交付物）：`references/templates/final-report.html`（三产物合一自包含 HTML；分拆件为上面三个 MD）
 
 所有 skill 文件引用以上文档，不自行定义路径、schema、角色、门禁。
 
