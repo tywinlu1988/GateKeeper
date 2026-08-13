@@ -88,6 +88,15 @@ paths:
 3. **首次推演 + 明确指定单一节点深入** → targeted-update（standard 深度，previous_artifacts 为空）
 4. 仍无法判断 → N3：full-chain
 
+## 路径边界裁定（monitoring-run vs targeted-update）
+
+两者都以"引用 plan_id"为特征，按动词裁定：
+
+1. **引用 plan_id + 监控动词**（监控/检查信号/信号比对/季报后/中报后/年报后/解禁窗口/告警）→ monitoring-run
+2. **引用 plan_id + 分析动词**（重新跑/更新/重新分析/补充分析某节点）→ targeted-update
+3. **引用 plan_id 但未说明意图** → 询问用户或按 N3 处理；不猜测
+4. monitoring-run 无前次制品 → 拒绝并提示先运行 full-chain（previous_run_id_required）
+
 ## 并行执行协调（quick-scan 特有）
 
 quick-scan 的 `mode: parallel` 表示 industry-scanner 和 tech-scanner **同时启动**而非串行等待。

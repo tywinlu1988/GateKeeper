@@ -114,4 +114,5 @@
 2. 每个产物以官方模板为底本填充，保留 `GateKeeper-Template` 标记注释
 3. **交付目录组织**：最终报告与三个分拆件在根目录；全部过程文件（analysis_plan、node-*-artifact/entries、html 分块）收入 `artifacts/` 子目录——用户目录只应看到 4 个可读文件
 4. 内核风险清单 ≤15 条（critical/high 优先 + unpriced 优先 + 三角色共识优先），禁止全量罗列 60+ 条
+5. monitoring-run 产物（监控告警清单）同样以 monitoring-report.md 模板为底本、保留 GateKeeper-Template 标记（v0.6.1 补充）
 **不通过处理**：标注缺失产物或缺失标记，要求基于模板重新生成。
