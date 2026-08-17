@@ -37,4 +37,4 @@
 
 ---
 
-*Gatekeeper v0.6.1 · 督导期监控告警清单 · 判定留痕见 monitor-run-{YYYYMMDD}.yaml · 每条判定均为"阈值 vs 最新值"显式比较（G9）*
+*Gatekeeper v0.6.2 · 督导期监控告警清单 · 判定留痕见 monitor-run-{YYYYMMDD}.yaml · 每条判定均为"阈值 vs 最新值"显式比较（G9）*

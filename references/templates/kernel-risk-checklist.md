@@ -37,4 +37,4 @@
 
 ---
 
-*Gatekeeper v0.6.1 · 内核风险清单 · 证据时效见各条目 data_as_of*
+*Gatekeeper v0.6.2 · 内核风险清单 · 证据时效见各条目 data_as_of*
