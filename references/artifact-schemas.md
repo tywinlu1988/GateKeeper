@@ -85,7 +85,7 @@ node_artifact:
 ```yaml
 # Schema: risk_entry
 # 产出者：每个 scanner 节点（每个角色产出多条）
-# 消费者：最终用户（风险矩阵报告）
+# 消费者：最终用户（内核风险清单 / 发行定价备忘录 / 督导期监控表；critical+unpriced 条目另生成 S5 预测记录）
 risk_entry:
   id: "RISK-{node}-{role}-{3位序号}"        # 必填，格式强制
   node: "industry|tech|finance|pricing"      # 必填，枚举
@@ -140,6 +140,43 @@ risk_entry:
 #   data_as_of 仍须填 2023 年对应期。历史案例引用须如实标注其发生期。
 #   聚合多篇统计时，data_as_of 填统计期末（非报道日）。
 #   时效阈值由 quality-gates.md G7 定义。
+```
+
+## S5: 预测记录（Prediction Record，v0.7.0 新增）
+
+<!-- 编号说明：制品新鲜度追踪（Artifact Freshness）为历史上未编号的第四类制品，故本 schema 顺延编号 S5 -->
+
+```yaml
+# Schema: prediction_record
+# 产出者：pricing 节点（Step 4.7，终端节点统一汇总 P1/P2/P3）
+# 消费者：最终报告「预测与验证计划」区块；predictions.yaml（artifacts/，只增不改）
+# 设计依据：事前预测可靠性是项目核心定位——预测必须在结果出来之前以可评分格式锁定，
+#   否则永远无法校准（天气预报原则：不能在下雨后才修正观测数据）。
+prediction_record:
+  prediction_id: "P-{plan_id}-{3位序号}"    # 必填，格式强制
+  type: "P1|P2|P3"                          # 必填，枚举：P1 首日方向 / P2 回归方向 / P3 风险兑现
+  claim: ""                                  # 必填，可证伪陈述（二元或分类），禁止含糊表述
+  forecast: 0.15                             # scored=true 必填，点估计概率（0-1）；允许附 range 字段表达不确定度
+  range: ""                                  # 可选，如 "0.10-0.20"
+  base_rate_ref: ""                          # 必填，锚定的 B 型基准（基准库条目或快照项 + 数值）
+  deviation_rationale: ""                    # 必填，一句话偏离理由（因何相对基准上调/下调）
+  horizon: "listing_day|6m|12m|event_driven" # 必填，枚举，决定报告区块的分类
+  resolution_criteria:
+    source: ""                               # 必填，判定数据源（如"东财行情"）
+    rule: ""                                 # 必填，判定规则（如"上市首日收盘价 < 发行价 判真"）
+  resolution_window: ""                      # 必填，验证时点/窗口（如"上市日 T""上市满 6 个月"）
+  scored: true                               # 必填；false 合法但须附 unscored_reason
+  unscored_reason: ""                        # scored=false 时必填
+  linked_risk_id: ""                         # P3 必填，指向内核清单条目 RISK-{node}-{role}-{seq}
+
+# 枚举约束
+# type: 仅允许 P1, P2, P3
+#   P1 首日方向：破发/平盘/上涨三分类，horizon=listing_day，每次推演强制 1 条
+#   P2 回归方向：上市后价格相对发行价区间带（<80% / 80-120% / >120%），horizon=6m 或 12m，每次推演强制 ≥1 条
+#   P3 风险兑现：内核清单中 critical + unpriced 条目逐条二值化（兑现/未兑现），horizon 逐条定
+# horizon: 仅允许 listing_day, 6m, 12m, event_driven
+# forecast 为 C 型主观判断预测——数值概率只允许出现在本 schema 与报告「预测与验证计划」区块（G5 概率语义分型）
+# predictions.yaml 只增不改：已落盘的预测记录禁止事后修改，判定结果写入独立的 resolutions 记录
 ```
 
 ## 制品新鲜度追踪（Artifact Freshness）

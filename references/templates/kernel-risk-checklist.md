@@ -37,4 +37,4 @@
 
 ---
 
-*Gatekeeper v0.6.2 · 内核风险清单 · 证据时效见各条目 data_as_of*
+*Gatekeeper v0.7.0 · 内核风险清单 · 证据时效见各条目 data_as_of · critical+unpriced 条目的兑现预测见最终报告「预测与验证计划」区块（artifacts/predictions.yaml）*

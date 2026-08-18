@@ -141,6 +141,19 @@ node 字段固定为 `"pricing"`。
 
 设计来源：频准激光初版报告的三处事实漂移（破发概率、可比 PE、撤回率）均由人工事后核查发现。本步骤将事后人工核查制度化为输出前的强制自检。
 
+### Step 4.7: 预测记录生成（v0.7.0 新增，终端节点强制，先于报告组装）
+
+事前预测可靠性是项目核心定位——每次推演必须以可评分格式锁定预测，先于一切结果。
+
+1. 产出三类预测记录（schema 见 `references/artifact-schemas.md §S5`）：
+   - **P1 首日方向**（强制 1 条）：破发/平盘/上涨三分类，horizon=listing_day，判定依据 Step 1.5 快照（禁止历史外推）
+   - **P2 回归方向**（强制 ≥1 条）：上市后价格相对发行价区间带（<80% / 80-120% / >120%），horizon=6m 或 12m
+   - **P3 风险兑现**：内核清单中 critical + unpriced 条目逐条二值化，linked_risk_id 指向原条目
+2. 每条记录强制：forecast 点估计 + base_rate_ref（锚定 B 型基准）+ deviation_rationale（一句话偏离理由）+ resolution_criteria（数据源+判定规则）+ resolution_window——缺一直接 G5 不通过
+3. 不可测条目标 `scored: false` + 理由——禁止为凑评分强行数值化
+4. 全部记录写入 `artifacts/predictions.yaml`（**只增不改**——已落盘记录禁止事后修改，判定结果写入独立的 resolutions 记录），并汇总为最终报告「预测与验证计划」区块（按验证时点分类：上市日 / 6-12 个月 / 事件驱动）
+5. C 型数值概率只允许出现在 predictions.yaml 与「预测与验证计划」区块；报告其余部分一律使用三档速记（低 5-20% / 中 20-50% / 高 50-80%，G5 概率语义分型）
+
 ### Step 5: 降级处理
 
 搜索失败/数据不足时按 degradation-paths.md 降级运行：
@@ -173,10 +186,11 @@ node_artifact:
 
 作为终端节点，pricing 整合四节点制品产出（模板见 references/templates/，均须以模板为底本、保留 GateKeeper-Template 标记——G8）：
 
-1. **final-report.html（主交付物）**：以 `references/templates/final-report.html` 为底本，将三个分拆件内容组装为一份自包含 HTML（导航 + 三区块 + 页脚）。组装按 html-assembly.md 协议（Write 分块 + cat 拼接；禁止 heredoc/python 依赖运行时）——Markdown 内容转 HTML 表格后再组装
+1. **final-report.html（主交付物）**：以 `references/templates/final-report.html` 为底本，将三个分拆件内容组装为一份自包含 HTML（导航 + 四区块 + 页脚：内核清单 / 定价备忘录 / 督导监控表 / 预测与验证计划）。组装按 html-assembly.md 协议（Write 分块 + cat 拼接；禁止 heredoc/python 依赖运行时）——Markdown 内容转 HTML 表格后再组装
 2. **内核风险清单**（kernel-risk-checklist.md）：从四节点条目精选 ≤15 条顶格风险（critical/high 优先 → unpriced 优先 → 三角色共识优先），每条含应对动作/责任归属/时限 + 反面论证 + 问询回复策略提示
 3. **发行定价备忘录**（pricing-memo.md）：本节点分析的结构化输出（定价事实/可比估值/隐含假设反推/流通结构/破发风险面/情绪位置/情景赔率/时效清单）
 4. **督导期监控表**（supervision-monitor.md）：四节点 signal_watchlist 汇总为 信号×阈值×责任人×检查周期×触发后动作 的监控表
+5. **预测记录**（predictions.yaml，v0.7.0）：Step 4.7 产出的 S5 记录，落盘 `artifacts/` 且只增不改；其 HTML 汇总构成最终报告第四区块「预测与验证计划」
 
 **交付目录组织（G8）**：最终报告 + 三个分拆件位于输出根目录；全部过程文件（analysis_plan、node-*-artifact/entries、html 分块）收入 `artifacts/` 子目录。
 三角色视角是分析阶段的内部分析透镜，不作为产物的组织框架（产物按"问题→应对→责任"组织）。
@@ -196,4 +210,5 @@ node_artifact:
 - 禁止用历史破发率或旧可比估值推断当前首日破发概率——首日判断只能以 Step 1.5 快照为依据
 - 禁止把超额认购倍数解读为估值认可——中签率极低环境下申购者是套利者，认购倍数对定价合理性零信息量，只说明发行端执行顺利
 - 禁止输出伪精确的数值放大因子（1.5×/2.0× 已弃用，v0.5.0）——传染叠加输出通道列表 + 定级
+- 数值概率（C 型主观判断预测）只允许出现在 S5 预测记录与报告「预测与验证计划」区块，且必须挂 base_rate_ref + 偏离理由（v0.7.0 G5 概率语义分型）；其余正文一律三档速记
 - 三个角色的估值分歧是分析阶段的内部张力——最终产物按"问题→应对→责任"组织，不按角色组织

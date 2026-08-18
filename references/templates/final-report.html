@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<!-- GateKeeper-Template: final-report.html —— 最终报告必须保留本标记（G8 验证依据）。三产物合一：内核风险清单 + 发行定价备忘录 + 督导期监控表 -->
+<!-- GateKeeper-Template: final-report.html —— 最终报告必须保留本标记（G8 验证依据）。三产物合一 + 预测与验证计划：内核风险清单 + 发行定价备忘录 + 督导期监控表 + S5 预测记录 -->
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -41,9 +41,9 @@
 
   <div class="rpt-hdr">
     <h1>🛡️ GateKeeper 决策支持报告 · {project_name}</h1>
-    <div class="sub">保荐机构科创板 IPO 全周期决策支持 ｜ 计划单 {plan_id} ｜ 生成于 {generated_at}</div>
+    <div class="sub">拟 IPO 标的事前调研推演 ｜ 计划单 {plan_id} ｜ 生成于 {generated_at}</div>
     <div class="tags">
-      <span>模式：{mode}</span><span>深度：{depth}</span><span>综合评级：{overall_rating}</span><span>三产物合一</span>
+      <span>模式：{mode}</span><span>深度：{depth}</span><span>综合评级：{overall_rating}</span><span>三产物 + 预测与验证计划</span>
     </div>
   </div>
 
@@ -51,6 +51,7 @@
     <a href="#sec-kernel">① 内核风险清单</a>
     <a href="#sec-pricing">② 发行定价备忘录</a>
     <a href="#sec-supervision">③ 督导期监控表</a>
+    <a href="#sec-predictions">④ 预测与验证计划</a>
   </div>
 
   <div class="node-sec" id="sec-kernel">
@@ -77,8 +78,37 @@
     <div class="sec-body">{supervision_content}</div>
   </div>
 
+  <div class="node-sec" id="sec-predictions">
+    <div class="sec-hdr">
+      <div class="sec-title">④ 预测与验证计划</div>
+      <div class="sec-desc">本报告全部可检验预测（S5 预测记录），按验证时点分类——每条预测已锁定判定标准，到期按标准判定，禁止事后解读 ｜ C 型数值概率仅允许出现于本区块（G5 概率语义分型）｜ 机器可读原件：artifacts/predictions.yaml（只增不改）</div>
+    </div>
+    <div class="sec-body">
+      <h2>上市日验证（P1 首日方向）</h2>
+      <table>
+        <thead><tr><th>ID</th><th>预测陈述</th><th>概率（点估计）</th><th>基准锚 / 偏离理由</th><th>判定规则</th></tr></thead>
+        <tbody>{predictions_p1_rows}</tbody>
+      </table>
+      <h2>6-12 个月验证（P2 回归方向）</h2>
+      <table>
+        <thead><tr><th>ID</th><th>预测陈述</th><th>概率（点估计）</th><th>基准锚 / 偏离理由</th><th>判定规则</th><th>验证窗口</th></tr></thead>
+        <tbody>{predictions_p2_rows}</tbody>
+      </table>
+      <h2>事件驱动验证（P3 风险兑现）</h2>
+      <table>
+        <thead><tr><th>ID</th><th>关联风险</th><th>预测陈述</th><th>概率（点估计）</th><th>判定规则</th><th>验证窗口</th></tr></thead>
+        <tbody>{predictions_p3_rows}</tbody>
+      </table>
+      <h2>不评分条目</h2>
+      <table>
+        <thead><tr><th>ID</th><th>陈述</th><th>不评分理由</th></tr></thead>
+        <tbody>{predictions_unscored_rows}</tbody>
+      </table>
+    </div>
+  </div>
+
   <div class="rpt-footer">
-    GateKeeper v0.6.2 · 三产物合一报告 · 所有数据内联摘要，可独立分发 · 知识来源：实时搜索 + 基准库<br>
+    GateKeeper v0.7.0 · 三产物合一报告 + 预测与验证计划 · 所有数据内联摘要，可独立分发 · 知识来源：实时搜索 + 基准库<br>
     完整审计底稿（节点制品/风险条目全量/搜索留痕）见 artifacts/ 目录 · 本报告为外部视角推演，不构成投资建议
   </div>
 
