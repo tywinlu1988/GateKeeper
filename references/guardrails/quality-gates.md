@@ -117,7 +117,7 @@
 1. 终端节点（pricing）必须产出**一份最终报告 + 三个分拆件**（模板见 references/templates/）：
    - **`final-report.html`（主交付物，三产物合一的自包含 HTML）**：以 final-report.html 模板为底本组装，含导航 + 四个固定区块（①内核风险清单 ②发行定价备忘录 ③督导期监控表 ④预测与验证计划——v0.7.0 新增，S5 预测记录按验证时点分类）
    - `kernel-risk-checklist.md`（内核风险清单：顶格风险精选 + 应对动作 + 责任归属 + 时限）
-   - `pricing-memo.md`（发行定价备忘录：可比估值 + 隐含假设反推 + 流通结构 + 破发风险面 + 情绪位置 + 情景赔率 + 时效清单）
+   - `pricing-memo.md`（发行定价备忘录：可比估值 + 隐含假设反推 + 流通结构 + 破发风险面 + 贱卖风险面（v0.7.1）+ 情绪位置 + 情景赔率 + 时效清单）
    - `supervision-monitor.md`（督导期监控表：信号 × 阈值 × 责任人 × 检查周期 × 触发后动作）
 2. 每个产物以官方模板为底本填充，保留 `GateKeeper-Template` 标记注释
 3. **交付目录组织**：最终报告与三个分拆件在根目录；全部过程文件（analysis_plan、node-*-artifact/entries、html 分块）收入 `artifacts/` 子目录——用户目录只应看到 4 个可读文件

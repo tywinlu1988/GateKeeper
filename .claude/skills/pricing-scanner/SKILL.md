@@ -146,7 +146,9 @@ node 字段固定为 `"pricing"`。
 事前预测可靠性是项目核心定位——每次推演必须以可评分格式锁定预测，先于一切结果。
 
 1. 产出三类预测记录（schema 见 `references/artifact-schemas.md §S5`）：
-   - **P1 首日方向**（强制 1 条）：破发/平盘/上涨三分类，horizon=listing_day，判定依据 Step 1.5 快照（禁止历史外推）
+   - **P1 首日方向**（强制 1 条）：horizon=listing_day，判定依据 Step 1.5 快照（禁止历史外推）。格式按基准率信息量分条件（v0.7.1）：
+     - **基准率退化**（如科创板零破发 regime——方向预测技巧分为零，实测：宇树/频准首日全对但零信息量）→ regime 复述 + **幅度带预测**：claim 为"首日涨幅相对 regime 均值 {X}%：显著低于 / 持平 / 显著高于"
+     - **基准率未退化**（如港股 18C 首日破发率 46%）→ 破发/平盘/上涨**三分类方向预测**
    - **P2 回归方向**（强制 ≥1 条）：上市后价格相对发行价区间带（<80% / 80-120% / >120%），horizon=6m 或 12m
    - **P3 风险兑现**：内核清单中 critical + unpriced 条目逐条二值化，linked_risk_id 指向原条目
 2. 每条记录强制：forecast 点估计 + base_rate_ref（锚定 B 型基准）+ deviation_rationale（一句话偏离理由）+ resolution_criteria（数据源+判定规则）+ resolution_window——缺一直接 G5 不通过
@@ -188,7 +190,7 @@ node_artifact:
 
 1. **final-report.html（主交付物）**：以 `references/templates/final-report.html` 为底本，将三个分拆件内容组装为一份自包含 HTML（导航 + 四区块 + 页脚：内核清单 / 定价备忘录 / 督导监控表 / 预测与验证计划）。组装按 html-assembly.md 协议（Write 分块 + cat 拼接；禁止 heredoc/python 依赖运行时）——Markdown 内容转 HTML 表格后再组装
 2. **内核风险清单**（kernel-risk-checklist.md）：从四节点条目精选 ≤15 条顶格风险（critical/high 优先 → unpriced 优先 → 三角色共识优先），每条含应对动作/责任归属/时限 + 反面论证 + 问询回复策略提示
-3. **发行定价备忘录**（pricing-memo.md）：本节点分析的结构化输出（定价事实/可比估值/隐含假设反推/流通结构/破发风险面/情绪位置/情景赔率/时效清单）
+3. **发行定价备忘录**（pricing-memo.md）：本节点分析的结构化输出（定价事实/可比估值/隐含假设反推/流通结构/破发风险面/贱卖风险面/情绪位置/情景赔率/时效清单）
 4. **督导期监控表**（supervision-monitor.md）：四节点 signal_watchlist 汇总为 信号×阈值×责任人×检查周期×触发后动作 的监控表
 5. **预测记录**（predictions.yaml，v0.7.0）：Step 4.7 产出的 S5 记录，落盘 `artifacts/` 且只增不改；其 HTML 汇总构成最终报告第四区块「预测与验证计划」
 

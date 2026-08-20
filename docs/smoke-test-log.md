@@ -234,7 +234,7 @@
 
 | # | 检查点 | 预期 | 状态 |
 |---|--------|------|------|
-| 1 | Step 4.7 产出三类预测 | P1×1（三分类）+ P2≥1（区间带）+ P3（critical+unpriced 逐条） | ⬜ 待测 |
+| 1 | Step 4.7 产出三类预测 | P1×1（regime 分条件：基准率退化→幅度带 / 未退化→三分类；智元 18C 破发率 46% 属未退化分支）+ P2≥1（区间带）+ P3（critical+unpriced 逐条） | ⬜ 待测 |
 | 2 | S5 字段完备 | 每条含点估计 + base_rate_ref + 偏离理由 + resolution_criteria + resolution_window，缺一 G5 不通过 | ⬜ 待测 |
 | 3 | predictions.yaml 落盘 artifacts/ 且标注只增不改 | G8 目录组织一致 | ⬜ 待测 |
 | 4 | 报告第四区块按验证时点分类 | 上市日 / 6-12 个月 / 事件驱动 / 不评分四小节，GateKeeper-Template 标记保留 | ⬜ 待测 |
