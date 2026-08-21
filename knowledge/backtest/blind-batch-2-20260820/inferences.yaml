@@ -1,0 +1,26 @@
+# 回放盲测批次 blind-batch-2-20260820 · inferences
+# 算法卡：references/prediction-algorithm/v0.2.md（V1-V7 生效后首批）
+# case 选择（先于结果知悉写死）：R4 协议第三案（热/暴涨>400%）+ V5 强触发冷案（高 PE+高超募）+ 2024 冷点（切换张力）
+batch_id: "blind-batch-2-20260820"
+algorithm_card: "v0.2"
+executed_at: "2026-08-20"
+
+cases:
+  - case: {code: "688818", name: "电科蓝天", listing_date: "2026-02-10", info_cutoff: "2026-02-09", pressure: "R4 协议第三案（热，预测首日 >400% 边界）"}
+    inputs: {issue_pe: 56.79, industry_pe: 44.69, issue_price: 9.47, float_ratio: 0.10, profitable: true, regime_break_rate_t0: 0.00, regime_avg_day1_12m: 259.3, regime_avg_day1_3m: "~230（偏离 11% 不触发双锚）", industry_excess_return_90d: "+22.4%（中证军工代理，规则外映射）"}
+    inferences:
+      - {type: "P1", claim: "首日显著高于基准 259.3%", forecast: "点估计 +389%（V4 映射 ×1.5）", basis_rule: "R1→R2（V3 题材 +22.4% >20% 上调一档 → V4）"}
+      - {type: "P2", claim: "6 个月窗口内任一收盘 < 首日收盘 ×0.8", forecast: 0.50, basis_rule: "R4 V6（389% 未触发 >400% 修正——死区）"}
+    contamination: "中（2 起接触已声明丢弃；行业→指数映射为最脆弱环节）"
+  - case: {code: "688531", name: "日联科技", listing_date: "2023-03-31", info_cutoff: "2023-03-30", pressure: "V5 强触发（PE 7.48x + 超募 355%）"}
+    inputs: {issue_pe: 267.32, industry_pe: 35.76, issue_price: 152.38, excess_raise_ratio: 3.55, float_ratio: 0.25, profitable: true, regime_break_rate_t0: "~28%", industry_excess_return_90d: "+4.0pp"}
+    inferences:
+      - {type: "P1", claim: "首日三分类", forecast: "破发 0.31 / 平盘 0.23 / 上涨 0.46", basis_rule: "R3（冷基准 16% + V5: PE +10、超募 +5）"}
+      - {type: "P2", claim: "6 个月窗口内任一收盘 < 发行价 ×0.8（121.90 元）", forecast: 0.55, basis_rule: "R5（0.40 + V5 双触发 +15）"}
+    contamination: "低（1 起接触已声明；机械执行无自由裁量）"
+  - case: {code: "688584", name: "上海合晶", listing_date: "2024-02-08", info_cutoff: "2024-02-07", pressure: "2024 冷点 + R1 切换张力（近12月非热 vs 近3月热态）"}
+    inputs: {issue_pe: 42.05, industry_pe: 30.02, issue_price: 22.66, excess_raise_ratio: "-11%（缩募）", float_ratio: 0.10, profitable: true, regime_break_rate_t0: "~16.9%", regime_avg_day1_3m: "~140-160%（零破发）", industry_excess_return_90d: "-19.2pp（算术）/ -20.7pp（几何）——贴线"}
+    inferences:
+      - {type: "P1", claim: "首日三分类", forecast: "破发 0.16 / 平盘 0.12 / 上涨 0.72（主分支）；敏感性分支：破发 0.26（若题材 -20% 触发）", basis_rule: "R3（PE 1.40x、缩募、题材贴线均未触发）"}
+      - {type: "P2", claim: "6 个月窗口内任一收盘 < 发行价 ×0.8（18.13 元）", forecast: 0.40, basis_rule: "R5（无修正触发）"}
+    contamination: "中（首日结局首次检索即暴露，已声明丢弃）"

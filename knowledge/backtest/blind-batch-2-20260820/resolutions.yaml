@@ -1,0 +1,63 @@
+# 回放盲测批次 blind-batch-2-20260820 · resolutions（S6）
+# 判定数据：东财 MCP 历史行情（窗口判定：窗口内最低收盘价）+ 首日涨幅公开统计
+batch_id: "blind-batch-2-20260820"
+resolved_at: "2026-08-20"
+
+resolutions:
+  # ===== 电科蓝天 =====
+  - resolution_id: "RES-BB2-dianke-P1"
+    case: "688818 电科蓝天"
+    prediction: {type: "P1", forecast: "显著高于基准（点估计 +389%）"}
+    verdict: "true"
+    observed_value: "首日 +596.30%"
+    criteria_check: "实际 +596.3% 偏离基准 259.3% 达 +130% >> +50% → '显著高于'带命中（V1 边界规则首次机械适用成功）；V4 点估计 +389% 系统性偏低（低估 39%）——带命中但映射参数存疑（样本第 2 例低估，首例先锋 ~400 vs 534）"
+    note: "V1 带边界规则实战验证 ✅；V4 映射参数累计 2/2 低估"
+  - resolution_id: "RES-BB2-dianke-P2"
+    case: "688818 电科蓝天"
+    prediction: {type: "P2", forecast: 0.50, claim: "6 个月窗口内任一收盘 < 首日收盘 ×0.8（52.75 元）"}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 41.35（2026-07-31）< 52.75；窗口末日 50.55 亦 < 52.75"
+    criteria_check: "窗口判定 true（时点判定亦 true）；但 P1 点映射 389% 落在 150-400% 死区未触发任何修正 → forecast = 基准 = 0.50"
+    brier: 0.25
+    base_rate_brier: 0.25
+    note: "R4 协议第三案：skill = 0（未触发修正）。反向指标修正项再次未被使用——三案中仅 2 案触发，1 胜 1 负"
+
+  # ===== 日联科技 =====
+  - resolution_id: "RES-BB2-rilian-P1"
+    case: "688531 日联科技"
+    prediction: {type: "P1", forecast: "破发 0.31（V5 双修正自 16% 上调）"}
+    verdict: "false"
+    observed_value: "首日 +27.44%（上涨）"
+    criteria_check: "实际上涨 → 破发预测 false；V5 修正（+15 点）方向错误——冷基准 16% 本身已含平均溢价效应，对极端个案再上调构成双重计算嫌疑"
+    brier: 0.096
+    base_rate_brier: 0.078
+    note: "skill = -0.23（V5 修正在 P1 端受伤；若未修正：0.16 → Brier 0.026 vs 基准 0.078 反而为正）"
+  - resolution_id: "RES-BB2-rilian-P2"
+    case: "688531 日联科技"
+    prediction: {type: "P2", forecast: 0.55, claim: "6 个月窗口内任一收盘 < 发行价 ×0.8（121.90 元）"}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 120.57（2023-08 下旬）< 121.90——贴线命中"
+    criteria_check: "窗口判定 true；V5 双修正（0.40→0.55）方向正确"
+    brier: 0.2025
+    base_rate_brier: 0.36
+    note: "skill = +0.44（V5 修正在 P2 端立功——与 P1 端受伤形成镜像，提示修正项与 P1/P2 的适配性不同）"
+
+  # ===== 上海合晶 =====
+  - resolution_id: "RES-BB2-hejing-P1"
+    case: "688584 上海合晶"
+    prediction: {type: "P1", forecast: "破发 0.16（主分支，题材 -19.2pp 贴线未触发）"}
+    verdict: "true"
+    observed_value: "首日 -6.31%（破发，2024 年唯一首日破发新股）"
+    criteria_check: "实际破发 → true；但 forecast 仅 0.16（主分支）——V3 行业信号（半导体指数 90 日 -26.6%）实际方向完全正确，却因 0.8pp 之差未触发修正（敏感性分支 0.26 若触发 Brier 更优：0.55 vs 0.71）"
+    brier: 0.71
+    base_rate_brier: 0.71
+    note: "skill = 0；R1 切换张力案判定正确（非热，实际破发）；V3 阈值边界问题成为本批最关键缺口"
+  - resolution_id: "RES-BB2-hejing-P2"
+    case: "688584 上海合晶"
+    prediction: {type: "P2", forecast: 0.40, claim: "6 个月窗口内任一收盘 < 发行价 ×0.8（18.13 元）"}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 14.40（2024-08-08，窗口末日）= 发行价 0.64x，深度跌破"
+    criteria_check: "窗口判定 true（深度）；但 R5 修正项无一触发——行业 90 日 -26.6% 的崩塌信号未被 R5 捕获（R5 修正项无行业热度项，R3 才有）"
+    brier: 0.36
+    base_rate_brier: 0.36
+    note: "skill = 0；行业信号在 P1 端贴线未触发、在 P2 端无对应修正项——同一信号两端失效"
