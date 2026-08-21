@@ -149,7 +149,7 @@ node 字段固定为 `"pricing"`。
    - **P1 首日方向**（强制 1 条）：horizon=listing_day，判定依据 Step 1.5 快照（禁止历史外推）。格式按基准率信息量分条件（v0.7.1；阈值量化 v0.7.2）：
      - **基准率退化**（判定标准：近 12 个月市场首日破发率 **<5% 或 >95%**，方向预测技巧分趋零；如科创板零破发 regime——实测：宇树/频准首日全对但零信息量）→ regime 复述 + **幅度带预测**：claim 为"首日涨幅相对 regime 均值 {X}%：显著低于 / 持平 / 显著高于"
      - **基准率未退化**（如港股 18C 首日破发率 ~25-30%）→ 破发/平盘/上涨**三分类方向预测**
-   - **P2 回归方向**（强制 ≥1 条）：上市后价格相对发行价区间带（<80% / 80-120% / >120%），horizon=6m 或 12m
+   - **P2 回归方向**（强制 ≥1 条）：上市后价格回归区间带，horizon=6m 或 12m。判定参照分 regime（v0.8.0）：热 regime（破发率 <5%）→ 相对**首日收盘价** <80%；非热 regime → 相对**发行价** <80%（依据 ipo-cohort-backtest F4）
    - **P3 风险兑现**：内核清单中 critical + unpriced 条目逐条二值化，linked_risk_id 指向原条目
 2. 每条记录强制：forecast 点估计 + base_rate_ref（锚定 B 型基准）+ deviation_rationale（一句话偏离理由）+ resolution_criteria（数据源+判定规则）+ resolution_window——缺一直接 G5 不通过
 3. 不可测条目标 `scored: false` + 理由——禁止为凑评分强行数值化

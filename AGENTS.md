@@ -1,7 +1,7 @@
 # AGENTS.md — Gatekeeper 跨 CLI 通用入口
 
 **项目**：Gatekeeper（拟 IPO 标的事前调研推演引擎）
-**版本**：v0.7.2
+**版本**：v0.8.0
 **一句话**：对拟 IPO 标的进行事前外部视角调研推演，产出内核风险清单与发行定价备忘录（附督导期监控表）。核心价值在发行/上市之前的预测；分析透镜是三角色；决策标准符合投资人与股票市场第一性。
 
 ## 定位原则（2026-08-17 定位修订）
@@ -68,6 +68,8 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 - 降级策略定义：`references/guardrails/degradation-paths.md`
 - 跨维度传染矩阵：`references/contagion-matrix.md`（C1-C9，含叠加规则§6）
 - 前瞻信号监测框架：`references/signal-watchlist.md`（含优先级矩阵§3.6、逆转信号§3.7、执行力代理§3.8）
+- 首发推断算法卡（冻结版本，v0.8.0）：`references/prediction-algorithm/*.md`
+- 校验协议（判定/盲测/差距分析，v0.8.0）：`references/validation-protocol.md`
 - 输出模板（Markdown）：`references/templates/risk-matrix-template.md`（⚠️ v0.7.0 起 DEPRECATED，仅供历史对照）
 - 输出模板（HTML）：`references/templates/risk-matrix-template.html`（⚠️ v0.7.0 起 DEPRECATED，仅供历史对照）
 - HTML 组装协议：`references/templates/html-assembly.md`（Write 分块 + cat 拼接；禁止 heredoc/python 渲染）
@@ -80,6 +82,6 @@ ipo-router → industry-scanner → tech-scanner → finance-scanner → pricing
 ## 知识库（基准库）
 
 `knowledge/` 为内建基准库——搜索失败或数据时效不足（D1/D4 降级）时的兜底依据。使用规则见 `knowledge/README.md`。子目录：
-- `industry-benchmarks/` — 新股发行环境基准、可比估值快照方法与实例（基准日期 2026-08）
+- `industry-benchmarks/` — 新股发行环境基准、可比估值快照方法与实例（基准日期 2026-08）；**科创板 IPO 全样本回测底座**（ipo-cohort-backtest.md，n=98，2026-08-20 首批）
 - `policy-tracker/` — IPO 审核/现场检查统计基准（基准日期 2026-08）
 - `case-library/` — 历史 IPO 案例库（**仅作引擎回归测试基准**，不做事后追踪）：频准激光（688826，科创板，含失败模式清单）、宇树科技（688836，科创板，含市场第一性要素）、智元机器人（港股 18C，含港股口径差异与数据缺口提示）

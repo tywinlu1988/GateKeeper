@@ -2,6 +2,18 @@
 
 GateKeeper 版本演进史。当前版本特性描述见 README.md。
 
+## v0.8.0（2026-08-20）
+
+**判定端闭环 + 盲测体系**（驱动依据：①S5 预测端上线后判定端为零，机制不对称——智元 3 个事件型预测可能数周内触发；②用户裁决：不让样本内总结的精炼规律直接成为设计底稿，规则必须冻结成显式算法经盲测检验）
+
+- **队列级回测底座**：knowledge/industry-benchmarks/ipo-cohort-backtest.md（科创板 n=98 全样本，热组 25/冷组 73）——六大发现：regime 主变量（破发行率冷 40%/热 4%）、二分框架跨 regime 稳健（corr≈0）、首日涨幅反向指标（>400% 组后续 0.81x）、热 regime 破发行价无区分度、贱卖中位 3.74x、P1 退化阈值两组验证
+- **首发推断算法卡 v0.1**（references/prediction-algorithm/）：R1-R6 显式冻结规则，每条标注证据等级（A/B/C）；R4 反向指标以 C 级假设身份接受盲测检验
+- **校验协议**（references/validation-protocol.md）：事件驱动判定 + resolution-sweep（月度全 cohort 批量回填，防逐案例追踪边界）+ 回放/活体双盲测 + 压力维度 + 按规则粒度过账的差距分析
+- **S6 resolution_record schema**：verdict 四枚举（true/false/insufficient/expired）+ Brier/基准率 Brier + 只增不改
+- **M1 落地**：P2 判定参照分 regime（热→相对首日收盘 <80%；非热→相对发行价 <80%，依据 F4）
+- **退役**：Phase 3"2027-02 单点回填"设计——被月度 sweep + 事件驱动判定取代
+- 首批回放盲测 3 case（热/冷/regime 切换点各一，subagent 信息屏障执行）进行中
+
 ## v0.7.2（2026-08-20）
 
 **场景 9 首测修复补丁**（驱动依据：智元 18C 复跑实测，PLAN-20260820-001）

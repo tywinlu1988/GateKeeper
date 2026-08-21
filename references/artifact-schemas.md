@@ -176,11 +176,39 @@ prediction_record:
 #     基准率退化（如科创板零破发 regime）→ regime 复述 + 幅度带预测
 #     （claim 为"首日涨幅相对 regime 均值：显著低于/持平/显著高于"）；
 #     基准率未退化（如港股 18C 首日破发率 ~25-30%）→ 保留破发/平盘/上涨三分类方向预测
-#   P2 回归方向：上市后价格相对发行价区间带（<80% / 80-120% / >120%），horizon=6m 或 12m，每次推演强制 ≥1 条
+#   P2 回归方向：上市后价格回归区间带，horizon=6m 或 12m，每次推演强制 ≥1 条；
+#     判定参照分 regime（v0.8.0，依据 ipo-cohort-backtest F4）——
+#     热 regime（首日破发率 <5%）→ 相对**首日收盘价** <80% 判真（热 regime 破发行价无区分度：24/25 仍在发行价上方）；
+#     非热 regime → 相对**发行价** <80% 判真（冷 regime 破发行率基准 40%）
 #   P3 风险兑现：内核清单中 critical + unpriced 条目逐条二值化（兑现/未兑现），horizon 逐条定
 # horizon: 仅允许 listing_day, 6m, 12m, event_driven
 # forecast 为 C 型主观判断预测——数值概率只允许出现在本 schema 与报告「预测与验证计划」区块（G5 概率语义分型）
 # predictions.yaml 只增不改：已落盘的预测记录禁止事后修改，判定结果写入独立的 resolutions 记录
+```
+
+## S6: 判定记录（Resolution Record，v0.8.0 新增）
+
+```yaml
+# Schema: resolution_record
+# 产出者：事件驱动判定 / resolution-sweep（流程见 references/validation-protocol.md）
+# 消费者：评分与差距分析（gap-analysis）；算法卡健康报告
+resolution_record:
+  resolution_id: "RES-{prediction_id}"       # 必填，格式强制
+  prediction_id: "P-{plan_id}-{3位序号}"      # 必填，指向 S5 记录
+  verdict: "true|false|insufficient|expired" # 必填，枚举
+  resolved_at: ""                            # 必填，ISO 8601 判定时间
+  resolution_source: ""                      # 必填，判定数据来源（如"东财行情""披露易招股书"）
+  observed_value: ""                         # 必填，实际观测值
+  criteria_check: ""                         # 必填，"规则原文 vs 实际观测值"的显式比较说明
+  brier: 0.0                                 # verdict=true/false 且 scored=true 时必填，(forecast − outcome)²，真=1 假=0
+  base_rate_brier: 0.0                       # 同上，regime 基准率预测的 Brier（技巧分 = 1 − brier/base_rate_brier）
+  note: ""                                   # insufficient/expired 必填原因
+
+# verdict 枚举
+#   true / false：按 resolution_criteria.rule 判定成立 / 不成立
+#   insufficient：判定窗口到达但数据不足（附原因；禁止临时改口径后判定）
+#   expired：预测前提失效（如 P1 regime_note 重锚条款触发——基准率已跨越退化阈值，原预测作废不计分）
+# resolutions.yaml 只增不改；expired/insufficient 不计分但计入覆盖率统计
 ```
 
 ## 制品新鲜度追踪（Artifact Freshness）
