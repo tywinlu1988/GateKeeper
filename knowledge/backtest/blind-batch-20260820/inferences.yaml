@@ -1,0 +1,32 @@
+# 回放盲测批次 blind-batch-20260820 · inferences
+# 算法卡：references/prediction-algorithm/v0.1.md（冻结 2026-08-20）
+# 执行：3 个 subagent（与算法卡作者分离），信息屏障=T0 前信息
+# 批次 case 选择（先于结果知悉写死）：热 regime 低曝光 1 例 + 非热 regime 1 例 + regime 切换点 1 例
+batch_id: "blind-batch-20260820"
+algorithm_card: "v0.1"
+executed_at: "2026-08-20"
+
+cases:
+  - case: {code: "688727", name: "恒坤新材", listing_date: "2025-11-18", info_cutoff: "2025-11-17", pressure: "热 regime 低曝光"}
+    inputs: {issue_pe: 71.42, issue_price: 14.99, fundraising: "10.10亿", float_ratio: 0.1118, profitable: true, regime_break_rate_t0: 0.00, regime_avg_day1_t0: "~250%"}
+    inferences:
+      - {type: "P1", claim: "首日涨幅相对 regime 基准（~250%）三档定位", forecast: "显著高于（0.45）/ 持平（0.35）/ 显著低于（0.20）", basis_rule: "R1+R2（题材热度上调一档）"}
+      - {type: "P2", claim: "6 个月内跌破首日收盘价 20%+", forecast: 0.60, basis_rule: "R4 基准 0.50 + 规则外判断 +10 点（带→点映射缺口）"}
+    contamination: "中（检索首条即暴露首日 +310.61%，已丢弃声明）"
+    rule_gaps_found: ["R2 风口清单未定义", "R2 幅度带→R4 点估计映射缺失"]
+
+  - case: {code: "688657", name: "浩辰软件", listing_date: "2023-10-10", info_cutoff: "2023-10-09", pressure: "非热 regime"}
+    inputs: {issue_pe: 77.77, issue_price: 103.40, fundraising: "11.60亿", float_ratio: 0.25, profitable: true, regime_break_rate_t0: "~20%", regime_avg_day1_t0: "~30-40%"}
+    inferences:
+      - {type: "P1", claim: "首日方向三分类", forecast: "破发 0.20 / 平盘 0.15 / 上涨 0.65", basis_rule: "R1+R3（基准 20%，无修正触发；三分类拆分为规则外判断）"}
+      - {type: "P2", claim: "6 个月内跌破发行价 20%+", forecast: 0.40, basis_rule: "R5 基准（盈利、PE 1.2x 均不触发修正）"}
+    contamination: "中（三次触及上市后信息，已丢弃声明）"
+    rule_gaps_found: ["R3 三分类拆分无规则", "R3 题材调整未量化"]
+
+  - case: {code: "688605", name: "先锋精科", listing_date: "2024-12-12", info_cutoff: "2024-12-11", pressure: "regime 切换点（9·24 后转暖）"}
+    inputs: {issue_pe: 28.64, issue_price: 11.29, fundraising: "5.71亿", float_ratio: 0.25, profitable: true, regime_break_rate_t0: "~1%", regime_avg_day1_t0: "近12月 ~250% / 近3月 ~450-530%"}
+    inferences:
+      - {type: "P1", claim: "幅度带预测", forecast: "显著高于基准（0.55），点估计区间 350-500%", basis_rule: "R1+R2（题材上调一档；统计窗口为规则外判断：近12月主锚+近3月辅锚）"}
+      - {type: "P2", claim: "6 个月内跌破首日收盘价 20%+", forecast: 0.67, basis_rule: "R4 基准 0.50 + 反向指标上调 15-20 点（预测首日 >400% 触发）"}
+    contamination: "高（结构化工具直接返回首日数据，已丢弃声明；规则外判断部分置信度下调）"
+    rule_gaps_found: ["R2 基准幅度统计窗口未指定（近12月 vs 近3月差 2 倍）", "P1 三档概率分配无规则"]

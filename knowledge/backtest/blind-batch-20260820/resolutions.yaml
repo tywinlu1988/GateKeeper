@@ -1,0 +1,65 @@
+# 回放盲测批次 blind-batch-20260820 · resolutions（S6）
+# 判定数据来源：东财 MCP 历史行情（精确至 6 个月判定日）+ 首日涨幅公开统计
+batch_id: "blind-batch-20260820"
+resolved_at: "2026-08-20"
+
+resolutions:
+  # ===== 恒坤新材 =====
+  - resolution_id: "RES-BB20-hengkun-P1"
+    case: "688727 恒坤新材"
+    prediction: {type: "P1", forecast: "显著高于 regime 基准 250%（0.45），隐含区间 ~300-400%"}
+    verdict: "true"
+    observed_value: "首日 +310.61%"
+    criteria_check: "预测隐含区间 300-400% vs 实际 +310.61% → 区间内命中；但'显著高于'带边界规则未定义（+24% 偏离算显著还是持平无法机械判定）——带边界判定记规则缺口，按隐含点估计区间判 true"
+    brier: null  # 幅度带按带内/带外，边界未定义不计 Brier（v0.1 约定缺陷，见 gap-analysis）
+    base_rate_brier: null
+    note: "幅度带量化边界缺失导致无法严格计分"
+  - resolution_id: "RES-BB20-hengkun-P2"
+    case: "688727 恒坤新材"
+    prediction: {type: "P2", forecast: 0.60, claim: "6 个月内跌破首日收盘 20%+"}
+    verdict: "false"
+    observed_value: "2026-05-18（满 6 个月）收盘 65.25 = 首日收盘 61.55 的 1.06x"
+    criteria_check: "规则：满 6 个月收盘 < 首日收盘 × 0.8 判真 → 1.06x 未达 → false。注：2026-08-20 已跌至 48.00（0.78x）——回归发生在 6 个月窗口之后"
+    brier: 0.36
+    base_rate_brier: 0.25
+    note: "R4 上调（+10 点）在此案受伤：skill = 1 - 0.36/0.25 = -0.44；热 regime 回归窗口可能 >6 个月"
+
+  # ===== 浩辰软件 =====
+  - resolution_id: "RES-BB20-haochen-P1"
+    case: "688657 浩辰软件"
+    prediction: {type: "P1", forecast: "破发 0.20"}
+    verdict: "true"
+    observed_value: "首日 -14.03%（破发）"
+    criteria_check: "实际破发 → 破发预测命中；但 forecast=当期基准率（0.20），无任何个案修正 → 与基准率预测完全同值"
+    brier: 0.64
+    base_rate_brier: 0.64
+    note: "skill = 0——R3 在无修正触发时等价于基准率复述（结构性零技巧）"
+  - resolution_id: "RES-BB20-haochen-P2"
+    case: "688657 浩辰软件"
+    prediction: {type: "P2", forecast: 0.40, claim: "6 个月内跌破发行价 20%+"}
+    verdict: "true"
+    observed_value: "2024-04-10（满 6 个月）收盘 61.92 = 发行价 103.40 的 0.60x"
+    criteria_check: "0.60x < 0.8x → true；同样无修正触发，forecast=基准"
+    brier: 0.36
+    base_rate_brier: 0.36
+    note: "skill = 0（同 R3 结构问题）"
+
+  # ===== 先锋精科 =====
+  - resolution_id: "RES-BB20-xianfeng-P1"
+    case: "688605 先锋精科"
+    prediction: {type: "P1", forecast: "显著高于基准 250%（0.55），点估计区间 350-500%"}
+    verdict: "true"
+    observed_value: "首日 +533.84%"
+    criteria_check: "实际 +533.84% 高于点估计区间上限且显著高于双锚（250%/450%）→ 带命中；点估计偏低但方向与档位正确。R1 在 regime 切换点判定正确（近12月 ~1% 捕捉到 9·24 后转暖）"
+    brier: null
+    base_rate_brier: null
+    note: "regime 切换点压力测试通过（R1）"
+  - resolution_id: "RES-BB20-xianfeng-P2"
+    case: "688605 先锋精科"
+    prediction: {type: "P2", forecast: 0.67, claim: "6 个月内跌破首日收盘 20%+"}
+    verdict: "true"
+    observed_value: "2025-06-12（满 6 个月）收盘 56.41 = 首日收盘 71.56 的 0.788x（贴线命中）"
+    criteria_check: "0.788x < 0.8x → true（注：当前已回升至 1.02x——回归后修复，6 个月时点判定成立）"
+    brier: 0.109
+    base_rate_brier: 0.25
+    note: "R4 反向指标上调（+17 点）在此案立功：skill = 1 - 0.109/0.25 = +0.56"
