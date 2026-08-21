@@ -1,0 +1,55 @@
+# 回放盲测批次 blind-batch-3-20260820 · resolutions（S6）
+batch_id: "blind-batch-3-20260820"
+resolved_at: "2026-08-20"
+
+resolutions:
+  - resolution_id: "RES-BB3-shuangyuan-P1"
+    case: "688623 双元科技"
+    prediction: {type: "P1", forecast: "破发 0.32"}
+    verdict: "true"
+    observed_value: "首日 -18.66%（破发）"
+    criteria_check: "实际破发 → true；V13 分档基准（27%）+ 超募修正（+5）方向正确"
+    brier: 0.4624
+    base_rate_brier: 0.5329
+    note: "skill = +0.13（V13 条件基准制首案立功；vs 旧总体基准 16% 口径 skill 更高 +0.35）"
+  - resolution_id: "RES-BB3-shuangyuan-P2"
+    case: "688623 双元科技"
+    prediction: {type: "P2", forecast: 0.60, claim: "6m 窗口 < 发行价×0.8（100.70 元）"}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 70.77 = 发行价 0.56x，深度跌破"
+    brier: 0.16
+    base_rate_brier: 0.2025
+    note: "skill = +0.21"
+  - resolution_id: "RES-BB3-suochen-P1"
+    case: "688507 索辰科技"
+    prediction: {type: "P1", forecast: "破发 0.02"}
+    verdict: "false"
+    observed_value: "首日 +2.62%（盘中破发但收涨）"
+    criteria_check: "收涨 → 破发 false；极低概率预测（2%）在不利结果下几乎无损——分档基准（>100x 档 7%）+ 题材修正（-10）方向正确"
+    brier: 0.0004
+    base_rate_brier: 0.0049
+    note: "skill = +0.92（本批最佳；V14 切换预警正确提示了置信下调）"
+  - resolution_id: "RES-BB3-suochen-P2"
+    case: "688507 索辰科技"
+    prediction: {type: "P2", forecast: 0.48, claim: "6m 窗口 < 发行价×0.8（196.45 元）"}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 105.2 = 发行价 0.43x，深度跌破"
+    brier: 0.2704
+    base_rate_brier: 0.3249
+    note: "skill = +0.17"
+  - resolution_id: "RES-BB3-hengyunchang-P1"
+    case: "688785 恒运昌"
+    prediction: {type: "P1", forecast: "幅度带 [+128%,+385%]，点估计 +256%"}
+    verdict: "true"
+    observed_value: "首日 +302.80%——带内命中，点估计偏差仅 +18%"
+    criteria_check: "幅度带与点估计双命中（V1 边界 + 中性 ×1.0 调整均正确）"
+    note: "热 regime 幅度带累计 4/4 命中"
+  - resolution_id: "RES-BB3-hengyunchang-P2"
+    case: "688785 恒运昌"
+    prediction: {type: "P2", forecast: 0.50, claim: "6m 窗口 < 首日收盘×0.8（297.04 元）"}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 262.41 = 首日收盘 371.30 的 0.71x；但窗口末日（2026-07-28）301.46 已回升至阈值上方"
+    criteria_check: "窗口判定 true / 时点判定 false——与先锋案同型（瞬时跌破后修复）；V6 窗口口径按设计生效"
+    brier: 0.25
+    base_rate_brier: 0.25
+    note: "skill = 0（R4 冻结修正项后是纯基准率规则，构造上零技巧——如实记录：它是 regime 复述而非预测优势）；**重要：窗口口径使判定更易触发 true，现行 0.50 基准来自时点统计，基准率需按窗口口径重估（下批次前置任务）**"

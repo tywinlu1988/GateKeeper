@@ -1,0 +1,26 @@
+# 回放盲测批次 blind-batch-3-20260820 · inferences
+# 算法卡：references/prediction-algorithm/v0.3.md（V13 条件基准制首批实战）
+# case 选择：V13 分档基准验证（60-100x 危险区 + >100x 题材档）+ R4 冻结后纯基准热案
+batch_id: "blind-batch-3-20260820"
+algorithm_card: "v0.3"
+executed_at: "2026-08-20"
+
+cases:
+  - case: {code: "688623", name: "双元科技", listing_date: "2023-06-08", info_cutoff: "2023-06-07", pressure: "V13 分档验证（60-100x 危险区 + 超募 185%）"}
+    inputs: {issue_pe: 79.83, industry_pe: 31.40, issue_price: 125.88, excess_raise_ratio: 1.85, profitable: true, regime_break_rate_t0: "~21-28%", industry_excess_return_90d: "+5.2pp（代理，无映射→双分支）", index_mapping: "无（强制双分支+降置信）"}
+    inferences:
+      - {type: "P1", forecast: "破发 0.32（敏感 0.22）/ 平盘 0.24 / 上涨 0.44；幅度点估计 +33%", basis_rule: "R3 60-100x 档 27% + 超募 +5；V15"}
+      - {type: "P2", forecast: 0.60, claim: "6m 窗口 < 发行价×0.8（100.70 元）", basis_rule: "R5 60-100x 档 55% + 超募 +5"}
+    contamination: "中（摘要暴露破发结局，已声明丢弃）"
+  - case: {code: "688507", name: "索辰科技", listing_date: "2023-04-18", info_cutoff: "2023-04-17", pressure: "V13 >100x 题材档 + V14 切换预警 + V12 映射（H30202）"}
+    inputs: {issue_pe: 368.92, industry_pe: 57.56, issue_price: 245.56, excess_raise_ratio: 1.618, profitable: true, regime_break_rate_t0: "~25-30%", industry_excess_return_90d: "+28.4pp（>25% 确定触发）", index_mapping: "软件→H30202（有映射）"}
+    inferences:
+      - {type: "P1", forecast: "破发 0.02 / 平盘 0.015 / 上涨 0.965；幅度 +39%（低置信）；V14 切换预警", basis_rule: "R3 >100x 档 7% + 超募 +5 − 题材 10 = 2%"}
+      - {type: "P2", forecast: 0.48, claim: "6m 窗口 < 发行价×0.8（196.45 元）", basis_rule: "R5 >100x 档 43% + 超募 +5"}
+    contamination: "中（2 起接触已声明丢弃）"
+  - case: {code: "688785", name: "恒运昌", listing_date: "2026-01-28", info_cutoff: "2026-01-27", pressure: "R4 冻结后纯基准热案（V6 窗口判定）"}
+    inputs: {issue_pe: 48.39, industry_pe: 39.84, issue_price: 92.18, excess_raise_ratio: -0.037, profitable: true, regime_break_rate_t0: 0.00, regime_avg_day1_12m: 256, regime_avg_day1_3m: "~250", industry_excess_return_90d: "+9.5pp", index_mapping: "半导体→990001"}
+    inferences:
+      - {type: "P1", forecast: "幅度带 [+128%,+385%]，点估计 +256%（V3 未触发，中性 ×1.0）", basis_rule: "R1+R2"}
+      - {type: "P2", forecast: 0.50, claim: "6m 窗口 < 首日收盘×0.8（297.04 元）", basis_rule: "R4 纯基准（V9 冻结修正项）"}
+    contamination: "中（首日 +302.80% 结局接触，已声明丢弃；点估计严格等于基准锚）"
