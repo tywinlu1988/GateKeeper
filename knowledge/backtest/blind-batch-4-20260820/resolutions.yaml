@@ -1,0 +1,52 @@
+# 回放盲测批次 blind-batch-4-20260820 · resolutions（S6）
+batch_id: "blind-batch-4-20260820"
+resolved_at: "2026-08-20"
+
+resolutions:
+  - resolution_id: "RES-BB4-yinuosi-P1"
+    case: "688710 益诺思"
+    prediction: {type: "P1", forecast: "破发 0.00 / 上涨 1.00；幅度 +170%"}
+    verdict: "true（方向）/ 幅度大幅高估"
+    observed_value: "首日 +41.61%"
+    criteria_check: "方向（上涨）命中，破发 0% 预测无损；但 V15 幅度点估计 +170% vs 实际 +41.6%——近 3 月锚被 2024-06 的 +273% 极值拉高，V14 切换预警的置信下调被证明正当"
+    note: "R3 <30x 档方向累计全胜；V15 幅度锚失效案 1/3"
+  - resolution_id: "RES-BB4-yinuosi-P2"
+    case: "688710 益诺思"
+    prediction: {type: "P2", forecast: 0.21, claim: "6m 窗口 < 15.25 元"}
+    verdict: "false"
+    observed_value: "窗口内最低收盘 22.95（>15.25）；当前 100.10 = 发行价 5.25x"
+    brier: 0.044
+    base_rate_brier: 0.044
+    note: "skill 0（forecast=基准）；<30x 档窗口战绩 0/5（估算样本）+ 本案 0/1——该档窗口真实值或显著低于 21% 下界，支持卡内观察注记"
+  - resolution_id: "RES-BB4-yuchen-P1"
+    case: "688638 誉辰智能"
+    prediction: {type: "P1", forecast: "破发 0.27"}
+    verdict: "true"
+    observed_value: "首日 -7.81%（破发）"
+    brier: 0.533
+    base_rate_brier: 0.608
+    note: "skill = +0.13（V13 分档基准在 30-60x 档再胜；幅度 +40% vs 实际 -7.81%——V15 失效案 2/3）"
+  - resolution_id: "RES-BB4-yuchen-P2"
+    case: "688638 誉辰智能"
+    prediction: {type: "P2", forecast: 0.40, claim: "6m 窗口 < 67.12 元"}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 56.36 = 发行价 0.67x"
+    brier: 0.36
+    base_rate_brier: 0.4225
+    note: "skill = +0.14"
+  - resolution_id: "RES-BB4-weimaisi-P1"
+    case: "688612 威迈斯"
+    prediction: {type: "P1", forecast: "破发 0.27"}
+    verdict: "false"
+    observed_value: "首日 +4.95%（上涨）"
+    brier: 0.073
+    base_rate_brier: 0.073
+    note: "skill 0（超募 49.5% 贴线未触发——若触发 +5 反而更差：0.32 → Brier 0.102；贴线规则偶然保护了预测）"
+  - resolution_id: "RES-BB4-weimaisi-P2"
+    case: "688612 威迈斯"
+    prediction: {type: "P2", forecast: 0.55, claim: "6m 窗口 < 37.83 元"}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 32.68 = 发行价 0.69x"
+    brier: 0.2025
+    base_rate_brier: 0.2025
+    note: "skill 0（无修正触发，forecast=基准）"

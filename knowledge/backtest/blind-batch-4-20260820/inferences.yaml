@@ -1,0 +1,25 @@
+# 回放盲测批次 blind-batch-4-20260820 · inferences
+# 算法卡：references/prediction-algorithm/v0.4.md（F8 窗口基准首批实战；三档 PE 分层各一，留一法：均未入估算集）
+batch_id: "blind-batch-4-20260820"
+algorithm_card: "v0.4"
+executed_at: "2026-08-20"
+
+cases:
+  - case: {code: "688710", name: "益诺思", listing_date: "2024-09-03", info_cutoff: "2024-09-02", pressure: "<30x 档窗口下界验证 + R1 口径敏感（6.2% vs 4.3%）"}
+    inputs: {issue_pe: 15.40, industry_pe: 18.37, issue_price: 19.06, excess_raise_ratio: -0.59, profitable: true, regime_break_rate_t0: "~6.2%（全市场含北交所；沪深口径 ~4.3%）", regime_avg_day1_3m: "~+170%", industry_excess_return_90d: "-6.84pp", index_mapping: "医药→399989"}
+    inferences:
+      - {type: "P1", forecast: "破发 0.00 / 上涨 1.00；幅度 +170%（V14 切换预警）", basis_rule: "R3 <30x 档 0% + V15 近 3 月锚"}
+      - {type: "P2", forecast: 0.21, claim: "6m 窗口 < 发行价×0.8（15.25 元）", basis_rule: "R5 <30x 档下界 21%"}
+    contamination: "中（首日 +41.61% 结局接触已声明）"
+  - case: {code: "688638", name: "誉辰智能", listing_date: "2023-07-12", info_cutoff: "2023-07-11", pressure: "30-60x 档 + 超募触发"}
+    inputs: {issue_pe: 51.11, industry_pe: 30.48, issue_price: 83.90, excess_raise_ratio: 0.96, profitable: true, regime_break_rate_t0: "~25-30%", industry_excess_return_90d: "-4.17pp", index_mapping: "新能源→399808"}
+    inferences:
+      - {type: "P1", forecast: "破发 0.27 / 平盘 0.20 / 上涨 0.53；幅度 +40%", basis_rule: "R3 30-60x 档 22% + 超募 +5"}
+      - {type: "P2", forecast: 0.40, claim: "6m 窗口 < 发行价×0.8（67.12 元）", basis_rule: "R5 30-60x 档 35% + 超募 +5"}
+    contamination: "高（3 次结局接触已声明丢弃）"
+  - case: {code: "688612", name: "威迈斯", listing_date: "2023-07-26", info_cutoff: "2023-07-25", pressure: "60-100x 档 + 超募 49.5% 贴线"}
+    inputs: {issue_pe: 73.98, industry_pe: 26.71, issue_price: 47.29, excess_raise_ratio: 0.495, profitable: true, regime_break_rate_t0: "~21-30%", industry_excess_return_90d: "-5.6pp", index_mapping: "新能源→399808"}
+    inferences:
+      - {type: "P1", forecast: "破发 0.27 / 平盘 0.20 / 上涨 0.53；幅度 +40%", basis_rule: "R3 60-100x 档 27%（超募贴线不加）"}
+      - {type: "P2", forecast: 0.55, claim: "6m 窗口 < 发行价×0.8（37.83 元）", basis_rule: "R5 60-100x 档 55%（无修正触发）"}
+    contamination: "中（2 次结局接触已声明丢弃）"
