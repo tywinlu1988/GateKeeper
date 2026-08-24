@@ -1,0 +1,53 @@
+# 回放盲测批次 blind-batch-5-20260820 · resolutions（S6）
+batch_id: "blind-batch-5-20260820"
+resolved_at: "2026-08-20"
+
+resolutions:
+  - resolution_id: "RES-BB5-ailuo-P1"
+    case: "688717 艾罗能源"
+    prediction: {type: "P1", forecast: "破发 0.05；幅度 +70%"}
+    verdict: "true（方向，上涨）/ 幅度偏差仅 12pp"
+    observed_value: "首日 +57.98%（盘中最高 100.03 元）"
+    criteria_check: "方向命中；V17 min 锚（+69.6%）vs 实际 +58% 偏差仅 12pp——若用旧 3 月锚（+141%）偏差 83pp，V17 修复验证成功"
+    note: "V17 首案立功"
+  - resolution_id: "RES-BB5-ailuo-P2"
+    case: "688717 艾罗能源"
+    prediction: {type: "P2", forecast: 0.15, claim: "6m 窗口 < 44.53 元"}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 41.11（2024-07-03 窗口末段）= 发行价 0.74x——2024-02 微盘崩盘冲击所致，<30x 档首例窗口 true（1/7）"
+    brier: 0.7225
+    base_rate_brier: 0.81
+    note: "skill = +0.11（超募 +5 修正贡献；V18 下调基准在首例 true 上受伤有限）；注：当前价已修复至 1.04x——又是'瞬时跌破后修复'同型"
+  - resolution_id: "RES-BB5-zhongchuang-P1"
+    case: "688695 中创股份"
+    prediction: {type: "P1", forecast: "破发 0.22（敏感 0.32）；幅度 +73%"}
+    verdict: "true（方向，上涨）/ 幅度低估（保守设计生效）"
+    observed_value: "首日 +116.90%"
+    criteria_check: "方向命中；主分支（不触发题材修正）正确 vs 敏感分支（若触发 0.32 更差）——V11 双分支首次实战，主分支选择正确；幅度锚 +73% 低估实际 +117%——符合 V17 保守原则（低估代价 < 高估）"
+    brier: 0.0484
+    base_rate_brier: 0.0484
+    note: "skill 0"
+  - resolution_id: "RES-BB5-zhongchuang-P2"
+    case: "688695 中创股份"
+    prediction: {type: "P2", forecast: "0.45 主分支（V10 触发）", claim: "6m 窗口 < 17.94 元"}
+    verdict: "false"
+    observed_value: "窗口内最低收盘 23.57（窗口末日 2024-09-13）= 发行价 1.05x——从未接近阈值"
+    brier: 0.2025
+    base_rate_brier: 0.1225
+    note: "skill = -0.65——V10 行业修正（-20.98% 贴线 1pp 触发 +10）首战受伤；若按敏感分支 0.35 则 skill 0。V10 累计 0 胜 2 负（上海合晶贴线未触发 + 本案贴线触发），阈值贴线区是噪声放大器"
+  - resolution_id: "RES-BB5-aike-P1"
+    case: "688610 埃科光电"
+    prediction: {type: "P1", forecast: "破发 0.27"}
+    verdict: "true"
+    observed_value: "首日 -4.08%（破发）"
+    brier: 0.533
+    base_rate_brier: 0.533
+    note: "skill 0（无修正干净基准案，forecast=基准）"
+  - resolution_id: "RES-BB5-aike-P2"
+    case: "688610 埃科光电"
+    prediction: {type: "P2", forecast: 0.55, claim: "6m 窗口 < 58.66 元"}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 39.3 = 发行价 0.54x，深度跌破"
+    brier: 0.2025
+    base_rate_brier: 0.2025
+    note: "skill 0（无修正，forecast=基准）"

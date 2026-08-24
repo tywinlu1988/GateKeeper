@@ -1,0 +1,25 @@
+# 回放盲测批次 blind-batch-5-20260820 · inferences
+# 算法卡：references/prediction-algorithm/v0.5.md（V16-V19 首批实战）
+batch_id: "blind-batch-5-20260820"
+algorithm_card: "v0.5"
+executed_at: "2026-08-20"
+
+cases:
+  - case: {code: "688717", name: "艾罗能源", listing_date: "2024-01-03", info_cutoff: "2024-01-02", pressure: "V18 <30x 档新基准 + V19 超募总额口径首检（+112.7%）+ 2024-02 微盘崩盘窗口"}
+    inputs: {issue_pe: 7.95, industry_pe: 17.42, issue_price: 55.66, excess_raise_ratio: 1.127, profitable: true, regime_break_rate_t0: "14.8%（沪深）", regime_avg_day1_12m: 0.696, regime_avg_day1_3m: 1.414, industry_excess_return_90d: "-1.49pp", index_mapping: "新能源→399808"}
+    inferences:
+      - {type: "P1", forecast: "破发 0.05 / 平盘 0.04 / 上涨 0.91；幅度 +70%（V17 min 锚）", basis_rule: "R3 <30x 档 0% + 超募 +5"}
+      - {type: "P2", forecast: 0.15, claim: "6m 窗口 < 发行价×0.8（44.53 元）", basis_rule: "R5 <30x 档 10% + 超募 +5"}
+    contamination: "中（2 次接触已声明；污染值'近70%'与 min 锚数值相近但锚独立产生）"
+  - case: {code: "688695", name: "中创股份", listing_date: "2024-03-13", info_cutoff: "2024-03-12", pressure: "V11 边界带双分支首检（题材 -21.0%）+ V10 贴线（过线 1pp）+ V14 切换预警"}
+    inputs: {issue_pe: 49.01, industry_pe: 44.76, issue_price: 22.43, excess_raise_ratio: -0.205, profitable: true, regime_break_rate_t0: "~16%（沪深）", regime_avg_day1_12m: 0.73, regime_avg_day1_3m: 1.00, industry_excess_return_90d: "-20.98%", index_mapping: "软件→H30202"}
+    inferences:
+      - {type: "P1", forecast: "破发 0.22（敏感 0.32）/ 上涨 0.61；幅度 +73%（min 锚）", basis_rule: "R3 30-60x 档 22%；V11 双分支；V14"}
+      - {type: "P2", forecast: "0.45 主分支（V10 触发）/ 0.35 敏感", claim: "6m 窗口 < 发行价×0.8（17.94 元）", basis_rule: "R5 30-60x 档 35% + V10 +10（贴线 1pp 双分支）"}
+    contamination: "中（结局接触已声明）"
+  - case: {code: "688610", name: "埃科光电", listing_date: "2023-07-19", info_cutoff: "2023-07-18", pressure: "60-100x 档无修正干净基准案"}
+    inputs: {issue_pe: 85.36, industry_pe: 39.55, issue_price: 73.33, excess_raise_ratio: 0.114, profitable: true, regime_break_rate_t0: "~31%（沪深）", regime_avg_day1_12m: 0.30, regime_avg_day1_3m: 0.3845, industry_excess_return_90d: "+10.3pp", index_mapping: "机器视觉→H30590（最近邻）"}
+    inferences:
+      - {type: "P1", forecast: "破发 0.27 / 平盘 0.20 / 上涨 0.53；幅度 +30%（min 锚）", basis_rule: "R3 60-100x 档 27%（无修正）"}
+      - {type: "P2", forecast: 0.55, claim: "6m 窗口 < 发行价×0.8（58.66 元）", basis_rule: "R5 60-100x 档 55%（无修正）"}
+    contamination: "中（3 次接触已声明丢弃）"
