@@ -1,0 +1,25 @@
+# 回放盲测批次 blind-batch-6-20260821 · inferences
+# 算法卡：references/prediction-algorithm/v0.6.md（V20 三档制首批实战）
+batch_id: "blind-batch-6-20260821"
+algorithm_card: "v0.6"
+executed_at: "2026-08-21"
+
+cases:
+  - case: {code: "688429", name: "时创能源", listing_date: "2023-06-29", info_cutoff: "2023-06-28", pressure: "V18 <30x 档第二数据点（档线贴线 28.92x）"}
+    inputs: {issue_pe: 28.92, industry_pe: 21.19, issue_price: 19.20, excess_raise_ratio: -0.299, profitable: true, regime_break_rate_t0: "~24-25%", regime_avg_day1_12m: 0.33, regime_avg_day1_3m: 0.38, industry_excess_return_90d: "-5.33pp", index_mapping: "最近邻 399808（远离阈值无需双分支）"}
+    inferences:
+      - {type: "P1", forecast: "破发 0.00 / 上涨 1.00；幅度 +33%（min 锚）", basis_rule: "R3 <30x 档 0%（无修正）"}
+      - {type: "P2", forecast: 0.10, claim: "6m 窗口 < 发行价×0.8（15.36 元）", basis_rule: "R5 <30x 档 10%（V22）"}
+    contamination: "中（2 次接触已声明；regime 池含本案自身的自指问题已分段处理）"
+  - case: {code: "688539", name: "高华科技", listing_date: "2023-04-18", info_cutoff: "2023-04-17", pressure: "60-100x 档 + 超募 100% + V14 切换预警 + V12 军工映射"}
+    inputs: {issue_pe: 75.01, industry_pe: 30.30, issue_price: 38.22, excess_raise_ratio: 1.001, profitable: true, regime_break_rate_t0: "~27-28%", regime_avg_day1_12m: 0.30, regime_avg_day1_3m: 0.50, industry_excess_return_90d: "+1.47pp", index_mapping: "军工→399967"}
+    inferences:
+      - {type: "P1", forecast: "破发 0.32 / 平盘 0.24 / 上涨 0.44；幅度 +30%；V14 切换预警", basis_rule: "R3 60-100x 档 27% + 超募 +5"}
+      - {type: "P2", forecast: 0.60, claim: "6m 窗口 < 发行价×0.8（30.58 元）", basis_rule: "R5 60-100x 档 55% + 超募 +5"}
+    contamination: "中（2 次结局接触已声明丢弃）"
+  - case: {code: "688523", name: "航天环宇", listing_date: "2023-06-02", info_cutoff: "2023-06-01", pressure: "60-100x 档 + 超募 78.7%"}
+    inputs: {issue_pe: 77.72, industry_pe: null, issue_price: 21.86, excess_raise_ratio: 0.787, profitable: true, regime_break_rate_t0: "~20%", regime_avg_day1_12m: 0.35, regime_avg_day1_3m: 0.25, industry_excess_return_90d: "+0.26pp", index_mapping: "军工→399967"}
+    inferences:
+      - {type: "P1", forecast: "破发 0.32 / 平盘 0.24 / 上涨 0.44；幅度 +25%（min 锚）", basis_rule: "R3 60-100x 档 27% + 超募 +5"}
+      - {type: "P2", forecast: 0.60, claim: "6m 窗口 < 发行价×0.8（17.49 元）", basis_rule: "R5 60-100x 档 55% + 超募 +5"}
+    contamination: "中（首日开盘 +41.8% 接触已声明丢弃）"

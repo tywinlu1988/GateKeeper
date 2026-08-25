@@ -1,0 +1,52 @@
+# 回放盲测批次 blind-batch-6-20260821 · resolutions（S6）
+batch_id: "blind-batch-6-20260821"
+resolved_at: "2026-08-21"
+
+resolutions:
+  - resolution_id: "RES-BB6-shichuang-P1"
+    case: "688429 时创能源"
+    prediction: {type: "P1", forecast: "破发 0.00；幅度 +33%"}
+    verdict: "true（方向，上涨）/ 幅度低估（保守设计）"
+    observed_value: "首日 +63.91%"
+    criteria_check: "方向命中；min 锚 +33% vs 实际 +63.91%——保守低估，符合 V17 设计意图"
+    note: "<30x 档方向累计全胜"
+  - resolution_id: "RES-BB6-shichuang-P2"
+    case: "688429 时创能源"
+    prediction: {type: "P2", forecast: 0.10, claim: "6m 窗口 < 15.36 元"}
+    verdict: "false"
+    observed_value: "窗口内最低收盘 19.30（窗口末段 2023-12-19 前后）——从未接近阈值；注：当前 10.49 元已破发，但破位发生在窗口之后（2024+）"
+    brier: 0.01
+    base_rate_brier: 0.01
+    note: "skill 0；<30x 档窗口战绩 1/8；本案提示 <30x 档的回归窗口可能普遍 >6 个月（与恒坤案同型）"
+  - resolution_id: "RES-BB6-gaohua-P1"
+    case: "688539 高华科技"
+    prediction: {type: "P1", forecast: "破发 0.32（含超募 +5）"}
+    verdict: "true"
+    observed_value: "首日 -8.42%（破发）"
+    brier: 0.4624
+    base_rate_brier: 0.5329
+    note: "skill = +0.13（V13 分档基准再胜，累计七胜零负六平；V14 预警正确标注）"
+  - resolution_id: "RES-BB6-gaohua-P2"
+    case: "688539 高华科技"
+    prediction: {type: "P2", forecast: 0.60（含超募 +5）, claim: "6m 窗口 < 30.58 元"}
+    verdict: "false"
+    observed_value: "窗口内最低收盘 35.0（首日即最低，-8.42%）——窗口内从未破 0.8x；当前 25.93 = 0.68x（破位在窗口后）"
+    brier: 0.36
+    base_rate_brier: 0.2025
+    note: "skill = -0.78——超募修正（55→60）受伤；若未修正则 = 基准（0.2025，skill 0）"
+  - resolution_id: "RES-BB6-hangtian-P1"
+    case: "688523 航天环宇"
+    prediction: {type: "P1", forecast: "破发 0.32（含超募 +5）"}
+    verdict: "false"
+    observed_value: "首日 +55.49%（上涨）"
+    brier: 0.1024
+    base_rate_brier: 0.0729
+    note: "skill = -0.40——超募修正在 P1 端受伤；若未修正（0.27）则 = 基准"
+  - resolution_id: "RES-BB6-hangtian-P2"
+    case: "688523 航天环宇"
+    prediction: {type: "P2", forecast: 0.60（含超募 +5）, claim: "6m 窗口 < 17.49 元"}
+    verdict: "false"
+    observed_value: "窗口内最低收盘 22.45 = 发行价 1.03x——从未接近阈值"
+    brier: 0.36
+    base_rate_brier: 0.2025
+    note: "skill = -0.78——超募修正 P2 端连续第二案受伤（高华/航天同型：首日强势或温和，窗口内不破位）"
