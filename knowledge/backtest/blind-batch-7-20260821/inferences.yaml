@@ -1,0 +1,25 @@
+# 回放盲测批次 blind-batch-7-20260821 · inferences
+# 算法卡：references/prediction-algorithm/v0.7.md（V23 双轨锚定制首批实战）
+batch_id: "blind-batch-7-20260821"
+algorithm_card: "v0.7"
+executed_at: "2026-08-21"
+
+cases:
+  - case: {code: "688709", name: "成都华微", listing_date: "2024-02-07", info_cutoff: "2024-02-06", pressure: "V20 贴线区首检（行业 -19.84pp）+ 超募率 -0.002% 贴 0% 边界 + V14 切换预警"}
+    inputs: {issue_pe: 37.04, industry_pe: 30.14, issue_price: 15.69, excess_raise_ratio: -0.00002, profitable: true, regime_break_rate_t0: "~14.6%", regime_avg_day1_12m: 0.73, regime_avg_day1_3m: 1.45, industry_excess_return_90d: "-19.84pp（贴线区）", index_mapping: "半导体→990001"}
+    inferences:
+      - {type: "P1", track_excess: "破发 0.04（敏感 0.09）", track_pe: "破发 0.22（敏感 0.27）", note: "V20 贴线双分支；V14 切换预警；幅度锚 +73%"}
+      - {type: "P2", track_excess: "0.13（敏感 0.18）", track_pe: "0.35（敏感 0.40）", note: "V24：12m 窗口平行记录"}
+    contamination: "中（2 起接触已声明；任务书拟募口径被招股书核实值推翻——15.84 亿 → 15.00 亿）"
+  - case: {code: "688721", name: "龙图光罩", listing_date: "2024-08-06", info_cutoff: "2024-08-05", pressure: "R1 贴线（4.4-4.7% vs 5%）+ 两轨信号正面冲突（缩募 vs 30-60x PE）+ PE 30.20x 骑跨 30x 断崖"}
+    inputs: {issue_pe: 30.20, industry_pe: 32.92, issue_price: 18.50, excess_raise_ratio: -0.069, profitable: true, regime_break_rate_t0: "~4.4-4.7%（沪深，贴线）", regime_avg_day1_12m: "~+122%", regime_avg_day1_3m: "~+170-185%", industry_excess_return_90d: "+10.52pp", index_mapping: "半导体→990001"}
+    inferences:
+      - {type: "P1", primary_hot: "幅度带 [+62%,+188%]，点估计 +125%", sensitivity_non_hot: {track_excess: "破发 0.04", track_pe: "破发 0.22"}}
+      - {type: "P2", primary_hot: "R4 0.60", sensitivity_non_hot: {track_excess: 0.13, track_pe: 0.35}}
+    contamination: "高（首日 +88.65% 结局接触已声明丢弃；R1 贴线主判热+敏感分支完整输出）"
+  - case: {code: "688576", name: "西山科技", listing_date: "2023-06-06", info_cutoff: "2023-06-05", pressure: "两轨最大分歧型（超募 172% 档 29% vs PE 109x 档 7%；P2 71% vs 43%）"}
+    inputs: {issue_pe: 109.28, industry_pe: 31.64, issue_price: 135.80, excess_raise_ratio: 1.72, profitable: true, regime_break_rate_t0: "~20%", regime_avg_day1_12m: 0.35, regime_avg_day1_3m: 0.25, industry_excess_return_90d: "-6.79pp", index_mapping: "医疗→399989"}
+    inferences:
+      - {type: "P1", track_excess: "破发 0.29", track_pe: "破发 0.07", note: "两轨分歧 22pp"}
+      - {type: "P2", track_excess: 0.71, track_pe: 0.43, note: "两轨分歧 28pp"}
+    contamination: "中（2 起接触已声明丢弃；拟募口径 8.29 亿 → 核实 6.61 亿，档判定两口径均稳健）"

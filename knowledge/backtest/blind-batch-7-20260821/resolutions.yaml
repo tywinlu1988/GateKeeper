@@ -1,0 +1,52 @@
+# 回放盲测批次 blind-batch-7-20260821 · resolutions（S6）
+batch_id: "blind-batch-7-20260821"
+resolved_at: "2026-08-21"
+
+resolutions:
+  # ===== 成都华微 =====
+  - resolution_id: "RES-BB7-chengdu-P1"
+    case: "688709 成都华微"
+    prediction: {track_excess: "破发 0.04", track_pe: "破发 0.22"}
+    verdict: "true（方向，上涨）"
+    observed_value: "首日 +25.49%"
+    criteria_check: "两轨方向均对（上涨）；Brier：超募轨 0.0016 vs PE 轨 0.0484——**超募轨胜**；⚠️ 超募率 -0.002% 贴 0% 边界（若按 0-50% 档 17% 则 Brier 0.0289 仍优于 PE 轨），贴线判定偶然有利，如实注记"
+    note: "V20 贴线双分支首检：主分支（不修正）正确；敏感分支（0.09/0.27）反而更差——贴线区信号接近噪声，双分支处理方式获验证"
+  - resolution_id: "RES-BB7-chengdu-P2"
+    case: "688709 成都华微"
+    prediction: {track_excess: 0.13, track_pe: 0.35}
+    verdict: "false"
+    observed_value: "窗口内最低收盘 17.31（>12.55 阈值 38% 余量）；当前 25.92 = 发行价 1.65x（12m 平行观察：未破位）"
+    criteria_check: "Brier：超募轨 0.0169 vs PE 轨 0.1225——**超募轨大胜**"
+    note: "超募轨 P2 端第 1 胜"
+
+  # ===== 龙图光罩 =====
+  - resolution_id: "RES-BB7-longtu-P1"
+    case: "688721 龙图光罩"
+    prediction: {primary_hot: "幅度带 [+62%,+188%]，点估计 +125%"}
+    verdict: "true（带内命中）"
+    observed_value: "首日 +88.65%"
+    criteria_check: "R1 贴线判热（4.4-4.7% vs 5%）方向正确（上涨）；幅度带含实际值 ✓；敏感分支（非热双轨）：超募轨 0.04 vs PE 轨 0.22——实际上涨，超募轨更近"
+    note: "R1 骑跨案第 2 起（益诺思型）：沪深口径判定方向均正确，支持 V16 口径选择"
+  - resolution_id: "RES-BB7-longtu-P2"
+    case: "688721 龙图光罩"
+    prediction: {primary_hot: 0.60, sensitivity: {track_excess: 0.13, track_pe: 0.35}}
+    verdict: "false"
+    observed_value: "窗口内最低收盘 25.04（>14.80 阈值 69% 余量）"
+    criteria_check: "Brier：超募轨 0.0169 vs PE 轨 0.1225 vs R4 基准 0.36——**超募轨最优**；本案为'缩募信号 vs 30-60x PE 信号'正面冲突案，超募轨正确裁决"
+    note: "超募轨 P2 端第 2 胜"
+
+  # ===== 西山科技 =====
+  - resolution_id: "RES-BB7-xishan-P1"
+    case: "688576 西山科技"
+    prediction: {track_excess: "破发 0.29", track_pe: "破发 0.07"}
+    verdict: "true（方向，上涨）"
+    observed_value: "首日 +40.79%"
+    criteria_check: "两轨方向均对（上涨）；Brier：超募轨 0.0841 vs PE 轨 0.0049——**PE 轨胜**（本案两轨最大分歧型，PE 档'题材溢价支撑'判断更贴合首日）"
+    note: "超募轨首败（1 负）；PE 轨唯一胜场"
+  - resolution_id: "RES-BB7-xishan-P2"
+    case: "688576 西山科技"
+    prediction: {track_excess: 0.71, track_pe: 0.43}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 82.16 = 发行价 0.60x，深度跌破（阈值 108.64）"
+    criteria_check: "Brier：超募轨 0.0841 vs PE 轨 0.3249——**超募轨大胜**：F9 >100% 档 71% 基准几乎完美命中深破；PE 档 43% 严重低估"
+    note: "超募轨 P2 端 3/3 全胜——F9 的 P2 区分度（13/48/54/71 单调）在实战中兑现"
