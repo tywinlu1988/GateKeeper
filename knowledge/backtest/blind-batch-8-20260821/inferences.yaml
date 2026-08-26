@@ -1,0 +1,25 @@
+# 回放盲测批次 blind-batch-8-20260821 · inferences
+# 算法卡：references/prediction-algorithm/v0.7.md（双轨第 2 批，档位覆盖：缩募/50-100%/>100%）
+batch_id: "blind-batch-8-20260821"
+algorithm_card: "v0.7"
+executed_at: "2026-08-21"
+
+cases:
+  - case: {code: "688726", name: "拉普拉斯", listing_date: "2024-10-29", info_cutoff: "2024-10-28", pressure: "缩募 -60% 档 + R1 判热（3.45%）首个热轨主分支案"}
+    inputs: {issue_pe: 19.87, industry_pe: 25.57, issue_price: 17.58, excess_raise_ratio: -0.60, profitable: true, regime_break_rate_t0: "3.45%（沪深 3/87）", regime_avg_day1_12m: 1.59, regime_avg_day1_3m: 2.13, industry_excess_return_90d: "+11.72pp", index_mapping: "最近邻 399808（远离阈值）"}
+    inferences:
+      - {type: "P1", primary_hot: "显著高于基准（流通盘 9%<10% 上调一档），点估计 +239%（×1.5）", track_excess: "破发 0.04", track_pe: "破发 0.00"}
+      - {type: "P2", primary_hot: "R4 0.60", track_excess: 0.13, track_pe: 0.10}
+    contamination: "中（1 起结局接触已声明丢弃）"
+  - case: {code: "688146", name: "中船特气", listing_date: "2023-04-21", info_cutoff: "2023-04-20", pressure: "50-100% 档 + PE 59.43x 贴 60x 档线 + 题材 +21.57pp 贴线区"}
+    inputs: {issue_pe: 59.43, industry_pe: 30.59, issue_price: 36.15, excess_raise_ratio: 0.794, profitable: true, regime_break_rate_t0: "~25%", regime_avg_day1_12m: 0.33, regime_avg_day1_3m: 0.45, industry_excess_return_90d: "+21.57pp（贴线区）", index_mapping: "半导体→990001"}
+    inferences:
+      - {type: "P1", track_excess: "破发 0.27（敏感 0.22）", track_pe: "破发 0.22（敏感 0.17）", note: "V20 贴线双分支"}
+      - {type: "P2", track_excess: 0.54, track_pe: 0.35, note: "两轨分歧 19pp"}
+    contamination: "中（1 起结局接触已声明丢弃；拟募口径 16.68 亿 → 核实 16.00 亿，档判定稳健）"
+  - case: {code: "688719", name: "爱科赛博", listing_date: "2023-09-28", info_cutoff: "2023-09-27", pressure: ">100% 档第二案（超募 +186~280%）+ 首日破发案"}
+    inputs: {issue_pe: 88.78, industry_pe: 20.16, issue_price: 69.98, excess_raise_ratio: "1.86-2.80（两口径同档）", profitable: true, regime_break_rate_t0: "~20%", regime_avg_day1_12m: 0.39, regime_avg_day1_3m: 0.65, industry_excess_return_90d: "-15.69pp（贴线区）", index_mapping: "最近邻 399808（降置信）"}
+    inferences:
+      - {type: "P1", track_excess: "破发 0.29（敏感 0.34）", track_pe: "破发 0.27（敏感 0.32）"}
+      - {type: "P2", track_excess: 0.71, track_pe: 0.55, note: "F9 >100% 档在 >100x 档之外是否仍占优的关键检验"}
+    contamination: "高（首日 -6.3% 结局首次检索即暴露，已声明丢弃）"

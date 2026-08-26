@@ -1,0 +1,47 @@
+# 回放盲测批次 blind-batch-8-20260821 · resolutions（S6）
+batch_id: "blind-batch-8-20260821"
+resolved_at: "2026-08-21"
+
+resolutions:
+  - resolution_id: "RES-BB8-laplace-P1"
+    case: "688726 拉普拉斯"
+    prediction: {primary_hot: "显著高于基准（点估计 +239%）"}
+    verdict: "true（带命中）"
+    observed_value: "首日 +286.29%"
+    criteria_check: "R1 判热正确（3.45%）；'显著高于'带命中（实际 +286% > 基准 ×1.5 = +239%）；V4 映射 ×1.5 第 3 例低估（先锋 400→534、电科 389→596、拉普 239→286）——低估方向稳定，带内无误"
+    note: "R1 累计 22/22；热幅度带 6/6"
+  - resolution_id: "RES-BB8-laplace-P2"
+    case: "688726 拉普拉斯"
+    prediction: {primary_hot: 0.60, track_excess: 0.13, track_pe: 0.10}
+    verdict: "false"
+    observed_value: "窗口内最低收盘 34.78（>14.06 阈值 147% 余量）"
+    criteria_check: "Brier：PE 轨 0.01 vs 超募轨 0.0169 vs R4 基准 0.36——非热双轨均大幅优于 R4 基准"
+    note: "R4（热基准 0.60）在龙图/拉普两案 Brier 0.36 显著劣于非热双轨——F8 基准对'近期上市、窗口未满即强势'标的的适用性需观察"
+  - resolution_id: "RES-BB8-zhongchuan-P1"
+    case: "688146 中船特气"
+    prediction: {track_excess: "破发 0.27", track_pe: "破发 0.22"}
+    verdict: "true（方向，上涨）"
+    observed_value: "首日 +35.80%"
+    criteria_check: "两轨方向均对；Brier：PE 轨 0.0484 vs 超募轨 0.0729——PE 轨小胜；V20 贴线敏感分支（0.22/0.17）方向更优（行业 +21.57pp 贴线信号本案为真）"
+    note: "双轨 P1 端比分 2-2"
+  - resolution_id: "RES-BB8-zhongchuan-P2"
+    case: "688146 中船特气"
+    prediction: {track_excess: 0.54, track_pe: 0.35}
+    verdict: "false"
+    observed_value: "窗口内最低收盘 33.55（>28.92 阈值 16% 余量）"
+    criteria_check: "Brier：PE 轨 0.1225 vs 超募轨 0.2916——**PE 轨胜，超募轨 P2 端首败**"
+    note: "超募轨 P2 端连胜止于 3 场（累计 3-1）"
+  - resolution_id: "RES-BB8-aike-P1"
+    case: "688719 爱科赛博"
+    prediction: {track_excess: "破发 0.29", track_pe: "破发 0.27"}
+    verdict: "true"
+    observed_value: "首日 -6.30%（破发）"
+    criteria_check: "Brier：超募轨 0.5041 vs PE 轨 0.5329——超募轨小胜；V20 贴线敏感分支（0.34/0.32）均更优（0.4356/0.4624）——贴线信号（-15.69pp）本案为真"
+    note: "双轨 P1 端比分 2-2 后超募轨再胜 → 3-2"
+  - resolution_id: "RES-BB8-aike-P2"
+    case: "688719 爱科赛博"
+    prediction: {track_excess: 0.71, track_pe: 0.55}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 43.65 = 发行价 0.62x，深度跌破（阈值 55.98）"
+    criteria_check: "Brier：超募轨 0.0841 vs PE 轨 0.2025——**超募轨再胜**：F9 >100% 档 71% 基准在 >100x 档之外（60-100x 档）的第二案继续命中"
+    note: "超募轨 P2 端累计 4-1"
