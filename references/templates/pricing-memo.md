@@ -69,4 +69,4 @@
 
 ---
 
-*Gatekeeper v0.8.6 · 发行定价备忘录 · 情景参数为假设非预测，不构成单一目标价建议 · 首日/回归方向的概率预测（P1/P2）见最终报告「预测与验证计划」区块（artifacts/predictions.yaml）*
+*Gatekeeper v0.8.7 · 发行定价备忘录 · 情景参数为假设非预测，不构成单一目标价建议 · 首日/回归方向的概率预测（P1/P2）见最终报告「预测与验证计划」区块（artifacts/predictions.yaml）*
