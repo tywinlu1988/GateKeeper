@@ -1,0 +1,25 @@
+# 回放盲测批次 blind-batch-9-20260821 · inferences
+# 算法卡：references/prediction-algorithm/v0.8.md（R5 定版后首批；R3 双轨决胜批）
+batch_id: "blind-batch-9-20260821"
+algorithm_card: "v0.8"
+executed_at: "2026-08-21"
+
+cases:
+  - case: {code: "688530", name: "欧莱新材", listing_date: "2024-05-09", info_cutoff: "2024-05-08", pressure: "两轨最大冲突（缩募 4% vs 30-60x 22%，与成都华微同构）"}
+    inputs: {issue_pe: 41.44, industry_pe: 28.20, issue_price: 9.60, excess_raise_ratio: -0.334, profitable: true, regime_break_rate_t0: "~13.6%", regime_avg_day1_12m: 0.77, regime_avg_day1_3m: 1.30, industry_excess_return_90d: "-0.18pp（H30597）/-3.49pp（990001）", index_mapping: "H30597+990001 双代理同判"}
+    inferences:
+      - {type: "P1", track_excess: "破发 0.04（幅度 +77%）", track_pe: "破发 0.22", note: "V14 切换预警"}
+      - {type: "P2", forecast: 0.13, note: "F9 定版（PE 参照 0.35 仅对照）；V24 12m 平行观察"}
+    contamination: "高（1 起结局接触已声明丢弃）"
+  - case: {code: "688693", name: "锴威特", listing_date: "2023-08-18", info_cutoff: "2023-08-17", pressure: "0-50% 档 + PE 60.69x 贴 60x 线（V26 双档首检）"}
+    inputs: {issue_pe: 60.69, industry_pe: 35.68, issue_price: 40.83, excess_raise_ratio: 0.4189, profitable: true, regime_break_rate_t0: "20.49%（67/327）", regime_avg_day1_12m: 0.3773, regime_avg_day1_3m: 0.3613, industry_excess_return_90d: "-8.17pp", index_mapping: "半导体→990001"}
+    inferences:
+      - {type: "P1", track_excess: "破发 0.17", track_pe: "破发 0.27（V26 邻档敏感 0.22）"}
+      - {type: "P2", forecast: 0.48, note: "F9 定版（PE 参照 0.55/邻档 0.35 对照）"}
+    contamination: "中（1 起结局接触已声明丢弃；拟募 6.17 亿 → 核实 5.30 亿，同档稳健）"
+  - case: {code: "688548", name: "广钢气体", listing_date: "2023-08-15", info_cutoff: "2023-08-14", pressure: "F9 >100% 档第三案（超募 +143%）"}
+    inputs: {issue_pe: 58.63, industry_pe: 35.78, issue_price: 9.87, excess_raise_ratio: 1.433, profitable: true, regime_break_rate_t0: "~22%", regime_avg_day1_12m: 0.33, regime_avg_day1_3m: 0.32, industry_excess_return_90d: "-3.2pp", index_mapping: "最近邻 990001（降置信）"}
+    inferences:
+      - {type: "P1", track_excess: "破发 0.29", track_pe: "破发 0.22"}
+      - {type: "P2", forecast: 0.71, note: "F9 >100% 档第三案（PE 参照 0.35 对照）"}
+    contamination: "中（2 起结局接触已声明丢弃）"

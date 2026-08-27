@@ -1,0 +1,47 @@
+# 回放盲测批次 blind-batch-9-20260821 · resolutions（S6）
+batch_id: "blind-batch-9-20260821"
+resolved_at: "2026-08-21"
+
+resolutions:
+  - resolution_id: "RES-BB9-oulai-P1"
+    case: "688530 欧莱新材"
+    prediction: {track_excess: "破发 0.04", track_pe: "破发 0.22"}
+    verdict: "true（方向，上涨）"
+    observed_value: "首日 +169.48%"
+    criteria_check: "两轨方向均对；Brier：超募轨 0.0016 vs PE 轨 0.0484——**超募轨大胜**（与成都华微同构案双胜缩募档）"
+    note: "缩募档 P1 端 3 案（成都华微/拉普/欧莱）全对"
+  - resolution_id: "RES-BB9-oulai-P2"
+    case: "688530 欧莱新材"
+    prediction: {track_excess: 0.13}
+    verdict: "false"
+    observed_value: "窗口内最低收盘 13.85（>7.68 阈值 80% 余量）"
+    criteria_check: "Brier：F9 定版 0.0169 vs PE 参照 0.1225——定版锚胜"
+    note: "缩募档 P2 端 4 案（成都华微/龙图/拉普/欧莱）全 false，13% 基准贴合"
+  - resolution_id: "RES-BB9-kaiwei-P1"
+    case: "688693 锴威特"
+    prediction: {track_excess: "破发 0.17", track_pe: "破发 0.27（邻档 0.22）"}
+    verdict: "true（方向，上涨）"
+    observed_value: "首日 +109.40%"
+    criteria_check: "两轨方向均对；Brier：超募轨 0.0289 vs PE 轨 0.0729（邻档 0.0484）——**超募轨胜（且优于 V26 邻档）**"
+    note: "V26 双档首检：贴线档（60-100x）反不如超募轨——贴线双档输出的参照价值保留"
+  - resolution_id: "RES-BB9-kaiwei-P2"
+    case: "688693 锴威特"
+    prediction: {track_excess: 0.48}
+    verdict: "true"
+    observed_value: "窗口内最低收盘 22.36 = 发行价 0.55x，深度跌破（阈值 32.66）"
+    criteria_check: "Brier：F9 定版 0.2704 vs PE 参照（60-100x 档 55%）0.2025——**PE 参照档胜，定版锚 P2 端定版后首负**；邻档（35%）则 0.4225 更差"
+    note: "F9 定版后 P2 端首负（累计 5-2→5-3 前的第 7 案）；PE 贴线档的参照价值在此案兑现"
+  - resolution_id: "RES-BB9-guanggang-P1"
+    case: "688548 广钢气体"
+    prediction: {track_excess: "破发 0.29", track_pe: "破发 0.22"}
+    verdict: "true（方向，上涨）"
+    observed_value: "首日 +33.23%"
+    criteria_check: "两轨方向均对；Brier：超募轨 0.0841 vs PE 轨 0.0484——**PE 轨胜**"
+    note: ">100% 档 P1 端：西山（PE 胜）/爱科（超募胜）/广钢（PE 胜）→ 1-2"
+  - resolution_id: "RES-BB9-guanggang-P2"
+    case: "688548 广钢气体"
+    prediction: {track_excess: 0.71}
+    verdict: "false"
+    observed_value: "窗口内最低收盘 9.33（>7.90 阈值 18% 余量）"
+    criteria_check: "Brier：F9 >100% 档 0.5041 vs PE 参照 0.1225——**F9 >100% 档首败（此前 2/2 深度命中）**"
+    note: ">100% 档实测战绩 2 胜 1 负——恰在基准值 71% 附近的早期形态；单案不破定版，但该档 n 仍小（F9 源数据 n=7）需继续观察"
